@@ -1,36 +1,50 @@
-# PROJECT STATE: Edelys Coiffure Digital Transformation
-> Dernière mise à jour : [Date] | Version : 1.0.0
+# PROJECT STATE: Edelys Coiffure - Digital Transformation
+> **Dernière mise à jour :** 2026-06-28 | **Version :** 1.0.0 | **Statut Global :** Phase d'Initialisation (Étape 1)
 
-## 1. CONTEXTE & VISION
-- **Client :** Edelys Coiffure (Salon de coiffure premium).
-- **Mission :** Site vitrine, DA complète, Audit & Stratégie Social Media.
-- **Stack :** Next.js (Antigravity), Vercel, Supabase.
-- **Philosophie :** Collaboration Homme-IA itérative (Vibe Coding).
+---
 
-## 2. WORKFLOW & PERSISTANCE (CLAUDE.MD STYLE)
-- **Mémoire Contextuelle :** Ce fichier `project_state.md` doit être mis à jour après chaque validation majeure.
-- **Process :** Analyse -> Proposition IA -> Feedback Humain -> Itération -> Mise à jour du SOT.
-- **Dépôt :** [Lien GitHub à insérer] pour historique des versions de la DA et du code.
+## 1. VISION & OBJECTIFS
+* **Client :** Salon de coiffure "Edelys Coiffure"
+* **Objectif global :** Créer un site vitrine moderne et épuré et mettre en place une stratégie de présence digitale (Social Media).
+* **Philosophie :** Collaboration itérative Homme-IA en "Vibe Coding" avec cycles rapides de feedback.
 
-## 3. IDENTITÉ VISUELLE (DA V0)
-- **Base :** Logo existant (Edelys).
-- **Style cible :** Moderne, design, épuré, sensoriel.
-- **Palette (Tendances 2025) :** Mocha Mousse, Crème, touches dorées/cuivrées.
-- **Moodboard :** En attente de co-création avec la cliente.
+---
 
-## 4. ARCHITECTURE TECHNIQUE V1
-- **Front-end :** Framework moderne (Next.js/Antigravity).
-- **Back-end :** Supabase (Gestion des produits/offres).
-- **Hosting :** Vercel (Performance & SEO).
-- **Objectif :** Légèreté et fluidité de navigation.
+## 2. STATUT DES ÉTAPES & ROADMAP
+* [ ] **Étape 1 : Initialisation & Workflow** (En cours ⏳)
+* [ ] **Étape 2 : Direction Artistique V0 & Charte Graphique** (À venir 📅)
+* [ ] **Étape 3 : Développement du Site Vitrine** (À venir 📅)
+* [ ] **Étape 4 : Audit & Stratégie Réseaux Sociaux** (À venir 📅)
 
-## 5. STRATÉGIE SOCIAL MEDIA
-- **Audit :** Analyse des posts actuels et de l'engagement.
-- **Canaux :** Instagram (Esthétique), TikTok (Savoir-faire), Facebook (Local).
-- **Livrable :** Guide de bonnes pratiques et axes d'amélioration.
+---
 
-## 6. BACKLOG & TODO
-- [ ] Initialisation du repository GitHub.
-- [ ] Création du dossier de charte graphique (Markdown/JSON).
-- [ ] Prototypage de la page d'accueil.
-- [ ] Audit complet des réseaux sociaux.
+## 3. IDENTITÉ VISUELLE & DIRECTION ARTISTIQUE (SOT)
+*(Cette section sera complétée à l'Étape 2 et servira de référence pour le design)*
+* **Logo :** Existant (stocké dans [Direction_Artistique/Ressources](file:///d:/Edelys/Direction_Artistique/Ressources))
+* **Style visuel cible :** Moderne, minimaliste, élégant, sensoriel
+* **Palette de couleurs :** *(En attente de validation - ex: Mocha Mousse, Crème, touches dorées/cuivrées)*
+* **Typographies :** *(En attente de validation)*
+* **Moodboard & Inspirations :** *(En attente de co-création)*
+
+---
+
+## 4. ARCHITECTURE TECHNIQUE & CONFIGURATION
+* **Repository GitHub :** *(À renseigner)*
+* **Stack Technique :** Next.js (Antigravity), Tailwind CSS / Vanilla CSS, Supabase, Vercel
+* **Environnement Supabase :** *(À configurer)*
+* **Configuration SEO de base :** *(À définir)*
+
+---
+
+## 5. JOURNAL DES DÉCISIONS STRATÉGIQUES
+*(Historique chronologique des choix clés validés pour éviter les régressions)*
+* **28/06/2026 :** Initialisation de la collaboration. Choix de la stack technique standard et du format de persistance contextuelle.
+
+---
+
+## 6. BACKLOG & PROCHAINES ACTIONS IMMÉDIATES (TO-DO LIST)
+- [ ] Valider le workflow de collaboration et le template `project_state.md` (Étape 1).
+- [ ] Analyser le logo existant et les images sources pour proposer une DA V0 et une charte graphique documentée (Étape 2).
+- [ ] Créer le document de charte graphique formalisé.
+- [ ] Initialiser le projet Next.js / framework de développement dans `Site_vitrine` (Étape 3).
+- [ ] Récupérer les liens et contenus des profils réseaux sociaux existants pour l'audit (Étape 4).
