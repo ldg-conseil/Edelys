@@ -1,26 +1,48 @@
 # PROJECT STATE: Edelys Coiffure - Digital Transformation
-> **Dernière mise à jour :** 2026-06-29 | **Version :** 1.2.0 | **Statut Global :** Initialisation Technique V1 (Étape 3)
+> **Dernière mise à jour :** 2026-06-29 | **Version :** V0.1 | **Statut Global :** Release V0.1 (UI Kit & Page d'Accueil)
 
 ---
 
 ## 1. VISION & OBJECTIFS
-* **Repository GitHub :** *(À renseigner)*
-* **Stack Technique :** Next.js (Antigravity), Tailwind CSS / Vanilla CSS, Supabase, Vercel
-* **Environnement Supabase :** *(À configurer)*
-* **Configuration SEO de base :** *(À définir)*
+* **Client :** Salon de coiffure "Edelys Coiffure" (Premium, Ambassadrice Kérastase).
+* **Objectif global :** Créer un site vitrine moderne et mettre en place une stratégie de community management.
 
 ---
 
-## 5. JOURNAL DES DÉCISIONS STRATÉGIQUES
-* **28/06/2026 (Initialisation) :** Choix de la stack technique standard et du format de persistance contextuelle.
-* **28/06/2026 (DA V0) :** Analyse du logo ("EC") et de la devanture du salon. Définition d'un positionnement moyen/haut de gamme, cosy et élégant lié au partenariat Kérastase. Proposition de la palette de couleurs et des typographies associées.
+## 2. WORKFLOW & STRATÉGIE GIT (Nouveau)
+* **Collaboration :** Développement itératif "Homme-IA" (Vibe Coding) + Validation Client.
+* **Gestion des Branches :** 
+  * La branche principale (`main` ou `master`) représente la version de production.
+  * Tous les développements, ajouts de fonctionnalités ou modifications se feront sur des branches dédiées nommées **`feature/nom-de-la-feature`**.
+* **Cycle de vie (Releases) :** Des *Releases* (versions taguées) seront créées lors des grandes étapes franchies pour assurer une gestion saine et traçable du cycle de vie du projet.
 
 ---
 
-## 6. BACKLOG & PROCHAINES ACTIONS IMMÉDIATES (TO-DO LIST)
-- [x] Valider le workflow de collaboration et le template `project_state.md` (Étape 1).
-- [x] Analyser le logo existant et les images sources pour proposer une DA V0 et une charte graphique documentée (Étape 2).
-- [x] Créer le document de charte graphique formalisé.
-- [ ] Valider la charte graphique V0 avec la cliente (ou via ton feedback intermédiaire).
-- [ ] Initialiser le projet Next.js / framework de développement dans `Site_vitrine` (Étape 3).
-- [ ] Récupérer les liens et contenus des profils réseaux sociaux existants pour l'audit (Étape 4).
+## 3. ARCHITECTURE TECHNIQUE
+* **Stack Web :** Next.js 15 (App Router), TypeScript, Tailwind CSS v4, Lucide React, Framer Motion.
+* **Hébergement & CI/CD :** Vercel (Déploiement automatique depuis GitHub).
+* **Backend / BDD :** Supabase (prévu pour la V1 légère).
+
+---
+
+## 4. DIRECTION ARTISTIQUE (Source of Truth)
+> 📍 **Fichier de référence :** `Direction_Artistique/charte_graphique_v0.md`
+*   **Palette :** Pêche Cuivrée (#E8A382), Noir Charcoal (#1A1A1A), Crème de Lait (#FAFAF7), Grège (#EAE5DF), Or Laiton (#D4AF37).
+*   **Typographies :** Cormorant Garamond (Sérif) & Montserrat (Sans-serif).
+
+---
+
+## 5. HISTORIQUE & LOG STRATÉGIQUE
+* **28/06/2026 :** Initialisation du repo et rédaction de la Charte Graphique V0.
+* **29/06/2026 :** Initialisation du projet Next.js avec les design tokens.
+* **29/06/2026 :** Création du UI Kit, ajout des animations Framer Motion, et conception de la Page d'Accueil dynamique. Release de la **V0.1**.
+
+---
+
+## 6. ROADMAP & BACKLOG (TO-DO)
+- [x] Initialiser le projet Next.js et configurer Tailwind/Fonts (Étape 3 terminée).
+- [x] Lier le projet à Vercel pour le déploiement continu.
+- [x] Développer les composants réutilisables UI (Boutons, Navigation, Footer, Logo).
+- [x] Construire la page d'accueil avec les animations Framer Motion.
+- [ ] Construire les pages annexes (Prestations, Contact).
+- [ ] Audit et Stratégie Réseaux Sociaux (Étape 4).

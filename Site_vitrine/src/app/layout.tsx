@@ -37,7 +37,7 @@ export default function RootLayout({
       <body className="bg-grain font-sans min-h-screen flex flex-col selection:bg-peche selection:text-charcoal transition-colors duration-500 overflow-x-hidden">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Header />
-          <div className="flex-grow flex flex-col mt-20">
+          <div className="flex-grow flex flex-col">
             {children}
           </div>
           <Footer />
