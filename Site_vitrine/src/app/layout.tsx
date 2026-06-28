@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Montserrat } from "next/font/google";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -32,7 +35,13 @@ export default function RootLayout({
       className={`${cormorant.variable} ${montserrat.variable} scroll-smooth antialiased`}
     >
       <body className="bg-grain font-sans min-h-screen flex flex-col selection:bg-peche selection:text-charcoal transition-colors duration-500 overflow-x-hidden">
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Header />
+          <div className="flex-grow flex flex-col mt-20">
+            {children}
+          </div>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

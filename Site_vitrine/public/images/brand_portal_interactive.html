@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edelys Coiffure — Portail de Marque Interactif & Charte Graphique</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        peche: '#E8A382',
+                        charcoal: '#1A1A1A',
+                        creme: '#FAFAF7',
+                        grege: '#EAE5DF',
+                        laiton: '#D4AF37',
+                        sauge: '#8FA89B',
+                        terracotta: '#C76849'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Grain d'arrière-plan discret pour évoquer le tadelakt et le papier coton */
+        .bg-grain {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+        }
+        
+        /* Curseur personnalisé Halo Doré */
+        #custom-cursor {
+            pointer-events: none;
+            transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* Fluidity Flow Pattern en SVG de fond */
+        .pattern-fluidity {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 Q 25 20, 50 50 T 100 50' fill='none' stroke='%23E8A382' stroke-width='0.5' opacity='0.15'/%3E%3Cpath d='M0 30 Q 25 0, 50 30 T 100 30' fill='none' stroke='%23EAE5DF' stroke-width='0.5' opacity='0.2'/%3E%3C/svg%3E");
+        }
+
+        /* Texture de papier fibreux de luxe */
+        .luxury-paper {
+            background-color: #FAFAF7;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paperNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperNoise)'/%3E%3C/svg%3E");
+        }
+
+        /* Masquage de la barre de défilement par défaut */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1A1A1A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E8A382;
+            border-radius: 4px;
+        }
+
+        .gold-shimmer {
+            background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-creme text-charcoal font-sans bg-grain selection:bg-peche selection:text-charcoal relative overflow-x-hidden">
+
+    <!-- Curseur interactif "Halo Doré" (Désactivé sur tactile) -->
+    <div id="custom-cursor" class="fixed top-0 left-0 w-8 h-8 rounded-full border border-peche/30 bg-peche/5 -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-none hidden md:block transition-all duration-75"></div>
+    <div id="custom-cursor-dot" class="fixed top-0 left-0 w-2 h-2 bg-peche rounded-full -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-none hidden md:block"></div>
+
+    <!-- Transition Voile de Crème Overlay -->
+    <div id="voile-creme" class="fixed inset-0 bg-creme z-50 translate-y-full transition-transform duration-700 ease-in-out pointer-events-none flex items-center justify-center">
+        <div class="text-center">
+            <span class="font-serif italic text-5xl text-peche block mb-2">Edelys</span>
+            <div class="h-[1px] w-32 bg-laiton mx-auto mb-2"></div>
+            <span class="text-xs tracking-[0.4em] uppercase text-charcoal/60">Institut Capillaire d'Élite</span>
+        </div>
+    </div>
+
+    <!-- Notification Toast pour copie de couleur (Améliorée) -->
+    <div id="toast" class="fixed bottom-8 right-8 bg-charcoal text-creme px-6 py-4 rounded-lg shadow-2xl border border-peche/20 transform translate-y-20 opacity-0 transition-all duration-300 z-50 font-sans tracking-wide text-xs flex flex-col gap-1">
+        <div class="flex items-center gap-3">
+            <i data-lucide="check" class="text-peche w-4 h-4"></i>
+            <span class="font-bold uppercase tracking-wider text-peche" id="toast-title">Copié !</span>
+        </div>
+        <span id="toast-body" class="text-creme/80 mt-1">Le code couleur a été copié avec succès.</span>
+    </div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="border-b border-grege/60 sticky top-0 bg-creme/90 backdrop-blur-md z-40 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <!-- Monogramme Logo SVG interactif -->
+                <div class="w-12 h-12 rounded-full border border-peche/60 flex items-center justify-center text-peche font-serif font-bold text-xl hover:bg-peche hover:text-charcoal hover:border-transparent transition-all duration-500 cursor-pointer">
+                    EC
+                </div>
+                <div>
+                    <span class="font-serif font-bold text-xl tracking-wider block">EDELYS</span>
+                    <span class="text-[9px] tracking-[0.35em] uppercase text-charcoal/60 block -mt-1">Haute Coiffure & Soin</span>
+                </div>
+            </div>
+            <nav class="hidden lg:flex items-center gap-8 text-[11px] font-semibold uppercase tracking-[0.25em] text-charcoal/80">
+                <a href="#strategie" class="hover:text-peche transition-colors relative group py-2">
+                    Stratégie
+                    <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-peche transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#charte" class="hover:text-peche transition-colors relative group py-2">
+                    Grammaire Visuelle
+                    <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-peche transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#moodboard" class="hover:text-peche transition-colors relative group py-2">
+                    Iconographie
+                    <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-peche transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#supports" class="hover:text-peche transition-colors relative group py-2">
+                    Supports & Imprimés
+                    <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-peche transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#interactions" class="hover:text-peche transition-colors relative group py-2">
+                    Bac à Sable UI
+                    <span class="absolute bottom-0 left-0 w-0 h-[1px] bg-peche transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <span class="hidden sm:inline-block text-[10px] uppercase tracking-widest text-laiton border border-laiton/30 px-3 py-1.5 rounded-full bg-laiton/5 font-semibold">
+                    Ambassadeur Kérastase
+                </span>
+                <button onclick="triggerVoile()" class="bg-charcoal text-creme text-[10px] font-semibold uppercase tracking-[0.2em] px-5 py-3 rounded hover:bg-peche hover:text-charcoal transition-all duration-300 shadow-sm">
+                    Démo Transition
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative min-h-[85vh] flex items-center border-b border-grege/60 overflow-hidden pattern-fluidity">
+        <div class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10 w-full">
+            <div class="lg:col-span-8 flex flex-col justify-center">
+                <div class="inline-flex items-center gap-3 mb-6 text-xs uppercase tracking-[0.3em] text-peche font-semibold">
+                    <span class="w-12 h-[1px] bg-peche"></span> Dossier de Recherche DA & Charte Interactive
+                </div>
+                <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-light text-charcoal leading-[1.1] mb-8">
+                    L'architecture <br>
+                    <span class="italic text-peche">du cheveu d'élite</span>
+                </h1>
+                <p class="font-sans text-base text-charcoal/70 leading-relaxed max-w-2xl font-light mb-10">
+                    Bienvenue dans le guide de recherche esthétique et stratégique d'Edelys Coiffure. Cet outil interactif a été conçu pour structurer, expérimenter et valider la direction artistique globale auprès d'une clientèle en quête de <strong class="font-medium text-charcoal">Quiet Luxury</strong> et d'une rigueur clinique de pointe.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#charte" class="bg-charcoal text-creme hover:bg-peche hover:text-charcoal text-xs uppercase tracking-[0.2em] font-semibold px-8 py-4.5 transition-all duration-500 rounded shadow-lg shadow-charcoal/15">
+                        Étudier l'Identité Visuelle
+                    </a>
+                    <a href="#interactions" class="border border-charcoal/30 text-charcoal hover:bg-charcoal hover:text-creme text-xs uppercase tracking-[0.2em] font-semibold px-8 py-4.5 transition-all duration-500 rounded">
+                        Bac à sable Digital
+                    </a>
+                </div>
+            </div>
+            <div class="lg:col-span-4 flex items-center justify-center relative">
+                <!-- Visuel d'illustration abstrait géométrique -->
+                <div class="w-80 h-80 md:w-96 md:h-96 rounded-full border border-grege relative flex items-center justify-center animate-[spin_120s_linear_infinite]">
+                    <div class="absolute inset-6 rounded-full border border-peche/30 border-dashed"></div>
+                    <div class="absolute inset-14 rounded-full border border-laiton/30 flex items-center justify-center">
+                        <span class="font-serif text-peche/80 text-7xl italic select-none">EC</span>
+                    </div>
+                    <!-- Ligne néoclassique animée en SVG -->
+                    <svg class="absolute w-full h-full" viewBox="0 0 100 100">
+                        <circle cx="50" cy="5" r="3" fill="#E8A382" />
+                        <circle cx="50" cy="95" r="3" fill="#D4AF37" />
+                        <circle cx="5" cy="50" r="2" fill="#8FA89B" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 1 : STRATÉGIE, CO-BRANDING & TON -->
+    <section id="strategie" class="py-24 border-b border-grege/60 bg-white bg-grain relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-4">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.25em] text-peche font-semibold block mb-2">Section 01</span>
+                    <h2 class="font-serif text-4xl md:text-5xl font-light text-charcoal">Analyse Stratégique & Positionnement</h2>
+                </div>
+                <p class="font-sans text-xs uppercase tracking-[0.15em] text-charcoal/50 max-w-sm md:text-right">
+                    Synergie Kérastase & Directives d'expression feutrée du luxe.
+                </p>
+            </div>
+
+            <!-- Tabs de Contenu -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Menu de navigation des onglets -->
+                <div class="lg:col-span-4 flex flex-col gap-3">
+                    <button onclick="switchTab('tab-semiotique')" id="btn-tab-semiotique" class="tab-btn active text-left px-6 py-5 rounded border-l-4 border-peche bg-creme font-serif text-lg italic text-charcoal hover:bg-grege/30 transition-all duration-300">
+                        Analyse Sémiotique & Psychologique
+                    </button>
+                    <button onclick="switchTab('tab-cobranding')" id="btn-tab-cobranding" class="tab-btn text-left px-6 py-5 rounded border-l-4 border-transparent font-serif text-lg text-charcoal/60 hover:text-charcoal hover:bg-grege/30 transition-all duration-300">
+                        Co-branding Implicite Kérastase
+                    </button>
+                    <button onclick="switchTab('tab-voice')" id="btn-tab-voice" class="tab-btn text-left px-6 py-5 rounded border-l-4 border-transparent font-serif text-lg text-charcoal/60 hover:text-charcoal hover:bg-grege/30 transition-all duration-300">
+                        Règles Éditoriales (Do & Don't)
+                    </button>
+                </div>
+
+                <!-- Conteneur des contenus d'onglets -->
+                <div class="lg:col-span-8 bg-creme border border-grege/60 p-8 md:p-12 rounded relative overflow-hidden shadow-sm">
+                    <div class="absolute top-0 right-0 p-4 opacity-5">
+                        <i data-lucide="award" class="w-48 h-48 text-charcoal"></i>
+                    </div>
+
+                    <!-- Onglet 1 : Sémiotique -->
+                    <div id="tab-semiotique" class="tab-content block space-y-6">
+                        <h3 class="font-serif text-3xl italic text-peche">Une dualité entre sensorialité humaine et rigueur clinique</h3>
+                        <p class="font-light text-sm leading-relaxed text-charcoal/80">
+                            La palette d’Edelys Coiffure s'écarte volontairement des codes agressifs du commerce de masse pour investir la niche du <span class="font-semibold text-charcoal">Quiet Luxury</span>. Elle équilibre la chaleur rassurante de la texture humaine avec la géométrie rationnelle de la science capillaire.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                            <div class="bg-white p-6 rounded border border-grege/50 shadow-sm hover:border-peche/30 transition-colors">
+                                <span class="text-xs uppercase tracking-widest text-peche font-bold block mb-2">Pêche Cuivrée / Rose Gold</span>
+                                <p class="text-xs text-charcoal/70 leading-relaxed">
+                                    Évoque la texture tactile de la peau, le bien-être sensoriel de la "golden hour". Elle crée un lien d'intimité fort avec la clientèle (70 % féminine) sans tomber dans un rose enfantin.
+                                </p>
+                            </div>
+                            <div class="bg-white p-6 rounded border border-grege/50 shadow-sm hover:border-charcoal/30 transition-colors">
+                                <span class="text-xs uppercase tracking-widest text-charcoal font-bold block mb-2">Noir Charcoal</span>
+                                <p class="text-xs text-charcoal/70 leading-relaxed">
+                                    Apporte la structure architecturale, l'autorité d'un sanctuaire protecteur. Fini mat pour adoucir la lumière et attirer la clientèle masculine (30 %) à la recherche de discrétion absolue.
+                                </p>
+                            </div>
+                            <div class="bg-white p-6 rounded border border-grege/50 shadow-sm hover:border-laiton/30 transition-colors">
+                                <span class="text-xs uppercase tracking-widest text-laiton font-bold block mb-2">Crème de Lait & Grège</span>
+                                <p class="text-xs text-charcoal/70 leading-relaxed">
+                                    Garantissent la clarté et l'espace de respiration nécessaire au luxe. Le blanc cassé élimine la froideur hospitalière tout en évoquant une pureté et un soin scientifique irréprochable.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet 2 : Co-branding -->
+                    <div id="tab-cobranding" class="tab-content hidden space-y-6">
+                        <h3 class="font-serif text-3xl italic text-peche">La science du cheveu au service du soin sur-mesure</h3>
+                        <p class="font-light text-sm leading-relaxed text-charcoal/80">
+                            Le partenariat avec <strong class="font-semibold text-charcoal">Kérastase</strong> est formulé pour rehausser le statut d'Edelys comme véritable institut d'expertise clinique. Ce n'est pas qu'un produit appliqué, c'est une caution d'excellence scientifique.
+                        </p>
+                        <ul class="space-y-4 pt-2">
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="cpu" class="text-laiton w-5 h-5 shrink-0 mt-1"></i>
+                                <div>
+                                    <strong class="font-semibold text-xs uppercase tracking-wider block">Diagnostic de Précision K-SCAN</strong>
+                                    <span class="text-xs text-charcoal/70">Utilisation d'outils d'analyse cellulaire et de micro-caméras pour personnaliser scientifiquement l'ordonnance capillaire de la cliente directement au fauteuil.</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="droplet" class="text-peche w-5 h-5 shrink-0 mt-1"></i>
+                                <div>
+                                    <strong class="font-semibold text-xs uppercase tracking-wider block">Rituels de Métamorphose Instantanée</strong>
+                                    <span class="text-xs text-charcoal/70">Mise en avant des protocoles moléculaires iconiques (Fusio-Dose, Chronologiste) comme des rituels alchimiques alliant sensorialité extrême et transformation visible.</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="recycle" class="text-sauge w-5 h-5 shrink-0 mt-1"></i>
+                                <div>
+                                    <strong class="font-semibold text-xs uppercase tracking-wider block">Luxe Durable & Éco-responsabilité</strong>
+                                    <span class="text-xs text-charcoal/70">Valorisation des emballages rechargeables d'exception de Kérastase (comme la gamme Elixir Ultime), matérialisant l'engagement éco-responsable haut de gamme d'Edelys.</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Onglet 3 : Tone of Voice -->
+                    <div id="tab-voice" class="tab-content hidden space-y-6">
+                        <h3 class="font-serif text-3xl italic text-peche">L'élégance du verbe : Charte Rédactionnelle</h3>
+                        <p class="font-light text-sm leading-relaxed text-charcoal/80 mb-4">
+                            Edelys s'exprime avec déférence, clarté et professionnalisme. Le vouvoiement est de rigueur. Nous empruntons nos termes à l'univers de la Haute Couture, de l'architecture et de la recherche biologique.
+                        </p>
+                        <!-- Table de Do/Don't -->
+                        <div class="border border-grege rounded overflow-hidden text-xs">
+                            <div class="grid grid-cols-2 bg-charcoal text-creme p-3 font-semibold uppercase tracking-wider">
+                                <div>À privilégier (Do)</div>
+                                <div>À proscrire (Don't)</div>
+                            </div>
+                            <div class="divide-y divide-grege">
+                                <div class="grid grid-cols-2 p-4 gap-4 bg-white">
+                                    <div class="text-charcoal/80 font-serif italic border-l-2 border-peche pl-2">« Nos stylistes étudient l'architecture de votre chevelure pour façonner une coupe sur-mesure... »</div>
+                                    <div class="text-charcoal/50">« Prenez rendez-vous pour une coupe rapide et pas chère avec nos coiffeurs qualifiés. »</div>
+                                </div>
+                                <div class="grid grid-cols-2 p-4 gap-4 bg-creme/50">
+                                    <div class="text-charcoal/80 font-serif italic border-l-2 border-laiton pl-2">« Un diagnostic moléculaire précis pour cibler les besoins fondamentaux de votre fibre capillaire... »</div>
+                                    <div class="text-charcoal/50">« On vous applique des shampoings pour soigner vos cheveux abîmés. »</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2 : LA GRAMMAIRE VISUELLE COMPLETÉE -->
+    <section id="charte" class="py-24 border-b border-grege/60">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-4">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.25em] text-peche font-semibold block mb-2">Section 02</span>
+                    <h2 class="font-serif text-4xl md:text-5xl font-light text-charcoal">La Grammaire Visuelle Complétée</h2>
+                </div>
+                <p class="font-sans text-xs uppercase tracking-[0.15em] text-charcoal/50 max-w-sm md:text-right">
+                    Calculateur d'exclusion du logo et palette interactive enrichie de contrastes.
+                </p>
+            </div>
+
+            <!-- Grille d'usage du logo -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch mb-16">
+                <!-- Calculateur d'Exclusion Interactif -->
+                <div class="lg:col-span-7 bg-white border border-grege p-8 rounded flex flex-col justify-between shadow-sm">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-widest text-peche font-bold block mb-4">Démonstrateur Interactif</span>
+                        <h3 class="font-serif text-2xl mb-4">Calculateur de zone d'exclusion du logo ($0,75 \times H$)</h3>
+                        <p class="text-xs text-charcoal/70 leading-relaxed mb-6">
+                            Ajustez la hauteur théorique ($H$) du monogramme avec la glissière ci-dessous pour visualiser la boîte d'exclusion de sécurité minimale requise sur vos supports imprimés ou d'affichage digital.
+                        </p>
+                    </div>
+
+                    <!-- Zone de rendu interactive -->
+                    <div class="bg-creme rounded-lg p-12 flex flex-col items-center justify-center border border-grege/50 min-h-[260px] relative overflow-hidden">
+                        <!-- Boîte d'exclusion simulée -->
+                        <div id="exclusion-box" class="border border-dashed border-peche/60 bg-peche/5 flex flex-col items-center justify-center p-6 transition-all duration-300">
+                            <!-- Monogramme -->
+                            <div id="logo-monogram" class="font-serif text-charcoal font-semibold text-3xl border border-charcoal/10 rounded-full px-5 py-3 bg-white flex items-center justify-center select-none transition-all duration-300 shadow-sm">
+                                EC
+                            </div>
+                        </div>
+                        <span id="calculated-padding" class="absolute bottom-3 text-[10px] font-mono text-charcoal/50 uppercase tracking-widest">Zone d'exclusion : 22.5px (0.75 * H)</span>
+                    </div>
+
+                    <!-- Glissière -->
+                    <div class="mt-6">
+                        <label for="height-slider" class="text-xs uppercase tracking-widest text-charcoal/60 font-semibold mb-2 flex justify-between">
+                            <span>Hauteur du Monogramme (H) :</span>
+                            <span id="slider-val" class="text-charcoal font-bold font-mono">30px</span>
+                        </label>
+                        <input id="height-slider" type="range" min="20" max="60" value="30" class="w-full accent-peche cursor-pointer">
+                    </div>
+                </div>
+
+                <!-- Usage et contraintes du Logo -->
+                <div class="lg:col-span-5 bg-charcoal text-creme p-8 rounded flex flex-col justify-between shadow-lg">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-widest text-peche font-bold block mb-4">Directives Techniques</span>
+                        <h3 class="font-serif text-2xl mb-6 text-peche font-light">Intégrité du Logotype</h3>
+                        <ul class="space-y-4 text-xs font-light text-creme/80">
+                            <li class="flex gap-3">
+                                <i data-lucide="info" class="text-peche w-5 h-5 shrink-0"></i>
+                                <span>La largeur minimale pour l'impression physique est de <strong class="text-creme font-semibold">35 mm</strong>, et de <strong class="text-creme font-semibold">140 px</strong> pour les écrans numériques afin d'éviter tout flou de rendu.</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <i data-lucide="eye-off" class="text-peche w-5 h-5 shrink-0"></i>
+                                <span>Interdiction d'afficher le logo sur fond photographique complexe sans insert d'aplat opaque (Crème de Lait ou Charcoal).</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <i data-lucide="contrast" class="text-peche w-5 h-5 shrink-0"></i>
+                                <span>Sur fond Charcoal, le monogramme utilise le Pêche Cuivrée ou l'Or Laiton, et l'écriture s'affiche en Crème de Lait avec une matité satinée.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="border-t border-creme/10 pt-6 mt-6 flex justify-between items-center text-[10px] tracking-widest uppercase">
+                        <span>Format recommandé :</span>
+                        <span class="font-bold text-peche">Vectoriel SVG / EPS</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Palette Chromatique Interactive (Enrichie) -->
+            <div>
+                <h3 class="font-serif text-3xl mb-4 italic text-charcoal">La Palette Chromatique Enrichie</h3>
+                <p class="text-xs text-charcoal/60 max-w-2xl mb-8 leading-relaxed">
+                    Cliquez sur l'un des codes couleur (HEX, RGB, CMJN ou Pantone) pour copier instantanément la valeur exacte dans votre presse-papier pour vos logiciels de PAO (InDesign, Photoshop) ou code d'intégration.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-6">
+                    
+                    <!-- Pêche Cuivrée -->
+                    <div class="bg-white border border-grege p-4 rounded group shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="h-28 rounded mb-4 bg-[#E8A382]"></div>
+                            <span class="text-xs font-bold block text-charcoal mb-3">Pêche Cuivrée / Rose Gold</span>
+                        </div>
+                        <div class="space-y-2 pt-2 border-t border-grege/30 text-[10px] font-mono text-charcoal/70">
+                            <div onclick="copyText('#E8A382', 'Code HEX #E8A382')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>HEX</span><span class="font-bold">#E8A382</span></div>
+                            <div onclick="copyText('rgb(232, 163, 130)', 'Code RGB')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>RGB</span><span class="font-bold">232,163,130</span></div>
+                            <div onclick="copyText('CMJN(5, 40, 48, 0)', 'Code CMJN')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>CMJN</span><span class="font-bold">5,40,48,0</span></div>
+                            <div onclick="copyText('Pantone 7520 C', 'Code Pantone')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>PMS</span><span class="font-bold">7520 C</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Noir Charcoal -->
+                    <div class="bg-white border border-grege p-4 rounded group shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="h-28 rounded mb-4 bg-[#1A1A1A]"></div>
+                            <span class="text-xs font-bold block text-charcoal mb-3">Noir Charcoal</span>
+                        </div>
+                        <div class="space-y-2 pt-2 border-t border-grege/30 text-[10px] font-mono text-charcoal/70">
+                            <div onclick="copyText('#1A1A1A', 'Code HEX #1A1A1A')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>HEX</span><span class="font-bold">#1A1A1A</span></div>
+                            <div onclick="copyText('rgb(26, 26, 26)', 'Code RGB')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>RGB</span><span class="font-bold">26,26,26</span></div>
+                            <div onclick="copyText('CMJN(74, 66, 64, 70)', 'Code CMJN')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>CMJN</span><span class="font-bold">74,66,64,70</span></div>
+                            <div onclick="copyText('Pantone Neutral Black C', 'Code Pantone')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>PMS</span><span class="font-bold">Black C</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Crème de Lait -->
+                    <div class="bg-white border border-grege p-4 rounded group shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="h-28 rounded mb-4 bg-[#FAFAF7] border border-grege"></div>
+                            <span class="text-xs font-bold block text-charcoal mb-3">Crème de Lait</span>
+                        </div>
+                        <div class="space-y-2 pt-2 border-t border-grege/30 text-[10px] font-mono text-charcoal/70">
+                            <div onclick="copyText('#FAFAF7', 'Code HEX #FAFAF7')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>HEX</span><span class="font-bold">#FAFAF7</span></div>
+                            <div onclick="copyText('rgb(250, 250, 247)', 'Code RGB')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>RGB</span><span class="font-bold">250,250,247</span></div>
+                            <div onclick="copyText('CMJN(1, 1, 3, 0)', 'Code CMJN')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>CMJN</span><span class="font-bold">1,1,3,0</span></div>
+                            <div onclick="copyText('Pantone Off-White C', 'Code Pantone')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>PMS</span><span class="font-bold">Off-White</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Grège Lin -->
+                    <div class="bg-white border border-grege p-4 rounded group shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="h-28 rounded mb-4 bg-[#EAE5DF]"></div>
+                            <span class="text-xs font-bold block text-charcoal mb-3">Grège Lin</span>
+                        </div>
+                        <div class="space-y-2 pt-2 border-t border-grege/30 text-[10px] font-mono text-charcoal/70">
+                            <div onclick="copyText('#EAE5DF', 'Code HEX #EAE5DF')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>HEX</span><span class="font-bold">#EAE5DF</span></div>
+                            <div onclick="copyText('rgb(234, 229, 223)', 'Code RGB')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>RGB</span><span class="font-bold">234,229,223</span></div>
+                            <div onclick="copyText('CMJN(10, 10, 12, 0)', 'Code CMJN')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>CMJN</span><span class="font-bold">10,10,12,0</span></div>
+                            <div onclick="copyText('Pantone 427 C', 'Code Pantone')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>PMS</span><span class="font-bold">427 C</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Or Laiton -->
+                    <div class="bg-white border border-grege p-4 rounded group shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="h-28 rounded mb-4 bg-[#D4AF37]"></div>
+                            <span class="text-xs font-bold block text-charcoal mb-3">Or Laiton (Prestige)</span>
+                        </div>
+                        <div class="space-y-2 pt-2 border-t border-grege/30 text-[10px] font-mono text-charcoal/70">
+                            <div onclick="copyText('#D4AF37', 'Code HEX #D4AF37')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>HEX</span><span class="font-bold">#D4AF37</span></div>
+                            <div onclick="copyText('rgb(212, 175, 55)', 'Code RGB')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>RGB</span><span class="font-bold">212,175,55</span></div>
+                            <div onclick="copyText('CMJN(21, 32, 85, 4)', 'Code CMJN')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>CMJN</span><span class="font-bold">21,32,85,4</span></div>
+                            <div onclick="copyText('Pantone 872 C', 'Code Pantone')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>PMS</span><span class="font-bold">872 C (Met)</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Sauge Douce -->
+                    <div class="bg-white border border-grege p-4 rounded group shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="h-28 rounded mb-4 bg-[#8FA89B]"></div>
+                            <span class="text-xs font-bold block text-charcoal mb-3">Sauge Douce (Succès)</span>
+                        </div>
+                        <div class="space-y-2 pt-2 border-t border-grege/30 text-[10px] font-mono text-charcoal/70">
+                            <div onclick="copyText('#8FA89B', 'Code HEX #8FA89B')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>HEX</span><span class="font-bold">#8FA89B</span></div>
+                            <div onclick="copyText('rgb(143, 168, 155)', 'Code RGB')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>RGB</span><span class="font-bold">143,168,155</span></div>
+                            <div onclick="copyText('CMJN(38, 18, 32, 0)', 'Code CMJN')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>CMJN</span><span class="font-bold">38,18,32,0</span></div>
+                            <div onclick="copyText('Pantone 5585 C', 'Code Pantone')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>PMS</span><span class="font-bold">5585 C</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Terre Cuite -->
+                    <div class="bg-white border border-grege p-4 rounded group shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="h-28 rounded mb-4 bg-[#C76849]"></div>
+                            <span class="text-xs font-bold block text-charcoal mb-3">Terre Cuite (Alerte)</span>
+                        </div>
+                        <div class="space-y-2 pt-2 border-t border-grege/30 text-[10px] font-mono text-charcoal/70">
+                            <div onclick="copyText('#C76849', 'Code HEX #C76849')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>HEX</span><span class="font-bold">#C76849</span></div>
+                            <div onclick="copyText('rgb(199, 104, 73)', 'Code RGB')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>RGB</span><span class="font-bold">199,104,73</span></div>
+                            <div onclick="copyText('CMJN(18, 67, 74, 5)', 'Code CMJN')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>CMJN</span><span class="font-bold">18,67,74,5</span></div>
+                            <div onclick="copyText('Pantone 7584 C', 'Code Pantone')" class="flex justify-between hover:bg-peche/10 p-1 rounded cursor-pointer transition-all"><span>PMS</span><span class="font-bold">7584 C</span></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3 : GUIDELINE PHOTOGRAPHIQUE & MOODBOARD -->
+    <section id="moodboard" class="py-24 border-b border-grege/60 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-4">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.25em] text-peche font-semibold block mb-2">Section 03</span>
+                    <h2 class="font-serif text-4xl md:text-5xl font-light text-charcoal">Iconographie & Guideline Photo</h2>
+                </div>
+                <p class="font-sans text-xs uppercase tracking-[0.15em] text-charcoal/50 max-w-sm md:text-right">
+                    Définition des scènes clés pour le shooting d'ambiance et de rituels.
+                </p>
+            </div>
+
+            <!-- Grille interactive du Moodboard -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <!-- Scène 1 -->
+                <div class="bg-creme border border-grege/60 rounded overflow-hidden group hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
+                    <div>
+                        <!-- Représentation graphique évocatrice -->
+                        <div class="h-48 bg-charcoal flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-tr from-charcoal to-peche/30 opacity-60"></div>
+                            <i data-lucide="microscope" class="w-8 h-8 text-peche mb-3 relative z-10"></i>
+                            <span class="font-serif italic text-base text-creme relative z-10">Le Rituel Moléculaire</span>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-[9px] uppercase tracking-widest text-peche font-bold block mb-2">Scène 01 — Technique & Science</span>
+                            <p class="text-xs text-charcoal/70 leading-relaxed font-light">
+                                Gros plan macro sur la préparation d'un soin Fusio-Dose. Flacon de verre ambré Kérastase captant une lumière oblique sur plan de travail grège. Focus sur l'onctuosité et la pureté clinique du geste de mélange chimique.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 border-t border-grege/20 mt-4 text-[10px] uppercase tracking-wider text-charcoal/50 font-semibold flex justify-between">
+                        <span>Lumière : Naturelle oblique</span>
+                        <span>Brillance : Élevée</span>
+                    </div>
+                </div>
+
+                <!-- Scène 2 -->
+                <div class="bg-creme border border-grege/60 rounded overflow-hidden group hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 bg-charcoal flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-tr from-charcoal to-laiton/30 opacity-60"></div>
+                            <i data-lucide="sparkles" class="w-8 h-8 text-laiton mb-3 relative z-10"></i>
+                            <span class="font-serif italic text-base text-creme relative z-10">Le Façonnage de la Fibre</span>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-[9px] uppercase tracking-widest text-peche font-bold block mb-2">Scène 02 — Matière & Mouvement</span>
+                            <p class="text-xs text-charcoal/70 leading-relaxed font-light">
+                                Chevelure en mouvement fluide de dos, capturant des reflets satinés et chauds. Focus sur la matière saine sublimée par l'huile Elixir Ultime. Arrière-plan flou (bokeh) en lin écru ou béton lissé tadelakt.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 border-t border-grege/20 mt-4 text-[10px] uppercase tracking-wider text-charcoal/50 font-semibold flex justify-between">
+                        <span>Mouvement : Fluide</span>
+                        <span>Contraste : Doux</span>
+                    </div>
+                </div>
+
+                <!-- Scène 3 -->
+                <div class="bg-creme border border-grege/60 rounded overflow-hidden group hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 bg-charcoal flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-tr from-charcoal to-grege/30 opacity-60"></div>
+                            <i data-lucide="home" class="w-8 h-8 text-grege mb-3 relative z-10"></i>
+                            <span class="font-serif italic text-base text-creme relative z-10">Le Temple du Silence</span>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-[9px] uppercase tracking-widest text-peche font-bold block mb-2">Scène 03 — Ambiance Salon</span>
+                            <p class="text-xs text-charcoal/70 leading-relaxed font-light">
+                                Poste de coiffage épuré. Miroir rond rétro-éclairé diffusant un halo or chaud. Fauteuil enveloppant beige bouclé, console minimale en bois de chêne clair avec d'élégantes branches de pampas.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 border-t border-grege/20 mt-4 text-[10px] uppercase tracking-wider text-charcoal/50 font-semibold flex justify-between">
+                        <span>Ambiance : Intimiste / Spa</span>
+                        <span>Espace : Épuré</span>
+                    </div>
+                </div>
+
+                <!-- Scène 4 -->
+                <div class="bg-creme border border-grege/60 rounded overflow-hidden group hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="h-48 bg-charcoal flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-tr from-charcoal to-sauge/30 opacity-60"></div>
+                            <i data-lucide="coffee" class="w-8 h-8 text-sauge mb-3 relative z-10"></i>
+                            <span class="font-serif italic text-base text-creme relative z-10">L'Expérience du Détail</span>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-[9px] uppercase tracking-widest text-peche font-bold block mb-2">Scène 04 — Accueil & Sensation</span>
+                            <p class="text-xs text-charcoal/70 leading-relaxed font-light">
+                                Plan serré sur des mains tenant une tasse en céramique noire mate texturée. Texture d'un peignoir en lin lourd, carte de bienvenue cachetée à la cire or rose.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 border-t border-grege/20 mt-4 text-[10px] uppercase tracking-wider text-charcoal/50 font-semibold flex justify-between">
+                        <span>Focus : Macro tactile</span>
+                        <span>Teintes : Sombres & Chaudes</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Directives de Shooting -->
+            <div class="bg-creme border border-grege p-8 rounded-lg shadow-sm">
+                <h3 class="font-serif text-2xl mb-6 text-charcoal italic">Directives pour les portraits d'équipe et photos de réalisations</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs font-light text-charcoal/80 leading-relaxed">
+                    <div class="space-y-4">
+                        <strong class="font-semibold text-charcoal uppercase tracking-wider block">Portraits d'Équipe</strong>
+                        <p>
+                            Les collaborateurs doivent être captés dans des poses naturelles, jamais forcées, en mouvement discret (ex : ajustant un outil, souriant doucement sur le côté). Le stylisme vestimentaire doit être harmonisé : des coupes asymétriques minimalistes, dans des couleurs unies (Noir Charcoal, Grège, Blanc cassé). Pas de motifs.
+                        </p>
+                        <p>
+                            <span class="font-semibold text-peche">Éclairage :</span> Préférer un éclairage de type "Clair-obscur" ou lumière naturelle latérale filtrée par un voilage blanc, afin de sculpter délicatement les visages et de conserver des ombres douces et rassurantes.
+                        </p>
+                    </div>
+                    <div class="space-y-4">
+                        <strong class="font-semibold text-charcoal uppercase tracking-wider block">Photos de Réalisations Capillaires</strong>
+                        <p>
+                            Bannir les photos prises de face à l'aide d'un flash direct (effet clinique et agressif pour le cheveu). Les réalisations de coupes et de couleurs doivent être prises de dos ou de trois-quarts profil, mettant en valeur le mouvement organique de la matière.
+                        </p>
+                        <p>
+                            <span class="font-semibold text-laiton">Traitement d'Image :</span> Utiliser des filtres très subtils qui réchauffent les demi-teintes (tons chauds) tout en conservant la fidélité de la coloration Kérastase. Le contraste doit rester délicat, en favorisant une grande plage dynamique dans les noirs et les blancs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4 : APPLICATION SUPPORTS IMPRIMÉS -->
+    <section id="supports" class="py-24 border-b border-grege/60 bg-white bg-grain">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-4">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.25em] text-peche font-semibold block mb-2">Section 04</span>
+                    <h2 class="font-serif text-4xl md:text-5xl font-light text-charcoal">Supports Imprimés & Tactiles</h2>
+                </div>
+                <p class="font-sans text-xs uppercase tracking-[0.15em] text-charcoal/50 max-w-sm md:text-right">
+                    Application concrète de l'identité de marque sur des textures physiques de prestige.
+                </p>
+            </div>
+
+            <!-- Grille des Supports Physiques -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Support 1 : Carte de Visite Triplex -->
+                <div class="luxury-paper p-8 rounded border border-grege shadow-sm flex flex-col justify-between group hover:-translate-y-2 transition-transform duration-300">
+                    <div>
+                        <div class="w-full h-40 bg-charcoal rounded-md p-6 flex flex-col justify-between text-creme relative overflow-hidden mb-6 shadow-md">
+                            <!-- Marquage à chaud simulé -->
+                            <div class="flex justify-between items-start">
+                                <span class="font-serif italic text-lg gold-shimmer">EC</span>
+                                <span class="text-[6px] tracking-widest text-creme/50">PARIS - TOKYO</span>
+                            </div>
+                            <div>
+                                <span class="text-[8px] tracking-widest uppercase block text-creme">Edelys Coiffure</span>
+                                <span class="text-[5px] text-peche tracking-wider block">12, Avenue des Rituels, 75008 Paris</span>
+                            </div>
+                            <!-- Slice centrale orange pour simuler le Triplex -->
+                            <div class="absolute bottom-0 left-0 w-full h-[3px] bg-peche"></div>
+                        </div>
+                        <h3 class="font-serif text-xl mb-3 text-charcoal">Cartes de Visite Triplex (650g)</h3>
+                        <p class="text-xs text-charcoal/70 leading-relaxed font-light">
+                            Papier coton d'une épaisseur exceptionnelle composé d'un cœur teinté dans la masse en Noir Charcoal mat, scellé de part et d'autre par deux feuillets Crème de Lait. Logo monogramme estampé à chaud or rose avec finition satinée.
+                        </p>
+                    </div>
+                    <div class="border-t border-grege/40 pt-4 mt-6 text-[9px] uppercase tracking-wider text-charcoal/50 flex justify-between">
+                        <span>Finition : Marquage à chaud</span>
+                        <span>Papier : Coton Fedrigoni</span>
+                    </div>
+                </div>
+
+                <!-- Support 2 : Menu des Rituels -->
+                <div class="luxury-paper p-8 rounded border border-grege shadow-sm flex flex-col justify-between group hover:-translate-y-2 transition-transform duration-300">
+                    <div>
+                        <div class="w-full h-40 bg-creme rounded-md border border-grege p-6 flex flex-col justify-between text-charcoal relative overflow-hidden mb-6 shadow-inner">
+                            <div class="text-center font-serif text-charcoal/40 text-[7px] tracking-widest">
+                                RITUELS & TARIFS
+                            </div>
+                            <div class="space-y-1.5 my-auto">
+                                <div class="flex justify-between text-[6px] text-charcoal/70"><span>Rituel Fusio-Dose Kérastase</span><span>85 €</span></div>
+                                <div class="flex justify-between text-[6px] text-charcoal/70"><span>Soin Profond Chronologiste</span><span>120 €</span></div>
+                                <div class="flex justify-between text-[6px] text-charcoal/70"><span>Diagnostic K-SCAN & Coupe Signature</span><span>140 €</span></div>
+                            </div>
+                            <div class="h-[1px] w-12 bg-peche/50 mx-auto"></div>
+                        </div>
+                        <h3 class="font-serif text-xl mb-3 text-charcoal">Dépliant des Rituels & Tarifs</h3>
+                        <p class="text-xs text-charcoal/70 leading-relaxed font-light">
+                            Triptyque vertical imprimé sur un papier texturé au grain de lin très marqué (Fedrigoni Materica Clay). Gaufrage à sec pur (sans encre) sur les motifs ondulés des flux capillaires pour une texture tactile raffinée.
+                        </p>
+                    </div>
+                    <div class="border-t border-grege/40 pt-4 mt-6 text-[9px] uppercase tracking-wider text-charcoal/50 flex justify-between">
+                        <span>Finition : Gaufrage à sec</span>
+                        <span>Papier : Materica Clay 250g</span>
+                    </div>
+                </div>
+
+                <!-- Support 3 : Sac Shopping -->
+                <div class="luxury-paper p-8 rounded border border-grege shadow-sm flex flex-col justify-between group hover:-translate-y-2 transition-transform duration-300">
+                    <div>
+                        <div class="w-full h-40 bg-charcoal rounded-md p-6 flex flex-col items-center justify-center text-creme relative overflow-hidden mb-6 shadow-md">
+                            <div class="w-8 h-8 rounded-full border border-peche/30 flex items-center justify-center text-peche font-serif text-xs">EC</div>
+                            <span class="text-[6px] tracking-[0.4em] uppercase text-creme/60 mt-2">EDELYS COIFFURE</span>
+                            <!-- Poignées en coton brut simulées -->
+                            <div class="absolute -top-3 w-8 h-6 rounded-full border-t-2 border-peche/40"></div>
+                        </div>
+                        <h3 class="font-serif text-xl mb-3 text-charcoal">Sacs & Coffrets Cadeaux</h3>
+                        <p class="text-xs text-charcoal/70 leading-relaxed font-light">
+                            Papier kraft lourd teinté dans la masse en Noir Charcoal mat d'une résistance supérieure. Poignées plates en ruban de coton brut écru. Le logo monogramme s'affiche sur les deux faces avec un film métallisé or rose satiné.
+                        </p>
+                    </div>
+                    <div class="border-t border-grege/40 pt-4 mt-6 text-[9px] uppercase tracking-wider text-charcoal/50 flex justify-between">
+                        <span>Finition : Film métallisé</span>
+                        <span>Papier : Kraft teinté 180g</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5 : BAC À SABLE ANIMATIONS & INTERACTIVITÉ UI -->
+    <section id="interactions" class="py-24 border-b border-grege/60 pattern-fluidity">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-4">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.25em] text-peche font-semibold block mb-2">Section 05</span>
+                    <h2 class="font-serif text-4xl md:text-5xl font-light text-charcoal">Expérimentations Digitales & UI</h2>
+                </div>
+                <p class="font-sans text-xs uppercase tracking-[0.15em] text-charcoal/50 max-w-sm md:text-right">
+                    Débouchés interactifs pour le site web d'Edelys Coiffure.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
+                <!-- Sandbox Animations -->
+                <div class="lg:col-span-8 bg-white border border-grege p-8 rounded flex flex-col justify-between shadow-sm">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-widest text-peche font-bold block mb-4">Interactif</span>
+                        <h3 class="font-serif text-2xl mb-6">Bac à sable : Micro-interactions de l'interface digitale</h3>
+                        <p class="text-xs text-charcoal/70 leading-relaxed mb-8">
+                            Survolez ou cliquez sur les composants interactifs ci-dessous pour ressentir l'effet de confort haut de gamme ("Quiet Luxury") que nous préconisons pour l'expérience numérique d'Edelys Coiffure.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+                        <!-- Module d'aimantation du curseur -->
+                        <div class="p-6 bg-creme border border-grege/50 rounded flex flex-col items-center justify-center min-h-[200px] text-center">
+                            <span class="text-[9px] uppercase tracking-widest text-charcoal/50 font-semibold mb-4">Halo Doré Magnétique</span>
+                            <button id="magnetic-btn" class="bg-charcoal text-creme hover:text-peche text-xs uppercase tracking-[0.2em] font-semibold px-6 py-3.5 rounded transition-all duration-300 relative overflow-hidden group">
+                                <span class="relative z-10">Bouton interactif</span>
+                                <div class="absolute inset-0 bg-peche/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                            </button>
+                            <p class="text-[10px] text-charcoal/50 mt-4 leading-relaxed max-w-xs">
+                                Survolez ce bouton pour voir le curseur "Halo Doré" s'agrandir et s'aimanter délicatement à l'appel à l'action.
+                            </p>
+                        </div>
+
+                        <!-- Micro-interaction de validation -->
+                        <div class="p-6 bg-creme border border-grege/50 rounded flex flex-col items-center justify-center min-h-[200px] text-center">
+                            <span class="text-[9px] uppercase tracking-widest text-charcoal/50 font-semibold mb-4">Validation d'Action</span>
+                            <button id="submit-btn" onclick="simulateBooking()" class="bg-charcoal text-creme text-xs uppercase tracking-[0.2em] font-semibold px-6 py-3.5 rounded transition-all duration-300 flex items-center gap-2 justify-center w-full max-w-[200px]">
+                                <span id="btn-text">Réserver un Rituel</span>
+                                <i id="btn-icon" data-lucide="calendar" class="w-4 h-4 text-peche"></i>
+                            </button>
+                            <p class="text-[10px] text-charcoal/50 mt-4 leading-relaxed max-w-xs">
+                                Cliquez pour simuler la réservation de soin. L'action propose une validation douce en Sauge Douce accompagnée d'un message rassurant.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommandations d'animation UI -->
+                <div class="lg:col-span-4 bg-charcoal text-creme p-8 rounded flex flex-col justify-between shadow-lg">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-widest text-peche font-bold block mb-4">Directives Digitales</span>
+                        <h3 class="font-serif text-2xl mb-6 text-peche font-light">Principes d'Animation</h3>
+                        <div class="space-y-6 text-xs font-light text-creme/80 leading-relaxed">
+                            <div>
+                                <strong class="font-semibold text-creme block uppercase tracking-wider mb-1">Entrée progressive en voile de crème</strong>
+                                <p>Toutes les transitions majeures de page s'effectuent par un voile soyeux de couleur crème glissant verticalement du bas vers le haut du viewport.</p>
+                            </div>
+                            <div>
+                                <strong class="font-semibold text-creme block uppercase tracking-wider mb-1">Ralentissement inertiel (Easing)</strong>
+                                <p>Chaque menu déroulant ou apparition d'élément au scroll utilise une courbe de Bézier personnalisée de type <code class="font-mono text-peche bg-charcoal/30 px-1 py-0.5 rounded">cubic-bezier(0.25, 1, 0.5, 1)</code> pour donner une impression de fluidité organique.</p>
+                            </div>
+                            <div>
+                                <strong class="font-semibold text-creme block uppercase tracking-wider mb-1">Rétroaction haptique & Micro-sons</strong>
+                                <p>Sur mobile, chaque appui sur un bouton de choix de soin produit une vibration haptique ultra-brève (si supportée), accentuant l'impression de robustesse physique.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-t border-creme/10 pt-6 mt-6 flex justify-between items-center text-[10px] tracking-widest uppercase">
+                        <span>Norme d'Accessibilité :</span>
+                        <span class="font-bold text-peche">WCAG 2.1 Contrast AA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-charcoal text-creme py-16 border-t border-grege/10">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div>
+                <span class="font-serif italic text-3xl text-peche block mb-2">Edelys Coiffure</span>
+                <span class="text-[10px] tracking-[0.25em] uppercase text-creme/40">Institut de Beauté Capillaire</span>
+            </div>
+            <div>
+                <h4 class="text-xs uppercase tracking-widest text-peche font-bold mb-4">Co-branding</h4>
+                <p class="text-xs text-creme/60 leading-relaxed font-light">
+                    Partenaire & Ambassadeur officiel Kérastase de prestige. Utilisation exclusive de rituels agréés et de technologies de pointe d'analyse du cuir chevelu.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-xs uppercase tracking-widest text-peche font-bold mb-4">Salon Physique</h4>
+                <p class="text-xs text-creme/60 leading-relaxed font-light">
+                    12, Avenue des Rituels <br>
+                    75008 Paris, France <br>
+                    <span class="font-semibold text-creme">Contact :</span> contact@edelys-coiffure.fr
+                </p>
+            </div>
+            <div>
+                <h4 class="text-xs uppercase tracking-widest text-peche font-bold mb-4">Spécifications</h4>
+                <ul class="text-xs text-creme/60 space-y-2 font-light">
+                    <li>Norme Accessibilité WCAG 2.1</li>
+                    <li>Rapport Contraste : 16.64:1</li>
+                    <li>Version de la charte : V1.0 - 2026</li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-creme/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] tracking-widest uppercase text-creme/40">
+            <span>© 2026 Edelys Coiffure. Tous droits réservés.</span>
+            <span>Réalisé par l'Expertise Direction Artistique</span>
+        </div>
+    </footer>
+
+    <!-- LOGIQUE JAVASCRIPT POUR L'INTERACTIVITÉ -->
+    <script>
+        // Initialisation de Lucide Icons
+        lucide.createIcons();
+
+        // 1. Curseur personnalisé interactif "Halo Doré"
+        const cursor = document.getElementById('custom-cursor');
+        const cursorDot = document.getElementById('custom-cursor-dot');
+        
+        // On ne gère le curseur de souris que sur les périphériques non tactiles
+        document.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            
+            // Suivi fluide du point central
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            
+            // Suivi avec un léger retard (effet halo)
+            cursor.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 150, fill: "forwards" });
+        });
+
+        // Comportement du curseur sur les éléments survolés (boutons, cartes couleur, etc.)
+        const hoverables = document.querySelectorAll('button, a, [onclick], input[type="range"]');
+        hoverables.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                cursor.classList.remove('w-8', 'h-8');
+                cursor.classList.add('w-14', 'h-14', 'bg-peche/10', 'border-peche/60');
+            });
+            item.addEventListener('mouseleave', () => {
+                cursor.classList.remove('w-14', 'h-14', 'bg-peche/10', 'border-peche/60');
+                cursor.classList.add('w-8', 'h-8');
+            });
+        });
+
+        // 2. Copie de Couleur Interactive et Toast Notification (Fixé avec fallback universel iFrame)
+        function copyText(value, message) {
+            // Création d'un élément textarea temporaire (robuste dans toutes les iFrames)
+            const dummy = document.createElement('textarea');
+            dummy.value = value;
+            document.body.appendChild(dummy);
+            dummy.select();
+            dummy.setSelectionRange(0, 99999); // Pour mobile
+
+            let success = false;
+            try {
+                success = document.execCommand('copy');
+            } catch (err) {
+                console.error('Erreur lors de la copie : ', err);
+            }
+
+            document.body.removeChild(dummy);
+
+            if (success) {
+                const toast = document.getElementById('toast');
+                const toastTitle = document.getElementById('toast-title');
+                const toastBody = document.getElementById('toast-body');
+
+                toastTitle.innerText = "Copié avec succès !";
+                toastBody.innerText = `${message} a été ajouté à votre presse-papier.`;
+
+                toast.classList.remove('translate-y-20', 'opacity-0');
+                toast.classList.add('translate-y-0', 'opacity-100');
+                
+                setTimeout(() => {
+                    toast.classList.remove('translate-y-0', 'opacity-100');
+                    toast.classList.add('translate-y-20', 'opacity-0');
+                }, 3500);
+            } else {
+                // Rétrocompatibilité au cas où
+                navigator.clipboard.writeText(value).then(() => {
+                    const toast = document.getElementById('toast');
+                    toast.classList.remove('translate-y-20', 'opacity-0');
+                    toast.classList.add('translate-y-0', 'opacity-100');
+                    setTimeout(() => {
+                        toast.classList.remove('translate-y-0', 'opacity-100');
+                        toast.classList.add('translate-y-20', 'opacity-0');
+                    }, 3500);
+                });
+            }
+        }
+
+        // 3. Changement d'Onglet (Tab Switcher) dans la section Stratégie
+        function switchTab(tabId) {
+            // Cacher tous les contenus
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+                content.classList.remove('block');
+            });
+            // Désactiver tous les boutons d'onglets
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active', 'border-peche', 'bg-creme', 'font-serif', 'italic', 'text-charcoal');
+                btn.classList.add('border-transparent', 'text-charcoal/60');
+            });
+
+            // Afficher le contenu de l'onglet actif
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById(tabId).classList.add('block');
+
+            // Activer le bouton correspondant
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            activeBtn.classList.add('active', 'border-peche', 'bg-creme', 'font-serif', 'italic', 'text-charcoal');
+            activeBtn.classList.remove('border-transparent', 'text-charcoal/60');
+        }
+
+        // 4. Calculateur de Zone d'Exclusion en Direct
+        const slider = document.getElementById('height-slider');
+        const sliderVal = document.getElementById('slider-val');
+        const exclusionBox = document.getElementById('exclusion-box');
+        const calculatedPadding = document.getElementById('calculated-padding');
+        const logoMonogram = document.getElementById('logo-monogram');
+
+        slider.addEventListener('input', (e) => {
+            const h = parseInt(e.target.value);
+            sliderVal.innerText = `${h}px`;
+            
+            // Règle de la charte : exclusion = 0.75 * H
+            const padding = Math.round(0.75 * h);
+            
+            // Mise à jour de l'affichage
+            exclusionBox.style.padding = `${padding}px`;
+            logoMonogram.style.fontSize = `${h}px`;
+            calculatedPadding.innerText = `Zone d'exclusion : ${padding}px (0.75 * H)`;
+        });
+
+        // 5. Simulateur d'Animation "Voile de Crème"
+        function triggerVoile() {
+            const voile = document.getElementById('voile-creme');
+            
+            // Étape 1 : Le rideau monte
+            voile.classList.remove('translate-y-full');
+            voile.classList.add('translate-y-0');
+            
+            // Étape 2 : Après un instant, il continue sa course vers le haut (ou redescend)
+            setTimeout(() => {
+                voile.classList.remove('translate-y-0');
+                voile.classList.add('-translate-y-full');
+                
+                // Reset de la position sans transition visible pour un prochain déclenchement
+                setTimeout(() => {
+                    voile.style.transition = 'none';
+                    voile.classList.remove('-translate-y-full');
+                    voile.classList.add('translate-y-full');
+                    
+                    // Force le reflow du DOM
+                    voile.offsetHeight; 
+                    voile.style.transition = '';
+                }, 700);
+            }, 1200);
+        }
+
+        // 6. Simulation du Bouton de Réservation (Micro-interaction)
+        function simulateBooking() {
+            const btn = document.getElementById('submit-btn');
+            
+            // Phase de chargement
+            btn.disabled = true;
+            btn.classList.add('opacity-85');
+            btn.innerHTML = `<span id="btn-text">Demande en cours...</span> <div class="w-4 h-4 border-2 border-peche border-t-transparent rounded-full animate-spin"></div>`;
+            
+            setTimeout(() => {
+                // Phase de succès en Sauge Douce
+                btn.className = "bg-sauge text-creme text-xs uppercase tracking-[0.2em] font-semibold px-6 py-3.5 rounded transition-all duration-300 flex items-center gap-2 justify-center w-full max-w-[200px]";
+                btn.innerHTML = `<span>Rituel Réservé !</span> <i data-lucide="check" class="w-4 h-4 text-white"></i>`;
+                lucide.createIcons();
+                
+                // Réinitialisation après 3 secondes
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.className = "bg-charcoal text-creme text-xs uppercase tracking-[0.2em] font-semibold px-6 py-3.5 rounded transition-all duration-300 flex items-center gap-2 justify-center w-full max-w-[200px]";
+                    btn.innerHTML = `<span id="btn-text">Réserver un Rituel</span> <i id="btn-icon" data-lucide="calendar" class="w-4 h-4 text-peche"></i>`;
+                    lucide.createIcons();
+                }, 3000);
+            }, 1800);
+        }
+    </script>
+</body>
+</html>
