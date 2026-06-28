@@ -14,7 +14,7 @@ export const Heading: React.FC<HeadingProps> = ({
   className = "",
   ...props
 }) => {
-  const Tag = `h${level}` as keyof JSX.IntrinsicElements;
+  const Tag = `h${level}` as React.ElementType;
 
   // Base styles for all headings: Cormorant Garamond, light/regular weight, elegant line height
   const baseClasses = "font-serif font-light text-charcoal dark:text-creme leading-tight";
