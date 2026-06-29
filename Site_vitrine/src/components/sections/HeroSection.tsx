@@ -13,14 +13,15 @@ export const HeroSection = () => {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/hero.jpg"
+          src="/images/hero.png"
           alt="L'ambiance Edelys Coiffure"
           fill
           priority
-          className="object-cover object-center"
+          className="object-cover object-bottom opacity-90 dark:opacity-80"
         />
-        {/* Overlay pour garantir la lisibilité du texte (dégradé sombre) */}
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent dark:from-black/90 dark:via-black/60 dark:to-transparent" />
+        {/* Double overlay de contrastes : un dégradé du bas et un voile assombrissant tout en haut pour protéger le Header */}
+        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/30 to-charcoal/40 dark:from-black/95 dark:via-black/40 dark:to-black/60" />
+        <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-black/50 to-transparent pointer-events-none" />
       </div>
 
       {/* Animation "Voile de Crème" d'entrée */}
@@ -31,8 +32,8 @@ export const HeroSection = () => {
         className="absolute inset-0 z-20 bg-creme dark:bg-dark-bg"
       />
 
-      {/* Contenu principal */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-20 text-center flex flex-col items-center">
+      {/* Contenu principal décalé vers le bas pour ne pas chevaucher le logo géant central de l'image */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-32 md:pt-40 text-center flex flex-col items-center">
         
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -51,7 +52,7 @@ export const HeroSection = () => {
           transition={{ duration: 0.8, delay: 1.2 }}
         >
           <Heading level={1} className="text-creme max-w-4xl mx-auto mb-6 drop-shadow-md">
-            L'architecture du cheveu <span className="italic text-peche">d'élite</span>
+            Votre Salon de Confiance <span className="italic text-peche">à La Ferté-Alais</span>
           </Heading>
         </motion.div>
 
@@ -61,7 +62,7 @@ export const HeroSection = () => {
           transition={{ duration: 0.8, delay: 1.4 }}
         >
           <Text variant="body" className="text-creme/90 max-w-2xl mx-auto mb-10 text-lg md:text-xl">
-            Un moment de déconnexion absolue. Profitez de notre expertise sur-mesure et de nos soins profonds Kérastase dans un cadre confidentiel.
+            Une équipe d'expertes à votre écoute pour révéler la beauté unique de vos cheveux, dans un cadre chaleureux et convivial.
           </Text>
         </motion.div>
 

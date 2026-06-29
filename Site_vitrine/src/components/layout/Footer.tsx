@@ -22,26 +22,31 @@ export const Footer = () => {
         {/* Links Column */}
         <div className="flex flex-col gap-4">
           <Text variant="overline" className="mb-2">Navigation</Text>
-          <Link href="/#salon" className="text-sm text-grege/70 hover:text-peche transition-colors">Le Salon</Link>
-          <Link href="/#expertise" className="text-sm text-grege/70 hover:text-peche transition-colors">Notre Expertise</Link>
-          <Link href="/#prestations" className="text-sm text-grege/70 hover:text-peche transition-colors">La Carte & Tarifs</Link>
-          <Link href="/#contact" className="text-sm text-grege/70 hover:text-peche transition-colors">Accès & Contact</Link>
+          <Link href="/a-propos" className="text-sm text-grege/70 hover:text-peche transition-colors">À Propos</Link>
+          <Link href="/equipe" className="text-sm text-grege/70 hover:text-peche transition-colors">L'équipe</Link>
+          <Link href="/prestations" className="text-sm text-grege/70 hover:text-peche transition-colors">Prestations & Tarifs</Link>
+          <Link href="/contact" className="text-sm text-grege/70 hover:text-peche transition-colors">Contact</Link>
+        </div>
+
+        {/* Horaires Column */}
+        <div className="flex flex-col gap-2">
+          <Text variant="overline" className="mb-2">Horaires</Text>
+          <p className="text-sm text-grege/70">Lundi : 14h – 19h</p>
+          <p className="text-sm text-grege/70">Mar – Ven : 9h30 – 19h</p>
+          <p className="text-sm text-grege/70">Samedi : 9h – 17h</p>
+          <p className="text-sm text-grege/70">Dimanche : Fermé</p>
         </div>
 
         {/* Contact Column */}
         <div className="flex flex-col gap-4">
           <Text variant="overline" className="mb-2">Contact</Text>
           <div className="flex items-start gap-3 text-sm text-grege/70">
-            <MapPin className="w-5 h-5 text-peche shrink-0" />
-            <span>123 Avenue de l'Élégance<br/>75000 Paris</span>
+            <MapPin className="w-5 h-5 text-peche shrink-0 mt-1" />
+            <span>2 Rue Eugène Millet<br/>91590 La Ferté-Alais</span>
           </div>
           <div className="flex items-center gap-3 text-sm text-grege/70">
             <Phone className="w-5 h-5 text-peche shrink-0" />
-            <span>01 23 45 67 89</span>
-          </div>
-          <div className="flex items-center gap-3 text-sm text-grege/70">
-            <Mail className="w-5 h-5 text-peche shrink-0" />
-            <span>contact@edelys-coiffure.fr</span>
+            <span>01 69 90 39 59</span>
           </div>
         </div>
 
