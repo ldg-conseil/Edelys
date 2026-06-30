@@ -6,8 +6,14 @@
 - The repository also includes design and branding resources under `Direction_Artistique/`.
 - Use `project_state.md` as the ongoing session context document.
 
+## Design System (V0.2 — 01/07/2026)
+- **Two themes:** Atelier Clinique (light, editorial) & Clair-Obscur Éditorial (dark, cinematic, rose gold)
+- **Tailwind v4 dark mode:** uses class strategy via `@variant dark (&:where(.dark, .dark *));` in globals.css
+- **Palette tokens:** `peche`, `charcoal`, `creme`, `grege`, `laiton`, `cinema-bg`, `cinema-card`, `cinema-border`
+- **Editorial utilities:** `editorial-grid`, `editorial-card`, `rule-accent`, `editorial-number`
+
 ## Primary AI responsibilities
-- Help iterate the site content, layout, and branding while preserving the current design tone: elegant, modern, high-end salon.
+- Help iterate the site content, layout, and branding while preserving the current two-theme design system.
 - Prefer small, well-scoped changes over broad rewrites.
 - Keep Next.js app routes and file structure consistent with the existing `app/` directory.
 - Do not modify generated build artifacts or `.next/` files.
@@ -20,8 +26,9 @@
 
 ## Development workflow
 - The application entrypoint is `Site_vitrine/src/app/page.tsx` and layout is in `Site_vitrine/src/app/layout.tsx`.
-- Use `npm run dev` inside `Site_vitrine/` to test changes locally.
+- Use `npm run dev` inside `Site_vitrine/` to test changes locally (port 3000).
 - Use `npm run lint` inside `Site_vitrine/` to verify code quality.
+- If `.next` cache gets corrupted, delete it and restart: `rm -rf .next && npm run dev`.
 
 ## Change guidance
 - Prefer editing content in `Site_vitrine/src/app/*` and `Site_vitrine/src/components/*` for pages and sections.
@@ -31,12 +38,13 @@
 
 ## Git & branching
 - Use feature branches for new work: `feature/<description>`.
+- Current active branch: `feature/site-content`.
 - Keep `project_state.md` updated with decisions, open tasks, and progress summaries.
 
 ## Helpful repo notes
-- Existing AI guidance: `Site_vitrine/AGENTS.md`, `Site_vitrine/CLAUDE.md`, and `project_state.md`.
+- Design identity document: `Direction_Artistique/Edelys Coiffure - Identite (autonome).html`.
+- Existing AI guidance: `Site_vitrine/AGENTS.md`, `CLAUDE.md`, and `project_state.md`.
 - The root-level `.agents/AGENTS.md` contains repository-level branching rules.
-- Use `Prompts/initialisation.txt` for initialization context if needed.
 
 ## Problem-solving rules
 - If you are unsure about the correct UI or copy, leave a TODO comment and describe the desired behavior or content.
