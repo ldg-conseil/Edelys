@@ -10,18 +10,18 @@ export const metadata: Metadata = {
 
 const AboutPage = () => {
   return (
-    <div className="bg-creme dark:bg-dark-bg py-24 sm:py-32">
+    <div className="bg-creme dark:bg-cinema-bg py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
-          <Text variant="overline" className="text-peche">Notre Histoire</Text>
-          <Heading level={1} className="mt-2 text-charcoal dark:text-creme">
-            Plus qu'un salon, une signature.
+          <Heading level={1} number="01" className="text-charcoal dark:text-creme">
+            Plus qu&rsquo;un salon,{" "}
+            <span className="italic text-peche dark:text-laiton">une signature.</span>
           </Heading>
         </div>
         <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2">
             <div>
-                <Heading level={2} className="text-charcoal dark:text-creme">Notre Philosophie</Heading>
-                <div className="mt-6 space-y-7 text-base text-charcoal/80 dark:text-grege">
+                <Heading level={2} number="02" className="text-charcoal dark:text-creme">Notre Philosophie</Heading>
+                <div className="mt-6 space-y-7 text-base text-charcoal/80 dark:text-grege/80">
                     <Text>
                         Chez Edelys Coiffure, nous pensons que la coiffure ne se limite pas à une coupe ou à une couleur : c'est un véritable moment d'échange. Que vous veniez pour une patine (un soin pigmenté léger qui ravive l'éclat et neutralise les reflets indésirables) ou pour un ombré hair subtil (un dégradé lumineux allant de racines naturelles vers des pointes éclaircies), nous mettons tout notre savoir-faire en œuvre.
                     </Text>
@@ -31,8 +31,8 @@ const AboutPage = () => {
                 </div>
             </div>
             <div>
-                <Heading level={2} className="text-charcoal dark:text-creme">Un salon familial au cœur de la commune</Heading>
-                <div className="mt-6 space-y-7 text-base text-charcoal/80 dark:text-grege">
+                <Heading level={2} number="03" className="text-charcoal dark:text-creme">Un salon familial au cœur de la commune</Heading>
+                <div className="mt-6 space-y-7 text-base text-charcoal/80 dark:text-grege/80">
                     <Text>
                         Situé au 2 Rue Eugène Millet, notre espace est entouré de nombreux commerces de proximité, facilitant vos haltes bien-être en centre-ville. 
                     </Text>

@@ -23,14 +23,13 @@ const ContactPage = () => {
     ];
 
     return (
-        <div className="bg-creme dark:bg-dark-bg">
+        <div className="bg-creme dark:bg-cinema-bg">
             <div className="relative isolate px-6 pt-24 sm:pt-32 lg:px-8">
                 <div className="mx-auto max-w-2xl text-center">
-                    <Text variant="overline" className="text-peche">Contact</Text>
-                    <Heading level={1} className="mt-2 text-charcoal dark:text-creme">
+                    <Heading level={1} number="01" className="text-charcoal dark:text-creme">
                         Prendre rendez-vous
                     </Heading>
-                    <Text variant="body" className="mt-6 text-lg leading-8 text-charcoal/80 dark:text-grege">
+                    <Text variant="body" className="mt-6 text-lg leading-8 text-charcoal/80 dark:text-grege/80">
                         Contactez-nous pour toute question ou pour réserver une prestation spécifique.
                     </Text>
                 </div>
@@ -42,13 +41,13 @@ const ContactPage = () => {
                     <div className="flex flex-col gap-8">
                         <div>
                             <Heading level={3} className="flex items-center gap-3 text-charcoal dark:text-creme">
-                                <MapPin className="w-6 h-6 text-peche"/> Adresse
+                                <MapPin className="w-6 h-6 text-peche dark:text-laiton"/> Adresse
                             </Heading>
                             <Text className="mt-2 ml-9">2 Rue Eugène Millet, 91590 La Ferté-Alais</Text>
                         </div>
                         <div>
                             <Heading level={3} className="flex items-center gap-3 text-charcoal dark:text-creme">
-                                <Phone className="w-6 h-6 text-peche"/> Téléphone
+                                <Phone className="w-6 h-6 text-peche dark:text-laiton"/> Téléphone
                             </Heading>
                             <Text className="mt-2 ml-9">01 69 90 39 59</Text>
                             <Text variant="caption" className="mt-1 ml-9 text-charcoal/60 dark:text-grege/80">
@@ -57,7 +56,7 @@ const ContactPage = () => {
                         </div>
                         <div>
                             <Heading level={3} className="flex items-center gap-3 text-charcoal dark:text-creme">
-                                <Clock className="w-6 h-6 text-peche"/> Horaires
+                                <Clock className="w-6 h-6 text-peche dark:text-laiton"/> Horaires
                             </Heading>
                             <ul className="mt-2 ml-9 space-y-1">
                                 <li>Lundi : 14h00 – 19h00</li>
@@ -68,15 +67,15 @@ const ContactPage = () => {
                         </div>
                     </div>
                     {/* Témoignages */}
-                    <div className="lg:col-span-2 bg-white/50 dark:bg-[#111]/50 p-10 rounded-2xl border border-charcoal/5 dark:border-white/5 shadow-sm">
+                    <div className="lg:col-span-2 bg-white/60 dark:bg-cinema-card/60 p-10 rounded-lg border border-charcoal/[0.06] dark:border-cinema-border">
                         <Heading level={2} className="text-center mb-10 text-charcoal dark:text-creme">Ce que disent nos clients</Heading>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                             {testimonials.map((testimonial, index) => (
                                 <figure key={index} className="flex flex-col">
-                                    <div className="flex gap-1 text-or mb-2">
+                                    <div className="flex gap-1 text-laiton mb-2">
                                         {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current"/>)}
                                     </div>
-                                    <blockquote className="text-charcoal/80 dark:text-grege flex-grow">
+                                    <blockquote className="text-charcoal/70 dark:text-grege/70 flex-grow">
                                         <p>"{testimonial.quote}"</p>
                                     </blockquote>
                                 </figure>

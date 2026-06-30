@@ -1,0 +1,2298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edelys Coiffure — Bibliothèque d'Effets CSS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   EDELYS COIFFURE — BIBLIOTHÈQUE D'EFFETS CSS
+   Palette: Pêche Cuivrée · Charcoal · Crème · Grège · Or Laiton
+   ============================================================ */
+
+:root {
+  /* Palette */
+  --peach:        #E8A382;
+  --peach-deep:   #C0795A;
+  --peach-soft:   rgba(232, 163, 130, .14);
+  --charcoal:     #1A1A1A;
+  --charcoal-2:   #121110;
+  --charcoal-3:   #0E0E0E;
+  --charcoal-4:   #211e1c;
+  --cream:        #FAFAF7;
+  --grege:        #EAE5DF;
+  --brass:        #D4AF37;
+  --page:         #EDEBE6;
+  --ink:          #1a1a1a;
+  --ink-soft:     rgba(26, 26, 26, .62);
+  --ink-mute:     rgba(26, 26, 26, .38);
+  --line:         rgba(26, 26, 26, .1);
+  --line-dark:    rgba(250, 250, 247, .12);
+
+  /* Type */
+  --font-serif:   'Cormorant Garamond', Georgia, serif;
+  --font-sans:    'Montserrat', system-ui, -apple-system, sans-serif;
+  --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Shadows */
+  --shadow-card:  0 24px 70px -26px rgba(0,0,0,.6);
+  --shadow-soft:  0 12px 30px -14px rgba(0,0,0,.25);
+  --shadow-press: 0 4px 12px -4px rgba(0,0,0,.2);
+
+  /* Radii */
+  --r-sm: 6px;
+  --r-md: 9px;
+  --r-lg: 12px;
+  --r-xl: 18px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--page);
+  color: var(--ink);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--peach); color: var(--charcoal); }
+
+/* ============================================================
+   LAYOUT — Top bar + sidebar + content
+   ============================================================ */
+
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 64px;
+  background: rgba(237, 235, 230, .82);
+  backdrop-filter: blur(14px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  border-bottom: 1px solid var(--line);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  padding: 0 36px;
+  gap: 28px;
+}
+.topbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 22px;
+  letter-spacing: .01em;
+  color: var(--charcoal);
+}
+.topbar .brand-mark {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--peach);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: var(--peach);
+  font-style: normal;
+}
+.topbar .brand span { color: var(--peach); }
+.topbar .search {
+  flex: 1;
+  max-width: 420px;
+  position: relative;
+}
+.topbar .search input {
+  width: 100%;
+  height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255,255,255,.6);
+  padding: 0 18px 0 42px;
+  font: 400 13px var(--font-sans);
+  color: var(--ink);
+  outline: none;
+  transition: border-color .25s, background .25s, box-shadow .25s;
+}
+.topbar .search input:focus {
+  border-color: var(--peach);
+  background: #fff;
+  box-shadow: 0 0 0 3px var(--peach-soft);
+}
+.topbar .search input::placeholder { color: var(--ink-mute); }
+.topbar .search .icon {
+  position: absolute;
+  left: 16px; top: 50%;
+  transform: translateY(-50%);
+  width: 14px; height: 14px;
+  border: 1.5px solid var(--ink-mute);
+  border-radius: 50%;
+}
+.topbar .search .icon::after {
+  content: '';
+  position: absolute;
+  right: -5px; bottom: -4px;
+  width: 6px; height: 1.5px;
+  background: var(--ink-mute);
+  transform: rotate(45deg);
+  transform-origin: left center;
+}
+.topbar .meta {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font: 600 11px/1 var(--font-sans);
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.topbar .meta .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--peach);
+  box-shadow: 0 0 0 4px var(--peach-soft);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 264px 1fr;
+  margin-top: 64px;
+  min-height: calc(100vh - 64px);
+}
+
+/* Sidebar */
+.sidebar {
+  position: sticky;
+  top: 64px;
+  height: calc(100vh - 64px);
+  border-right: 1px solid var(--line);
+  background: rgba(250, 250, 247, .55);
+  overflow-y: auto;
+  padding: 32px 0 48px;
+}
+.sidebar h4 {
+  font: 600 10px/1 var(--font-mono);
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  padding: 0 24px;
+  margin-bottom: 12px;
+}
+.sidebar nav { display: flex; flex-direction: column; }
+.sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 24px;
+  font: 500 13px/1 var(--font-sans);
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all .2s;
+  position: relative;
+}
+.sidebar a:hover {
+  color: var(--ink);
+  background: rgba(232,163,130,.06);
+}
+.sidebar a.active {
+  color: var(--peach-deep);
+  border-left-color: var(--peach);
+  background: rgba(232,163,130,.08);
+  font-weight: 600;
+}
+.sidebar a .num {
+  font: 600 10px var(--font-mono);
+  color: var(--ink-mute);
+  width: 18px;
+}
+.sidebar a.active .num { color: var(--peach-deep); }
+.sidebar a .count {
+  margin-left: auto;
+  font: 500 10px var(--font-mono);
+  color: var(--ink-mute);
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(0,0,0,.04);
+}
+
+/* Main content */
+.content {
+  padding: 0;
+  min-width: 0;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  padding: 88px 72px 72px;
+  background: radial-gradient(125% 95% at 50% 16%, var(--charcoal-4) 0%, var(--charcoal-3) 62%);
+  color: var(--cream);
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 40%; left: 50%;
+  width: 580px; height: 580px;
+  border: 1px solid rgba(232,163,130,.18);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 40%; left: 50%;
+  width: 380px; height: 380px;
+  border: 1px solid rgba(232,163,130,.28);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: heroPulse 6s ease-in-out infinite;
+}
+@keyframes heroPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  50% { transform: translate(-50%, -50%) scale(1.05); opacity: .55; }
+}
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 56px;
+  font: 600 11px/1 var(--font-sans);
+  letter-spacing: .32em;
+  text-transform: uppercase;
+}
+.hero-top .left {
+  display: flex; align-items: center; gap: 14px;
+  color: var(--peach);
+}
+.hero-top .left .bar {
+  width: 34px; height: 1px;
+  background: var(--peach);
+}
+.hero-top .right { color: rgba(250,250,247,.45); }
+
+.hero h1 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: 1.02;
+  letter-spacing: .005em;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--peach);
+}
+.hero .lead {
+  font: 300 16px/1.7 var(--font-sans);
+  color: rgba(250,250,247,.72);
+  max-width: 580px;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+.hero .meta-row {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font: 600 11px/1 var(--font-sans);
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: rgba(250,250,247,.55);
+  position: relative;
+  z-index: 1;
+}
+.hero .meta-row .sep {
+  flex: 0 0 60px; height: 1px;
+  background: rgba(232,163,130,.34);
+}
+.hero .meta-row .accent { color: var(--peach); }
+
+/* ============================================================
+   SECTIONS — Categories of effects
+   ============================================================ */
+.section {
+  padding: 72px 72px 32px;
+  scroll-margin-top: 64px;
+}
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--line);
+}
+.section-head .label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font: 600 11px/1 var(--font-sans);
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--peach-deep);
+  margin-bottom: 14px;
+}
+.section-head .label .bar {
+  width: 28px; height: 1px;
+  background: var(--peach);
+}
+.section-head h2 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 46px;
+  line-height: 1;
+  color: var(--charcoal);
+}
+.section-head h2 em {
+  font-style: italic;
+  color: var(--peach-deep);
+}
+.section-head .count {
+  font: 600 11px var(--font-mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: 28px;
+}
+
+/* ============================================================
+   EFFECT CARD — Demo + code panel
+   ============================================================ */
+.card {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow .3s, transform .3s;
+}
+.card:hover {
+  box-shadow: 0 20px 50px -20px rgba(0,0,0,.3);
+  transform: translateY(-2px);
+}
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(234, 229, 223, .35);
+}
+.card-head .id {
+  font: 600 10px var(--font-mono);
+  letter-spacing: .12em;
+  color: var(--ink-mute);
+}
+.card-head .name {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  color: var(--charcoal);
+  margin-top: 2px;
+}
+.card-head .name em {
+  font-style: italic;
+  color: var(--peach-deep);
+}
+.card-head .actions {
+  display: flex;
+  gap: 6px;
+}
+.card-head .btn {
+  font: 600 10px/1 var(--font-sans);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 12px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.card-head .btn:hover {
+  color: var(--charcoal);
+  border-color: var(--peach);
+  background: var(--peach-soft);
+}
+.card-head .btn.copied {
+  background: var(--peach);
+  color: var(--charcoal);
+  border-color: var(--peach);
+}
+.card-head .btn svg {
+  width: 11px; height: 11px;
+  vertical-align: -1px;
+  margin-right: 4px;
+}
+
+/* Demo stage */
+.demo {
+  position: relative;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 28px;
+  background: radial-gradient(120% 100% at 50% 0%, var(--charcoal-4) 0%, var(--charcoal-3) 80%);
+  color: var(--cream);
+  overflow: hidden;
+}
+.demo.light {
+  background: linear-gradient(180deg, var(--grege) 0%, var(--page) 100%);
+  color: var(--charcoal);
+}
+.demo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(rgba(232,163,130,.04) 1px, transparent 1px);
+  background-size: 18px 18px;
+  pointer-events: none;
+}
+.demo.light::before {
+  background-image: radial-gradient(rgba(26,26,26,.04) 1px, transparent 1px);
+}
+
+/* Code panel */
+.code {
+  border-top: 1px solid var(--line);
+  background: #1a1817;
+  color: #e7e1d8;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.7;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s ease;
+}
+.code.open { max-height: 540px; overflow: auto; }
+.code-tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  position: sticky;
+  top: 0;
+  background: #1a1817;
+  z-index: 1;
+}
+.code-tab {
+  font: 600 10px/1 var(--font-mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(231,225,216,.5);
+  background: transparent;
+  border: 0;
+  padding: 12px 18px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all .2s;
+}
+.code-tab.active {
+  color: var(--peach);
+  border-bottom-color: var(--peach);
+}
+.code-tab:hover { color: var(--cream); }
+.code pre {
+  padding: 18px 22px;
+  white-space: pre;
+  overflow-x: auto;
+  display: none;
+}
+.code pre.active { display: block; }
+.code .tok-tag    { color: #c98a6e; }
+.code .tok-attr   { color: #d4af37; }
+.code .tok-str    { color: #9ec38a; }
+.code .tok-sel    { color: #e8a382; }
+.code .tok-prop   { color: #b6a6e1; }
+.code .tok-val    { color: #e7e1d8; }
+.code .tok-num    { color: #d4af37; }
+.code .tok-key    { color: #c98a6e; }
+.code .tok-com    { color: rgba(231,225,216,.4); font-style: italic; }
+.code .tok-punc   { color: rgba(231,225,216,.6); }
+
+/* Footer */
+.footer {
+  padding: 64px 72px 56px;
+  background: var(--charcoal-3);
+  color: var(--cream);
+  margin-top: 48px;
+}
+.footer .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.footer .mark {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 32px;
+  line-height: 1;
+}
+.footer .mark span { color: var(--peach); }
+.footer .meta {
+  font: 600 11px/1.6 var(--font-sans);
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: rgba(250,250,247,.45);
+  text-align: right;
+}
+.footer .meta .accent { color: var(--peach); display: block; margin-bottom: 4px; }
+.footer .rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(232,163,130,.4), transparent);
+  margin: 32px 0;
+}
+
+/* Filtered-out / search */
+.card.hide, .section.hide { display: none; }
+.no-results {
+  display: none;
+  padding: 80px 72px;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: 28px;
+  color: var(--ink-mute);
+}
+.no-results.show { display: block; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { position: relative; top: 0; height: auto; border-right: 0; border-bottom: 1px solid var(--line); padding: 24px 0; }
+  .sidebar nav { flex-direction: row; flex-wrap: wrap; padding: 0 24px; gap: 6px; }
+  .sidebar a { padding: 8px 14px; border-left: 0; border-radius: 999px; border: 1px solid var(--line); }
+  .sidebar a.active { border-color: var(--peach); }
+  .sidebar h4 { display: none; }
+  .hero, .section, .footer { padding-left: 36px; padding-right: 36px; }
+  .topbar { padding: 0 20px; gap: 16px; }
+  .topbar .meta { display: none; }
+}
+@media (max-width: 640px) {
+  .hero { padding: 56px 24px 44px; }
+  .section { padding: 56px 24px 16px; }
+  .footer { padding: 48px 24px; }
+  .section-head h2 { font-size: 32px; }
+  .grid { grid-template-columns: 1fr; }
+  .topbar .brand { font-size: 18px; }
+  .topbar .brand-mark { width: 30px; height: 30px; font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     TOP BAR
+     ============================================================ -->
+<div class="topbar">
+  <div class="brand">
+    <span class="brand-mark">EC</span>
+    Edelys <span>·</span> CSS
+  </div>
+  <div class="search">
+    <span class="icon"></span>
+    <input type="text" id="search" placeholder="Rechercher un effet — bouton, carte, hover, texte…">
+  </div>
+  <div class="meta">
+    <span class="dot"></span>
+    Bibliothèque · 2026
+  </div>
+</div>
+
+<div class="layout">
+
+  <!-- ============================================================
+       SIDEBAR
+       ============================================================ -->
+  <aside class="sidebar">
+    <h4>Catégories</h4>
+    <nav id="nav">
+      <a href="#sec-buttons"><span class="num">01</span>Boutons &amp; CTAs <span class="count">7</span></a>
+      <a href="#sec-cards"><span class="num">02</span>Cartes &amp; Tuiles <span class="count">6</span></a>
+      <a href="#sec-text"><span class="num">03</span>Effets de texte <span class="count">6</span></a>
+      <a href="#sec-hover"><span class="num">04</span>Hover &amp; images <span class="count">5</span></a>
+      <a href="#sec-loaders"><span class="num">05</span>Loaders &amp; micro-interactions <span class="count">6</span></a>
+      <a href="#sec-backgrounds"><span class="num">06</span>Fonds &amp; décorations <span class="count">5</span></a>
+      <a href="#sec-forms"><span class="num">07</span>Champs &amp; contrôles <span class="count">5</span></a>
+      <a href="#sec-entrance"><span class="num">08</span>Animations d'entrée <span class="count">5</span></a>
+    </nav>
+  </aside>
+
+  <!-- ============================================================
+       CONTENT
+       ============================================================ -->
+  <main class="content">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-top">
+        <div class="left"><span class="bar"></span>Direction Artistique</div>
+        <div class="right">Bibliothèque CSS · 2026</div>
+      </div>
+      <h1>L'architecture <em>du CSS</em><br>à voix basse.</h1>
+      <p class="lead">Une collection d'effets CSS prêts à l'emploi, calibrée pour l'identité Edelys Coiffure. Chaque démonstration est interactive, chaque ligne de code est copiable. Le luxe, dans le détail.</p>
+      <div class="meta-row">
+        <span>45+ Effets</span>
+        <span class="sep"></span>
+        <span>Vanilla CSS</span>
+        <span class="sep"></span>
+        <span class="accent">Quiet Luxury</span>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 01 — BOUTONS & CTAs
+         ============================================================ -->
+    <section class="section" id="sec-buttons" data-name="boutons buttons cta">
+      <div class="section-head">
+        <div>
+          <div class="label"><span class="bar"></span>Catégorie 01</div>
+          <h2>Boutons &amp; <em>CTAs</em></h2>
+        </div>
+        <div class="count">07 effets</div>
+      </div>
+      <div class="grid">
+        <!-- Effects inserted here by JS -->
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 02 — CARTES & TUILES
+         ============================================================ -->
+    <section class="section" id="sec-cards" data-name="cartes cards tuiles tiles">
+      <div class="section-head">
+        <div>
+          <div class="label"><span class="bar"></span>Catégorie 02</div>
+          <h2>Cartes &amp; <em>Tuiles</em></h2>
+        </div>
+        <div class="count">06 effets</div>
+      </div>
+      <div class="grid"></div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 03 — EFFETS DE TEXTE
+         ============================================================ -->
+    <section class="section" id="sec-text" data-name="texte typography text">
+      <div class="section-head">
+        <div>
+          <div class="label"><span class="bar"></span>Catégorie 03</div>
+          <h2>Effets de <em>texte</em></h2>
+        </div>
+        <div class="count">06 effets</div>
+      </div>
+      <div class="grid"></div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 04 — HOVER & IMAGES
+         ============================================================ -->
+    <section class="section" id="sec-hover" data-name="hover images overlays">
+      <div class="section-head">
+        <div>
+          <div class="label"><span class="bar"></span>Catégorie 04</div>
+          <h2>Hover &amp; <em>images</em></h2>
+        </div>
+        <div class="count">05 effets</div>
+      </div>
+      <div class="grid"></div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 05 — LOADERS & MICRO-INTERACTIONS
+         ============================================================ -->
+    <section class="section" id="sec-loaders" data-name="loaders spinners micro interactions">
+      <div class="section-head">
+        <div>
+          <div class="label"><span class="bar"></span>Catégorie 05</div>
+          <h2>Loaders &amp; <em>micro-interactions</em></h2>
+        </div>
+        <div class="count">06 effets</div>
+      </div>
+      <div class="grid"></div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 06 — FONDS & DECORATIONS
+         ============================================================ -->
+    <section class="section" id="sec-backgrounds" data-name="fonds backgrounds decor decoratives dividers">
+      <div class="section-head">
+        <div>
+          <div class="label"><span class="bar"></span>Catégorie 06</div>
+          <h2>Fonds &amp; <em>décorations</em></h2>
+        </div>
+        <div class="count">05 effets</div>
+      </div>
+      <div class="grid"></div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 07 — CHAMPS & CONTROLES
+         ============================================================ -->
+    <section class="section" id="sec-forms" data-name="champs forms inputs controls">
+      <div class="section-head">
+        <div>
+          <div class="label"><span class="bar"></span>Catégorie 07</div>
+          <h2>Champs &amp; <em>contrôles</em></h2>
+        </div>
+        <div class="count">05 effets</div>
+      </div>
+      <div class="grid"></div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 08 — ANIMATIONS D'ENTREE
+         ============================================================ -->
+    <section class="section" id="sec-entrance" data-name="entree entrance animations reveal scroll">
+      <div class="section-head">
+        <div>
+          <div class="label"><span class="bar"></span>Catégorie 08</div>
+          <h2>Animations <em>d'entrée</em></h2>
+        </div>
+        <div class="count">05 effets</div>
+      </div>
+      <div class="grid"></div>
+    </section>
+
+    <div class="no-results" id="noResults">Aucun effet ne correspond à votre recherche.</div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="row">
+        <div>
+          <div class="mark">Edelys <span>Coiffure</span></div>
+          <div style="font: 300 13px/1.6 var(--font-sans); color: rgba(250,250,247,.5); margin-top: 12px; max-width: 360px;">Bibliothèque d'effets CSS · prête à l'emploi, calibrée pour l'identité de marque.</div>
+        </div>
+        <div class="meta">
+          <span class="accent">Quiet Luxury</span>
+          Carecoach officiel Kérastase<br>
+          Femme · Homme · Enfants
+        </div>
+      </div>
+      <div class="rule"></div>
+      <div style="display: flex; justify-content: space-between; font: 600 10px/1 var(--font-mono); letter-spacing: .2em; text-transform: uppercase; color: rgba(250,250,247,.4);">
+        <span>© 2026 — Edelys Coiffure</span>
+        <span>Identité de marque · CSS Library</span>
+      </div>
+    </footer>
+
+  </main>
+</div>
+
+<!-- ============================================================
+     EFFECTS DATA — INJECTED BY JS
+     ============================================================ -->
+<script>
+// =============================================================
+// EDELYS CSS EFFECTS LIBRARY — Render Engine
+// =============================================================
+
+const EFFECTS = [
+  // =====================================================
+  // 01 — BOUTONS & CTAs
+  // =====================================================
+  {
+    id: 'btn-01',
+    section: 'buttons',
+    name: 'Bouton <em>Rose Gold</em>',
+    desc: 'Remplissage pêche cuivrée avec élévation douce',
+    theme: 'dark',
+    html: `<button class="efx-btn-01">Réserver</button>`,
+    css: `.efx-btn-01{
+  font-family:'Montserrat',sans-serif;
+  font-weight:600;font-size:12px;letter-spacing:.26em;
+  text-transform:uppercase;color:#1A1A1A;
+  background:#E8A382;border:1px solid #E8A382;
+  padding:16px 36px;border-radius:999px;cursor:pointer;
+  transition:all .4s cubic-bezier(.2,.7,.2,1);
+  box-shadow:0 8px 22px -10px rgba(232,163,130,.6);
+}
+.efx-btn-01:hover{
+  background:#FAFAF7;border-color:#FAFAF7;color:#1A1A1A;
+  transform:translateY(-2px);
+  box-shadow:0 14px 32px -10px rgba(232,163,130,.75);
+}
+.efx-btn-01:active{transform:translateY(0);}`
+  },
+  {
+    id: 'btn-02',
+    section: 'buttons',
+    name: 'Bouton <em>Outline Éditorial</em>',
+    desc: 'Ligne qui se dessine autour du bouton',
+    theme: 'dark',
+    html: `<button class="efx-btn-02">Découvrir</button>`,
+    css: `.efx-btn-02{
+  position:relative;font-family:'Montserrat',sans-serif;
+  font-weight:600;font-size:12px;letter-spacing:.3em;
+  text-transform:uppercase;color:#FAFAF7;
+  background:transparent;border:0;
+  padding:16px 36px;cursor:pointer;
+}
+.efx-btn-02::before,
+.efx-btn-02::after{
+  content:'';position:absolute;
+  background:#E8A382;
+  transition:transform .5s cubic-bezier(.7,0,.2,1);
+}
+.efx-btn-02::before{top:0;left:0;width:100%;height:1px;transform:scaleX(0);transform-origin:left;}
+.efx-btn-02::after{bottom:0;right:0;width:100%;height:1px;transform:scaleX(0);transform-origin:right;}
+.efx-btn-02 .v-line-l,.efx-btn-02 .v-line-r{
+  position:absolute;width:1px;height:100%;top:0;background:#E8A382;
+  transition:transform .5s cubic-bezier(.7,0,.2,1) .1s;
+}
+.efx-btn-02 .v-line-l{left:0;transform:scaleY(0);transform-origin:bottom;}
+.efx-btn-02 .v-line-r{right:0;transform:scaleY(0);transform-origin:top;}
+.efx-btn-02:hover{color:#E8A382;}
+.efx-btn-02:hover::before,
+.efx-btn-02:hover::after{transform:scaleX(1);}
+.efx-btn-02:hover .v-line-l,
+.efx-btn-02:hover .v-line-r{transform:scaleY(1);}`
+  },
+  {
+    id: 'btn-03',
+    section: 'buttons',
+    name: 'Bouton <em>Quiet Underline</em>',
+    desc: 'Soulignement qui se révèle depuis la gauche',
+    theme: 'dark',
+    html: `<a class="efx-btn-03">Voir la carte</a>`,
+    css: `.efx-btn-03{
+  position:relative;font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:24px;color:#FAFAF7;
+  text-decoration:none;cursor:pointer;padding-bottom:6px;
+}
+.efx-btn-03::after{
+  content:'';position:absolute;left:0;bottom:0;
+  width:100%;height:1px;background:#E8A382;
+  transform:scaleX(0);transform-origin:right;
+  transition:transform .5s cubic-bezier(.7,0,.2,1);
+}
+.efx-btn-03:hover{color:#E8A382;}
+.efx-btn-03:hover::after{transform:scaleX(1);transform-origin:left;}`
+  },
+  {
+    id: 'btn-04',
+    section: 'buttons',
+    name: 'Bouton <em>Slide-In</em>',
+    desc: 'La couleur glisse depuis la gauche',
+    theme: 'dark',
+    html: `<button class="efx-btn-04"><span>Réserver</span></button>`,
+    css: `.efx-btn-04{
+  position:relative;overflow:hidden;
+  font-family:'Montserrat',sans-serif;font-weight:600;
+  font-size:12px;letter-spacing:.26em;text-transform:uppercase;
+  color:#FAFAF7;background:transparent;
+  border:1px solid rgba(250,250,247,.3);
+  padding:16px 36px;border-radius:999px;cursor:pointer;
+  transition:color .35s,border-color .35s;
+}
+.efx-btn-04::before{
+  content:'';position:absolute;inset:0;
+  background:#E8A382;border-radius:999px;
+  transform:translateX(-101%);
+  transition:transform .5s cubic-bezier(.7,0,.2,1);
+  z-index:0;
+}
+.efx-btn-04 span{position:relative;z-index:1;}
+.efx-btn-04:hover{color:#1A1A1A;border-color:#E8A382;}
+.efx-btn-04:hover::before{transform:translateX(0);}`
+  },
+  {
+    id: 'btn-05',
+    section: 'buttons',
+    name: 'Bouton <em>Glow Halo</em>',
+    desc: 'Halo lumineux pêche qui pulse au survol',
+    theme: 'dark',
+    html: `<button class="efx-btn-05">Réserver</button>`,
+    css: `.efx-btn-05{
+  font-family:'Montserrat',sans-serif;font-weight:600;
+  font-size:12px;letter-spacing:.26em;text-transform:uppercase;
+  color:#E8A382;background:transparent;
+  border:1px solid #E8A382;padding:16px 36px;
+  border-radius:999px;cursor:pointer;
+  transition:all .4s;position:relative;
+}
+.efx-btn-05:hover{
+  color:#1A1A1A;background:#E8A382;
+  box-shadow:0 0 0 0 rgba(232,163,130,.6);
+  animation:efx05pulse 1.4s ease-out infinite;
+}
+@keyframes efx05pulse{
+  0%{box-shadow:0 0 0 0 rgba(232,163,130,.55);}
+  100%{box-shadow:0 0 0 22px rgba(232,163,130,0);}
+}`
+  },
+  {
+    id: 'btn-06',
+    section: 'buttons',
+    name: 'Bouton <em>Border Gradient</em>',
+    desc: 'Bordure animée par dégradé rotatif',
+    theme: 'dark',
+    html: `<button class="efx-btn-06">Réserver</button>`,
+    css: `.efx-btn-06{
+  position:relative;font-family:'Montserrat',sans-serif;
+  font-weight:600;font-size:12px;letter-spacing:.26em;
+  text-transform:uppercase;color:#FAFAF7;background:#1A1A1A;
+  padding:16px 36px;border:0;border-radius:999px;cursor:pointer;
+  z-index:0;isolation:isolate;
+}
+.efx-btn-06::before{
+  content:'';position:absolute;inset:-2px;border-radius:inherit;
+  background:conic-gradient(from 0deg,#E8A382,#D4AF37,#E8A382,#C0795A,#E8A382);
+  z-index:-1;animation:efx06spin 4s linear infinite;
+  opacity:0;transition:opacity .4s;
+}
+.efx-btn-06::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  background:#1A1A1A;z-index:-1;
+}
+.efx-btn-06:hover::before{opacity:1;}
+@keyframes efx06spin{to{transform:rotate(360deg);}}`
+  },
+  {
+    id: 'btn-07',
+    section: 'buttons',
+    name: 'Bouton <em>Sheen</em>',
+    desc: 'Éclair diagonal qui balaie le bouton',
+    theme: 'dark',
+    html: `<button class="efx-btn-07"><span>Commander</span></button>`,
+    css: `.efx-btn-07{
+  position:relative;overflow:hidden;
+  font-family:'Montserrat',sans-serif;font-weight:600;
+  font-size:12px;letter-spacing:.26em;text-transform:uppercase;
+  color:#1A1A1A;background:#E8A382;border:0;
+  padding:16px 36px;border-radius:8px;cursor:pointer;
+}
+.efx-btn-07::before{
+  content:'';position:absolute;top:0;left:-120%;
+  width:60%;height:100%;
+  background:linear-gradient(115deg,transparent,rgba(250,250,247,.55),transparent);
+  transform:skewX(-20deg);transition:left .7s ease;
+}
+.efx-btn-07 span{position:relative;z-index:1;}
+.efx-btn-07:hover::before{left:140%;}`
+  },
+
+  // =====================================================
+  // 02 — CARTES & TUILES
+  // =====================================================
+  {
+    id: 'card-01',
+    section: 'cards',
+    name: 'Carte <em>Clair-Obscur</em>',
+    desc: 'Carte sombre avec image et dégradé cinématographique',
+    theme: 'light',
+    html: `<article class="efx-card-01">
+  <img src="https://picsum.photos/seed/edelys01/600/400" alt="">
+  <div class="overlay"></div>
+  <div class="body">
+    <div class="label">Carecoach</div>
+    <h3>Rituel <em>Fusio-Dose</em></h3>
+    <p>Cocktail sur-mesure au fauteuil.</p>
+  </div>
+</article>`,
+    css: `.efx-card-01{
+  position:relative;width:300px;height:220px;
+  border-radius:12px;overflow:hidden;color:#FAFAF7;
+  box-shadow:0 24px 60px -22px rgba(0,0,0,.6);cursor:pointer;
+}
+.efx-card-01 img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .9s cubic-bezier(.2,.7,.2,1);
+}
+.efx-card-01 .overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(14,14,14,0) 30%,rgba(14,14,14,.85) 100%);
+}
+.efx-card-01 .body{position:absolute;left:24px;right:24px;bottom:22px;}
+.efx-card-01 .label{
+  font:600 10px/1 'Montserrat',sans-serif;
+  letter-spacing:.28em;text-transform:uppercase;
+  color:#E8A382;margin-bottom:8px;
+}
+.efx-card-01 h3{
+  font:300 28px/1.1 'Cormorant Garamond',serif;margin-bottom:6px;
+}
+.efx-card-01 h3 em{font-style:italic;color:#E8A382;}
+.efx-card-01 p{font:300 12px/1.5 'Montserrat';color:rgba(250,250,247,.7);}
+.efx-card-01:hover img{transform:scale(1.08);}`
+  },
+  {
+    id: 'card-02',
+    section: 'cards',
+    name: 'Carte <em>Tilt 3D</em>',
+    desc: 'Inclinaison 3D qui suit le curseur',
+    theme: 'light',
+    html: `<article class="efx-card-02" onmousemove="this.style.setProperty('--mx',(event.offsetX-150)/4+'deg');this.style.setProperty('--my',(event.offsetY-110)/-4+'deg')">
+  <div class="inner">
+    <div class="badge">Prestige</div>
+    <h3>Chronologiste</h3>
+    <p>Le summum de la régénération.</p>
+  </div>
+</article>`,
+    css: `.efx-card-02{
+  width:300px;height:220px;border-radius:12px;
+  perspective:900px;cursor:pointer;
+}
+.efx-card-02 .inner{
+  position:relative;width:100%;height:100%;
+  background:radial-gradient(125% 95% at 50% 16%,#211e1c,#0E0E0E 62%);
+  border:1px solid rgba(232,163,130,.2);
+  border-radius:12px;padding:24px;color:#FAFAF7;
+  transform:rotateY(var(--mx,0)) rotateX(var(--my,0));
+  transition:transform .2s ease-out;transform-style:preserve-3d;
+}
+.efx-card-02 .badge{
+  display:inline-block;font:600 10px/1 'Montserrat',sans-serif;
+  letter-spacing:.26em;text-transform:uppercase;
+  color:#E8A382;border:1px solid rgba(232,163,130,.4);
+  padding:7px 12px;border-radius:999px;margin-bottom:30px;
+  transform:translateZ(40px);
+}
+.efx-card-02 h3{
+  font:300 32px/1 'Cormorant Garamond',serif;
+  margin-bottom:8px;transform:translateZ(28px);
+}
+.efx-card-02 p{
+  font:300 12.5px/1.6 'Montserrat';
+  color:rgba(250,250,247,.65);transform:translateZ(18px);
+}`
+  },
+  {
+    id: 'card-03',
+    section: 'cards',
+    name: 'Carte <em>Border Frame</em>',
+    desc: 'Cadre minimal avec coins accentués',
+    theme: 'light',
+    html: `<article class="efx-card-03">
+  <div class="body">
+    <div class="label">Tarif</div>
+    <h3>Soin <em>Première</em></h3>
+    <p>Recrée 96% de la force d'un cheveu sain.</p>
+    <div class="price">60–70€</div>
+  </div>
+  <span class="corner tl"></span><span class="corner tr"></span>
+  <span class="corner bl"></span><span class="corner br"></span>
+</article>`,
+    css: `.efx-card-03{
+  position:relative;width:300px;height:220px;
+  padding:28px;background:#FAFAF7;
+  border:1px solid rgba(26,26,26,.1);border-radius:8px;
+  cursor:pointer;transition:all .4s;
+}
+.efx-card-03 .label{
+  font:600 10px/1 'Montserrat';letter-spacing:.28em;
+  text-transform:uppercase;color:#C0795A;margin-bottom:14px;
+}
+.efx-card-03 h3{font:300 30px/1.1 'Cormorant Garamond',serif;color:#1A1A1A;margin-bottom:8px;}
+.efx-card-03 h3 em{font-style:italic;color:#E8A382;}
+.efx-card-03 p{font:300 12px/1.5 'Montserrat';color:rgba(26,26,26,.6);max-width:200px;}
+.efx-card-03 .price{
+  position:absolute;bottom:24px;right:28px;
+  font-family:'Cormorant Garamond',serif;font-size:22px;color:#1A1A1A;
+}
+.efx-card-03 .corner{
+  position:absolute;width:14px;height:14px;
+  border:1px solid #E8A382;opacity:0;
+  transition:opacity .4s,transform .4s;
+}
+.efx-card-03 .corner.tl{top:-1px;left:-1px;border-right:0;border-bottom:0;transform:translate(6px,6px);}
+.efx-card-03 .corner.tr{top:-1px;right:-1px;border-left:0;border-bottom:0;transform:translate(-6px,6px);}
+.efx-card-03 .corner.bl{bottom:-1px;left:-1px;border-right:0;border-top:0;transform:translate(6px,-6px);}
+.efx-card-03 .corner.br{bottom:-1px;right:-1px;border-left:0;border-top:0;transform:translate(-6px,-6px);}
+.efx-card-03:hover{box-shadow:0 16px 40px -20px rgba(0,0,0,.3);transform:translateY(-2px);}
+.efx-card-03:hover .corner{opacity:1;transform:translate(0,0);}`
+  },
+  {
+    id: 'card-04',
+    section: 'cards',
+    name: 'Carte <em>Glass</em>',
+    desc: 'Glassmorphism sur dégradé pêche',
+    theme: 'dark',
+    html: `<div class="efx-glass-wrap">
+  <article class="efx-card-04">
+    <div class="label">Sanctuaire</div>
+    <h3>Quiet <em>Luxury</em></h3>
+    <p>Précision, chaleur, déférence.</p>
+  </article>
+</div>`,
+    css: `.efx-glass-wrap{
+  width:320px;height:220px;padding:60px 40px;
+  background:radial-gradient(120% 100% at 30% 20%,#E8A382,transparent 70%),
+             radial-gradient(120% 100% at 80% 80%,#D4AF37,transparent 60%),
+             #211e1c;border-radius:18px;position:relative;
+}
+.efx-card-04{
+  background:rgba(250,250,247,.08);
+  backdrop-filter:blur(14px) saturate(140%);
+  -webkit-backdrop-filter:blur(14px) saturate(140%);
+  border:1px solid rgba(250,250,247,.18);
+  border-radius:12px;padding:24px;color:#FAFAF7;
+}
+.efx-card-04 .label{
+  font:600 10px/1 'Montserrat';letter-spacing:.28em;
+  text-transform:uppercase;color:#E8A382;margin-bottom:12px;
+}
+.efx-card-04 h3{font:300 28px/1.1 'Cormorant Garamond',serif;margin-bottom:6px;}
+.efx-card-04 h3 em{font-style:italic;color:#E8A382;}
+.efx-card-04 p{font:300 12px/1.5 'Montserrat';color:rgba(250,250,247,.7);}`
+  },
+  {
+    id: 'card-05',
+    section: 'cards',
+    name: 'Carte <em>Reveal Image</em>',
+    desc: 'L\'image se révèle depuis le coin',
+    theme: 'light',
+    html: `<article class="efx-card-05">
+  <div class="img-wrap">
+    <img src="https://picsum.photos/seed/edelys02/400/300" alt="">
+  </div>
+  <div class="body">
+    <h3>L'équipe <em>Edelys</em></h3>
+    <span class="link">Rencontrer →</span>
+  </div>
+</article>`,
+    css: `.efx-card-05{
+  width:300px;background:#FAFAF7;
+  border:1px solid rgba(26,26,26,.08);border-radius:10px;
+  overflow:hidden;cursor:pointer;
+}
+.efx-card-05 .img-wrap{
+  height:140px;overflow:hidden;
+  clip-path:inset(0 100% 0 0);
+  transition:clip-path .8s cubic-bezier(.7,0,.2,1);
+}
+.efx-card-05 .img-wrap img{
+  width:100%;height:100%;object-fit:cover;
+  transform:scale(1.2);transition:transform 1s ease;
+}
+.efx-card-05 .body{padding:18px 22px 22px;}
+.efx-card-05 h3{font:300 22px/1.1 'Cormorant Garamond',serif;color:#1A1A1A;margin-bottom:10px;}
+.efx-card-05 h3 em{font-style:italic;color:#E8A382;}
+.efx-card-05 .link{
+  font:600 10px/1 'Montserrat';letter-spacing:.24em;
+  text-transform:uppercase;color:#C0795A;
+}
+.efx-card-05:hover .img-wrap{clip-path:inset(0 0 0 0);}
+.efx-card-05:hover .img-wrap img{transform:scale(1);}`
+  },
+  {
+    id: 'card-06',
+    section: 'cards',
+    name: 'Carte <em>Lift Subtil</em>',
+    desc: 'Élevation douce avec halo pêche',
+    theme: 'light',
+    html: `<article class="efx-card-06">
+  <div class="label">01 · Couverture</div>
+  <h3>L'architecture<br><em>du cheveu</em></h3>
+  <p>Direction Artistique · 2026</p>
+</article>`,
+    css: `.efx-card-06{
+  width:300px;padding:36px 32px;
+  background:linear-gradient(180deg,#1A1A1A,#0E0E0E);
+  border-radius:14px;color:#FAFAF7;cursor:pointer;
+  box-shadow:0 10px 30px -16px rgba(0,0,0,.4);
+  transition:all .5s cubic-bezier(.2,.7,.2,1);
+  position:relative;overflow:hidden;
+}
+.efx-card-06::before{
+  content:'';position:absolute;top:0;left:50%;
+  width:60%;height:140px;
+  background:radial-gradient(50% 100% at 50% 0%,rgba(232,163,130,.3),transparent 70%);
+  transform:translateX(-50%);opacity:0;transition:opacity .5s;
+}
+.efx-card-06 .label{
+  font:600 10px/1 'Montserrat';letter-spacing:.28em;
+  text-transform:uppercase;color:#E8A382;margin-bottom:30px;
+  position:relative;
+}
+.efx-card-06 h3{
+  font:300 30px/1.1 'Cormorant Garamond',serif;
+  margin-bottom:14px;position:relative;
+}
+.efx-card-06 h3 em{font-style:italic;color:#E8A382;}
+.efx-card-06 p{
+  font:300 11px/1 'Montserrat';letter-spacing:.2em;
+  text-transform:uppercase;color:rgba(250,250,247,.5);
+  position:relative;
+}
+.efx-card-06:hover{
+  transform:translateY(-6px);
+  box-shadow:0 24px 50px -16px rgba(232,163,130,.4);
+}
+.efx-card-06:hover::before{opacity:1;}`
+  },
+
+  // =====================================================
+  // 03 — EFFETS DE TEXTE
+  // =====================================================
+  {
+    id: 'text-01',
+    section: 'text',
+    name: 'Texte <em>Gradient Peach</em>',
+    desc: 'Texte à dégradé pêche animé',
+    theme: 'dark',
+    html: `<h2 class="efx-text-01">Le luxe, à voix basse</h2>`,
+    css: `.efx-text-01{
+  font:300 44px/1.1 'Cormorant Garamond',serif;
+  text-align:center;
+  background:linear-gradient(110deg,#E8A382 0%,#FAFAF7 50%,#E8A382 100%);
+  background-size:200% auto;-webkit-background-clip:text;
+  background-clip:text;-webkit-text-fill-color:transparent;
+  animation:efx-t01 4s linear infinite;
+}
+@keyframes efx-t01{
+  to{background-position:200% center;}
+}`
+  },
+  {
+    id: 'text-02',
+    section: 'text',
+    name: 'Texte <em>Italic Reveal</em>',
+    desc: 'Mot accent qui apparaît en italique pêche',
+    theme: 'dark',
+    html: `<h2 class="efx-text-02">L'architecture <em>du cheveu</em></h2>`,
+    css: `.efx-text-02{
+  font:300 38px/1.2 'Cormorant Garamond',serif;
+  color:#FAFAF7;text-align:center;
+}
+.efx-text-02 em{
+  font-style:italic;color:#E8A382;display:inline-block;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .5s .15s,transform .5s cubic-bezier(.2,.7,.2,1) .15s;
+}
+.efx-text-02:hover em{opacity:1;transform:translateY(0);}`
+  },
+  {
+    id: 'text-03',
+    section: 'text',
+    name: 'Texte <em>Letter Cascade</em>',
+    desc: 'Les lettres apparaissent en cascade',
+    theme: 'dark',
+    html: `<h2 class="efx-text-03">EDELYS</h2>`,
+    css: `.efx-text-03{
+  font:300 56px/1 'Cormorant Garamond',serif;
+  letter-spacing:.2em;color:#FAFAF7;text-align:center;
+}
+.efx-text-03 span{
+  display:inline-block;opacity:0;transform:translateY(20px);
+  animation:efx-t03 .7s cubic-bezier(.2,.7,.2,1) forwards;
+}
+@keyframes efx-t03{to{opacity:1;transform:translateY(0);}}`
+  },
+  {
+    id: 'text-04',
+    section: 'text',
+    name: 'Texte <em>Underline Sweep</em>',
+    desc: 'Soulignement qui balaie horizontalement',
+    theme: 'dark',
+    html: `<h2 class="efx-text-04">Carecoach officiel</h2>`,
+    css: `.efx-text-04{
+  position:relative;font:300 36px/1.2 'Cormorant Garamond',serif;
+  color:#FAFAF7;text-align:center;display:inline-block;cursor:default;
+}
+.efx-text-04::after{
+  content:'';position:absolute;left:0;bottom:-6px;
+  width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,#E8A382,transparent);
+  background-size:200% 100%;background-position:200% 0;
+  transition:background-position .8s ease;
+}
+.efx-text-04:hover::after{background-position:-200% 0;}`
+  },
+  {
+    id: 'text-05',
+    section: 'text',
+    name: 'Texte <em>Outline Fill</em>',
+    desc: 'Texte contouré qui se remplit au survol',
+    theme: 'dark',
+    html: `<h2 class="efx-text-05">Edelys</h2>`,
+    css: `.efx-text-05{
+  font:300 72px/1 'Cormorant Garamond',serif;
+  text-align:center;letter-spacing:.02em;cursor:default;
+  color:transparent;
+  -webkit-text-stroke:1px #E8A382;
+  background:linear-gradient(90deg,#E8A382,#E8A382) no-repeat;
+  background-size:0% 100%;background-position:left;
+  -webkit-background-clip:text;background-clip:text;
+  transition:background-size .6s cubic-bezier(.7,0,.2,1),color .6s;
+}
+.efx-text-05:hover{
+  background-size:100% 100%;
+  -webkit-text-stroke-color:#E8A382;color:#1A1A1A;
+}`
+  },
+  {
+    id: 'text-06',
+    section: 'text',
+    name: 'Texte <em>Shimmer Gold</em>',
+    desc: 'Éclat or laitonné qui balaie le texte',
+    theme: 'dark',
+    html: `<h2 class="efx-text-06">Quiet Luxury</h2>`,
+    css: `.efx-text-06{
+  font:400 italic 48px/1.1 'Cormorant Garamond',serif;
+  text-align:center;color:#D4AF37;position:relative;
+  background:linear-gradient(110deg,#9a7d28 0%,#D4AF37 20%,#FAFAF7 35%,#D4AF37 50%,#9a7d28 70%);
+  background-size:200% auto;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:efx-t06 4.5s linear infinite;
+}
+@keyframes efx-t06{to{background-position:200% center;}}`
+  },
+
+  // =====================================================
+  // 04 — HOVER & IMAGES
+  // =====================================================
+  {
+    id: 'hov-01',
+    section: 'hover',
+    name: 'Image <em>Zoom Subtil</em>',
+    desc: 'Zoom discret avec légende qui apparaît',
+    theme: 'dark',
+    html: `<figure class="efx-hov-01">
+  <img src="https://picsum.photos/seed/edelys03/400/300" alt="">
+  <figcaption>
+    <span class="label">01</span>
+    <h4>Rituel <em>Kérastase</em></h4>
+  </figcaption>
+</figure>`,
+    css: `.efx-hov-01{
+  position:relative;width:320px;height:200px;
+  border-radius:10px;overflow:hidden;cursor:pointer;margin:0;
+  box-shadow:0 14px 36px -16px rgba(0,0,0,.5);
+}
+.efx-hov-01 img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 1s cubic-bezier(.2,.7,.2,1);
+}
+.efx-hov-01 figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:20px 24px;
+  background:linear-gradient(0deg,rgba(14,14,14,.85),transparent);
+  color:#FAFAF7;
+  transform:translateY(20px);opacity:0;
+  transition:transform .5s,opacity .5s;
+}
+.efx-hov-01 .label{
+  display:block;font:600 10px/1 'Montserrat';letter-spacing:.26em;
+  text-transform:uppercase;color:#E8A382;margin-bottom:6px;
+}
+.efx-hov-01 h4{font:300 22px/1 'Cormorant Garamond',serif;}
+.efx-hov-01 h4 em{font-style:italic;color:#E8A382;}
+.efx-hov-01:hover img{transform:scale(1.1);}
+.efx-hov-01:hover figcaption{transform:translateY(0);opacity:1;}`
+  },
+  {
+    id: 'hov-02',
+    section: 'hover',
+    name: 'Image <em>Peach Tint</em>',
+    desc: 'Voile pêche qui se dissipe au survol',
+    theme: 'dark',
+    html: `<figure class="efx-hov-02">
+  <img src="https://picsum.photos/seed/edelys04/400/300" alt="">
+  <div class="tint"></div>
+  <figcaption>Sanctuaire</figcaption>
+</figure>`,
+    css: `.efx-hov-02{
+  position:relative;width:320px;height:200px;
+  border-radius:10px;overflow:hidden;cursor:pointer;margin:0;
+}
+.efx-hov-02 img{
+  width:100%;height:100%;object-fit:cover;
+  filter:grayscale(.3) brightness(.85);
+  transition:filter .6s;
+}
+.efx-hov-02 .tint{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(232,163,130,.5),rgba(192,121,90,.4));
+  mix-blend-mode:multiply;transition:opacity .6s;
+}
+.efx-hov-02 figcaption{
+  position:absolute;left:24px;bottom:20px;color:#FAFAF7;
+  font:600 11px/1 'Montserrat';letter-spacing:.28em;
+  text-transform:uppercase;z-index:2;
+}
+.efx-hov-02:hover img{filter:grayscale(0) brightness(1);}
+.efx-hov-02:hover .tint{opacity:0;}`
+  },
+  {
+    id: 'hov-03',
+    section: 'hover',
+    name: 'Image <em>Parallax Frame</em>',
+    desc: 'Cadre qui se déplace indépendamment',
+    theme: 'dark',
+    html: `<div class="efx-hov-03">
+  <img src="https://picsum.photos/seed/edelys05/360/240" alt="">
+  <span class="frame"></span>
+</div>`,
+    css: `.efx-hov-03{
+  position:relative;width:300px;height:200px;cursor:pointer;
+}
+.efx-hov-03 img{
+  width:100%;height:100%;object-fit:cover;border-radius:8px;
+  transition:transform .5s cubic-bezier(.2,.7,.2,1);
+  filter:brightness(.85);
+}
+.efx-hov-03 .frame{
+  position:absolute;top:14px;left:14px;right:-14px;bottom:-14px;
+  border:1px solid #E8A382;border-radius:8px;z-index:-1;
+  transition:transform .5s cubic-bezier(.2,.7,.2,1);
+}
+.efx-hov-03:hover img{transform:translate(-6px,-6px);filter:brightness(1);}
+.efx-hov-03:hover .frame{transform:translate(6px,6px);}`
+  },
+  {
+    id: 'hov-04',
+    section: 'hover',
+    name: 'Image <em>Mosaic Reveal</em>',
+    desc: 'L\'image se révèle par tuiles',
+    theme: 'dark',
+    html: `<div class="efx-hov-04">
+  <div class="tile t1"></div><div class="tile t2"></div>
+  <div class="tile t3"></div><div class="tile t4"></div>
+  <img src="https://picsum.photos/seed/edelys06/400/300" alt="">
+</div>`,
+    css: `.efx-hov-04{
+  position:relative;width:320px;height:200px;
+  border-radius:10px;overflow:hidden;cursor:pointer;
+}
+.efx-hov-04 img{
+  width:100%;height:100%;object-fit:cover;
+}
+.efx-hov-04 .tile{
+  position:absolute;background:#0E0E0E;
+  transition:transform .5s cubic-bezier(.7,0,.2,1);
+}
+.efx-hov-04 .t1{top:0;left:0;width:50%;height:50%;}
+.efx-hov-04 .t2{top:0;right:0;width:50%;height:50%;}
+.efx-hov-04 .t3{bottom:0;left:0;width:50%;height:50%;}
+.efx-hov-04 .t4{bottom:0;right:0;width:50%;height:50%;}
+.efx-hov-04:hover .t1{transform:translate(-100%,-100%);}
+.efx-hov-04:hover .t2{transform:translate(100%,-100%);}
+.efx-hov-04:hover .t3{transform:translate(-100%,100%);}
+.efx-hov-04:hover .t4{transform:translate(100%,100%);}`
+  },
+  {
+    id: 'hov-05',
+    section: 'hover',
+    name: 'Image <em>Grayscale &rarr; Color</em>',
+    desc: 'Désaturée par défaut, en couleur au survol',
+    theme: 'dark',
+    html: `<figure class="efx-hov-05">
+  <img src="https://picsum.photos/seed/edelys07/400/300" alt="">
+  <figcaption><em>Venez nous rencontrer</em></figcaption>
+</figure>`,
+    css: `.efx-hov-05{
+  position:relative;width:320px;height:200px;
+  border-radius:10px;overflow:hidden;cursor:pointer;margin:0;
+}
+.efx-hov-05 img{
+  width:100%;height:100%;object-fit:cover;
+  filter:grayscale(1) contrast(.95);
+  transition:filter .8s ease,transform .8s ease;
+}
+.efx-hov-05 figcaption{
+  position:absolute;inset:0;display:flex;align-items:center;
+  justify-content:center;font:italic 22px/1 'Cormorant Garamond',serif;
+  color:#FAFAF7;background:rgba(14,14,14,.4);
+  transition:opacity .5s;
+}
+.efx-hov-05 figcaption em{font-style:italic;color:#E8A382;}
+.efx-hov-05:hover img{filter:grayscale(0) contrast(1);transform:scale(1.05);}
+.efx-hov-05:hover figcaption{opacity:0;}`
+  },
+
+  // =====================================================
+  // 05 — LOADERS & MICRO-INTERACTIONS
+  // =====================================================
+  {
+    id: 'load-01',
+    section: 'loaders',
+    name: 'Loader <em>Ring Peach</em>',
+    desc: 'Anneau minimaliste en rotation',
+    theme: 'dark',
+    html: `<div class="efx-load-01"></div>`,
+    css: `.efx-load-01{
+  width:46px;height:46px;border-radius:50%;
+  border:1px solid rgba(232,163,130,.25);
+  border-top-color:#E8A382;
+  animation:efx-l01 1s linear infinite;
+}
+@keyframes efx-l01{to{transform:rotate(360deg);}}`
+  },
+  {
+    id: 'load-02',
+    section: 'loaders',
+    name: 'Loader <em>Dots Quiet</em>',
+    desc: 'Trois points qui pulsent en cascade',
+    theme: 'dark',
+    html: `<div class="efx-load-02">
+  <span></span><span></span><span></span>
+</div>`,
+    css: `.efx-load-02{display:flex;gap:10px;}
+.efx-load-02 span{
+  width:8px;height:8px;border-radius:50%;background:#E8A382;
+  animation:efx-l02 1.4s ease-in-out infinite;
+}
+.efx-load-02 span:nth-child(2){animation-delay:.2s;}
+.efx-load-02 span:nth-child(3){animation-delay:.4s;}
+@keyframes efx-l02{
+  0%,80%,100%{opacity:.25;transform:scale(.8);}
+  40%{opacity:1;transform:scale(1.1);}
+}`
+  },
+  {
+    id: 'load-03',
+    section: 'loaders',
+    name: 'Loader <em>Bar Editorial</em>',
+    desc: 'Barre fine qui se remplit',
+    theme: 'dark',
+    html: `<div class="efx-load-03">
+  <div class="track"></div>
+  <div class="label">Chargement</div>
+</div>`,
+    css: `.efx-load-03{display:flex;flex-direction:column;gap:14px;width:200px;}
+.efx-load-03 .track{
+  height:1px;background:rgba(232,163,130,.2);position:relative;overflow:hidden;
+}
+.efx-load-03 .track::after{
+  content:'';position:absolute;top:0;left:-40%;width:40%;height:100%;
+  background:linear-gradient(90deg,transparent,#E8A382);
+  animation:efx-l03 1.6s cubic-bezier(.7,0,.2,1) infinite;
+}
+.efx-load-03 .label{
+  font:600 10px/1 'Montserrat';letter-spacing:.3em;
+  text-transform:uppercase;color:rgba(250,250,247,.55);
+}
+@keyframes efx-l03{
+  0%{left:-40%;}
+  100%{left:100%;}
+}`
+  },
+  {
+    id: 'load-04',
+    section: 'loaders',
+    name: 'Loader <em>Hair Strands</em>',
+    desc: 'Trois mèches verticales ondulantes',
+    theme: 'dark',
+    html: `<div class="efx-load-04">
+  <span></span><span></span><span></span><span></span><span></span>
+</div>`,
+    css: `.efx-load-04{display:flex;gap:5px;align-items:center;height:50px;}
+.efx-load-04 span{
+  width:2px;height:100%;background:#E8A382;
+  border-radius:2px;transform-origin:center;
+  animation:efx-l04 1.4s ease-in-out infinite;
+}
+.efx-load-04 span:nth-child(2){animation-delay:.1s;}
+.efx-load-04 span:nth-child(3){animation-delay:.2s;}
+.efx-load-04 span:nth-child(4){animation-delay:.3s;}
+.efx-load-04 span:nth-child(5){animation-delay:.4s;}
+@keyframes efx-l04{
+  0%,100%{transform:scaleY(.25);opacity:.4;}
+  50%{transform:scaleY(1);opacity:1;}
+}`
+  },
+  {
+    id: 'load-05',
+    section: 'loaders',
+    name: 'Toggle <em>Quiet Switch</em>',
+    desc: 'Interrupteur à bascule minimaliste',
+    theme: 'dark',
+    html: `<label class="efx-load-05">
+  <input type="checkbox" checked>
+  <span class="track"><span class="thumb"></span></span>
+  <span class="label">Kérastase</span>
+</label>`,
+    css: `.efx-load-05{display:flex;align-items:center;gap:14px;cursor:pointer;}
+.efx-load-05 input{display:none;}
+.efx-load-05 .track{
+  position:relative;width:46px;height:24px;
+  background:rgba(250,250,247,.15);border-radius:999px;
+  border:1px solid rgba(250,250,247,.2);
+  transition:background .4s,border-color .4s;
+}
+.efx-load-05 .thumb{
+  position:absolute;top:2px;left:2px;width:18px;height:18px;
+  background:#FAFAF7;border-radius:50%;
+  transition:transform .4s cubic-bezier(.2,.7,.2,1),background .4s;
+}
+.efx-load-05 .label{
+  font:600 11px/1 'Montserrat';letter-spacing:.26em;
+  text-transform:uppercase;color:rgba(250,250,247,.7);
+}
+.efx-load-05 input:checked + .track{
+  background:rgba(232,163,130,.3);border-color:#E8A382;
+}
+.efx-load-05 input:checked + .track .thumb{
+  transform:translateX(22px);background:#E8A382;
+}
+.efx-load-05 input:checked ~ .label{color:#E8A382;}`
+  },
+  {
+    id: 'load-06',
+    section: 'loaders',
+    name: 'Cursor <em>Dot Follower</em>',
+    desc: 'Point pêche qui suit le curseur (survol zone)',
+    theme: 'dark',
+    html: `<div class="efx-load-06" onmousemove="this.querySelector('.dot').style.transform='translate('+(event.offsetX-8)+'px,'+(event.offsetY-8)+'px)'">
+  <span class="dot"></span>
+  <span class="hint">Déplacez le curseur</span>
+</div>`,
+    css: `.efx-load-06{
+  position:relative;width:260px;height:140px;
+  display:flex;align-items:center;justify-content:center;
+  border:1px dashed rgba(232,163,130,.3);border-radius:10px;
+  cursor:none;overflow:hidden;
+}
+.efx-load-06 .dot{
+  position:absolute;top:0;left:0;width:16px;height:16px;
+  border-radius:50%;background:#E8A382;pointer-events:none;
+  transition:transform .12s ease-out,opacity .3s;
+  box-shadow:0 0 0 4px rgba(232,163,130,.2);
+}
+.efx-load-06 .hint{
+  font:600 10px/1 'Montserrat';letter-spacing:.26em;
+  text-transform:uppercase;color:rgba(250,250,247,.4);
+  pointer-events:none;
+}`
+  },
+
+  // =====================================================
+  // 06 — FONDS & DECORATIONS
+  // =====================================================
+  {
+    id: 'bg-01',
+    section: 'backgrounds',
+    name: 'Fond <em>Radial Cinematic</em>',
+    desc: 'Dégradé radial sombre cinématographique',
+    theme: 'light',
+    html: `<div class="efx-bg-01">
+  <div class="label">Direction</div>
+  <h3>Clair-Obscur</h3>
+</div>`,
+    css: `.efx-bg-01{
+  width:300px;height:170px;border-radius:12px;
+  background:radial-gradient(125% 95% at 50% 16%,#211e1c 0%,#0E0E0E 62%);
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;color:#FAFAF7;
+}
+.efx-bg-01 .label{
+  font:600 10px/1 'Montserrat';letter-spacing:.28em;
+  text-transform:uppercase;color:#E8A382;margin-bottom:10px;
+}
+.efx-bg-01 h3{font:300 30px/1 'Cormorant Garamond',serif;}`
+  },
+  {
+    id: 'bg-02',
+    section: 'backgrounds',
+    name: 'Fond <em>Noise Texture</em>',
+    desc: 'Texture de bruit subtile par SVG',
+    theme: 'dark',
+    html: `<div class="efx-bg-02">
+  <span>Quiet</span>
+</div>`,
+    css: `.efx-bg-02{
+  width:300px;height:170px;border-radius:12px;
+  background:#1A1A1A;display:flex;align-items:center;
+  justify-content:center;position:relative;overflow:hidden;
+}
+.efx-bg-02::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 .91 0 0 0 0 .64 0 0 0 0 .51 0 0 0 .25 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.5;mix-blend-mode:overlay;
+}
+.efx-bg-02 span{
+  position:relative;font:italic 36px/1 'Cormorant Garamond',serif;
+  color:#E8A382;
+}`
+  },
+  {
+    id: 'bg-03',
+    section: 'backgrounds',
+    name: 'Divider <em>Décoratif</em>',
+    desc: 'Ligne fine avec point central pêche',
+    theme: 'dark',
+    html: `<div class="efx-bg-03">
+  <span class="label">Section</span>
+  <div class="line">
+    <span class="seg"></span><span class="dot"></span><span class="seg"></span>
+  </div>
+  <span class="meta">01 · Couverture</span>
+</div>`,
+    css: `.efx-bg-03{display:flex;flex-direction:column;align-items:center;gap:14px;width:240px;}
+.efx-bg-03 .label{
+  font:600 11px/1 'Montserrat';letter-spacing:.3em;
+  text-transform:uppercase;color:#E8A382;
+}
+.efx-bg-03 .line{display:flex;align-items:center;gap:10px;width:100%;}
+.efx-bg-03 .seg{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(232,163,130,.4),transparent);}
+.efx-bg-03 .dot{width:6px;height:6px;border-radius:50%;background:#E8A382;box-shadow:0 0 0 4px rgba(232,163,130,.2);}
+.efx-bg-03 .meta{
+  font:600 10px/1 'Montserrat';letter-spacing:.24em;
+  text-transform:uppercase;color:rgba(250,250,247,.5);
+}`
+  },
+  {
+    id: 'bg-04',
+    section: 'backgrounds',
+    name: 'Fond <em>Mesh Peach</em>',
+    desc: 'Dégradé maillé pêche et or',
+    theme: 'light',
+    html: `<div class="efx-bg-04">
+  <div class="label">Carecoach</div>
+  <h3>Première</h3>
+</div>`,
+    css: `.efx-bg-04{
+  width:300px;height:170px;border-radius:12px;
+  background:
+    radial-gradient(80% 80% at 20% 20%,rgba(232,163,130,.7),transparent 60%),
+    radial-gradient(80% 80% at 80% 30%,rgba(212,175,55,.5),transparent 60%),
+    radial-gradient(80% 80% at 50% 90%,rgba(192,121,90,.6),transparent 60%),
+    #1A1A1A;
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;color:#FAFAF7;
+}
+.efx-bg-04 .label{
+  font:600 10px/1 'Montserrat';letter-spacing:.28em;
+  text-transform:uppercase;color:#1A1A1A;background:rgba(250,250,247,.85);
+  padding:7px 12px;border-radius:999px;margin-bottom:14px;
+}
+.efx-bg-04 h3{font:300 34px/1 'Cormorant Garamond',serif;}`
+  },
+  {
+    id: 'bg-05',
+    section: 'backgrounds',
+    name: 'Fond <em>Stripe Diagonal</em>',
+    desc: 'Rayures diagonales type cheveu',
+    theme: 'light',
+    html: `<div class="efx-bg-05">
+  <div class="label">Rituel</div>
+  <h3>Fusio-Dose</h3>
+</div>`,
+    css: `.efx-bg-05{
+  width:300px;height:170px;border-radius:12px;
+  background:repeating-linear-gradient(135deg,
+    #171717 0 12px,#1c1b1a 12px 24px);
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;color:#FAFAF7;
+}
+.efx-bg-05 .label{
+  font:600 10px/1 'Montserrat';letter-spacing:.28em;
+  text-transform:uppercase;color:#E8A382;margin-bottom:10px;
+}
+.efx-bg-05 h3{font:300 30px/1 'Cormorant Garamond',serif;}
+.efx-bg-05 h3 em{font-style:italic;color:#E8A382;}`
+  },
+
+  // =====================================================
+  // 07 — CHAMPS & CONTROLES
+  // =====================================================
+  {
+    id: 'form-01',
+    section: 'forms',
+    name: 'Input <em>Underline</em>',
+    desc: 'Champ avec soulignement pêche au focus',
+    theme: 'dark',
+    html: `<label class="efx-form-01">
+  <span class="label">Email</span>
+  <input type="text" placeholder="vous@edelys.fr">
+</label>`,
+    css: `.efx-form-01{display:flex;flex-direction:column;gap:6px;width:240px;}
+.efx-form-01 .label{
+  font:600 10px/1 'Montserrat';letter-spacing:.26em;
+  text-transform:uppercase;color:rgba(250,250,247,.5);
+}
+.efx-form-01 input{
+  background:transparent;border:0;border-bottom:1px solid rgba(250,250,247,.2);
+  padding:8px 0;color:#FAFAF7;font:300 16px 'Cormorant Garamond',serif;
+  outline:none;transition:border-color .4s;
+}
+.efx-form-01 input::placeholder{color:rgba(250,250,247,.3);font-style:italic;}
+.efx-form-01 input:focus{border-bottom-color:#E8A382;}`
+  },
+  {
+    id: 'form-02',
+    section: 'forms',
+    name: 'Input <em>Floating Label</em>',
+    desc: 'Label flottant qui monte au focus',
+    theme: 'dark',
+    html: `<label class="efx-form-02">
+  <input type="text" placeholder=" ">
+  <span class="label">Nom complet</span>
+</label>`,
+    css: `.efx-form-02{position:relative;width:240px;}
+.efx-form-02 input{
+  width:100%;background:transparent;border:1px solid rgba(250,250,247,.2);
+  border-radius:8px;padding:18px 14px 8px;color:#FAFAF7;
+  font:300 14px 'Montserrat',sans-serif;outline:none;
+  transition:border-color .3s;
+}
+.efx-form-02 input:focus{border-color:#E8A382;}
+.efx-form-02 .label{
+  position:absolute;left:14px;top:14px;
+  font:300 14px 'Montserrat';color:rgba(250,250,247,.5);
+  pointer-events:none;transition:all .3s cubic-bezier(.2,.7,.2,1);
+}
+.efx-form-02 input:focus + .label,
+.efx-form-02 input:not(:placeholder-shown) + .label{
+  top:6px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  color:#E8A382;
+}`
+  },
+  {
+    id: 'form-03',
+    section: 'forms',
+    name: 'Input <em>Glow Peach</em>',
+    desc: 'Halo pêche autour du champ au focus',
+    theme: 'dark',
+    html: `<input type="text" class="efx-form-03" placeholder="Rechercher une prestation…">`,
+    css: `.efx-form-03{
+  width:260px;background:rgba(250,250,247,.06);
+  border:1px solid rgba(250,250,247,.18);border-radius:999px;
+  padding:13px 22px;color:#FAFAF7;
+  font:300 13px 'Montserrat',sans-serif;outline:none;
+  transition:border-color .3s,box-shadow .3s,background .3s;
+}
+.efx-form-03::placeholder{color:rgba(250,250,247,.4);font-style:italic;}
+.efx-form-03:focus{
+  border-color:#E8A382;background:rgba(232,163,130,.05);
+  box-shadow:0 0 0 4px rgba(232,163,130,.18);
+}`
+  },
+  {
+    id: 'form-04',
+    section: 'forms',
+    name: 'Checkbox <em>Éditorial</em>',
+    desc: 'Case à cocher style quiet luxury',
+    theme: 'dark',
+    html: `<label class="efx-form-04">
+  <input type="checkbox" checked>
+  <span class="box"></span>
+  <span class="label">Soins Kérastase</span>
+</label>`,
+    css: `.efx-form-04{display:flex;align-items:center;gap:12px;cursor:pointer;}
+.efx-form-04 input{display:none;}
+.efx-form-04 .box{
+  width:20px;height:20px;border:1px solid rgba(250,250,247,.25);
+  border-radius:4px;position:relative;
+  transition:background .3s,border-color .3s;
+}
+.efx-form-04 .box::after{
+  content:'';position:absolute;top:5px;left:7px;
+  width:5px;height:9px;border:solid #1A1A1A;
+  border-width:0 2px 2px 0;transform:rotate(45deg) scale(0);
+  transition:transform .25s cubic-bezier(.2,.7,.2,1);
+}
+.efx-form-04 .label{
+  font:300 14px 'Cormorant Garamond',serif;
+  color:rgba(250,250,247,.85);
+}
+.efx-form-04 input:checked + .box{background:#E8A382;border-color:#E8A382;}
+.efx-form-04 input:checked + .box::after{transform:rotate(45deg) scale(1);}
+.efx-form-04 input:checked ~ .label{color:#E8A382;}`
+  },
+  {
+    id: 'form-05',
+    section: 'forms',
+    name: 'Select <em>Quiet</em>',
+    desc: 'Liste déroulante stylisée',
+    theme: 'dark',
+    html: `<label class="efx-form-05">
+  <span class="label">Prestation</span>
+  <select>
+    <option>Coupe · Brushing</option>
+    <option>Couleur INOA</option>
+    <option>Soin Première</option>
+    <option>Fusio-Dose</option>
+  </select>
+</label>`,
+    css: `.efx-form-05{display:flex;flex-direction:column;gap:6px;width:240px;}
+.efx-form-05 .label{
+  font:600 10px/1 'Montserrat';letter-spacing:.26em;
+  text-transform:uppercase;color:rgba(250,250,247,.5);
+}
+.efx-form-05 select{
+  appearance:none;background:transparent;
+  border:1px solid rgba(250,250,247,.2);border-radius:8px;
+  padding:13px 40px 13px 14px;color:#FAFAF7;
+  font:300 14px 'Montserrat',sans-serif;outline:none;cursor:pointer;
+  background-image:linear-gradient(45deg,transparent 50%,#E8A382 50%),
+                   linear-gradient(135deg,#E8A382 50%,transparent 50%);
+  background-position:calc(100% - 18px) center,calc(100% - 13px) center;
+  background-size:5px 5px,5px 5px;background-repeat:no-repeat;
+  transition:border-color .3s;
+}
+.efx-form-05 select:focus{border-color:#E8A382;}
+.efx-form-05 select option{background:#1A1A1A;color:#FAFAF7;}`
+  },
+
+  // =====================================================
+  // 08 — ANIMATIONS D'ENTREE
+  // =====================================================
+  {
+    id: 'ent-01',
+    section: 'entrance',
+    name: 'Reveal <em>Fade Up</em>',
+    desc: 'Apparition en fondu vertical',
+    theme: 'dark',
+    html: `<button class="efx-ent-01-toggle">Rejouer</button>
+<div class="efx-ent-01"><h3>Le luxe,<br><em>à voix basse.</em></h3></div>`,
+    css: `.efx-ent-01-toggle{
+  position:absolute;top:14px;right:14px;
+  font:600 9px/1 'Montserrat';letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(250,250,247,.5);background:transparent;
+  border:1px solid rgba(250,250,247,.18);border-radius:999px;
+  padding:7px 11px;cursor:pointer;transition:all .3s;
+}
+.efx-ent-01-toggle:hover{color:#E8A382;border-color:#E8A382;}
+.efx-ent-01{text-align:center;}
+.efx-ent-01 h3{font:300 30px/1.15 'Cormorant Garamond',serif;color:#FAFAF7;}
+.efx-ent-01 h3 em{font-style:italic;color:#E8A382;}
+.efx-ent-01.play h3{animation:efx-e01 .9s cubic-bezier(.2,.7,.2,1);}
+@keyframes efx-e01{
+  from{opacity:0;transform:translateY(28px);}
+  to{opacity:1;transform:translateY(0);}
+}`
+  },
+  {
+    id: 'ent-02',
+    section: 'entrance',
+    name: 'Reveal <em>Letter Mask</em>',
+    desc: 'Le texte se révèle à travers un masque',
+    theme: 'dark',
+    html: `<button class="efx-ent-02-toggle">Rejouer</button>
+<div class="efx-ent-02"><h3>Edelys</h3></div>`,
+    css: `.efx-ent-02-toggle{
+  position:absolute;top:14px;right:14px;
+  font:600 9px/1 'Montserrat';letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(250,250,247,.5);background:transparent;
+  border:1px solid rgba(250,250,247,.18);border-radius:999px;
+  padding:7px 11px;cursor:pointer;transition:all .3s;
+}
+.efx-ent-02-toggle:hover{color:#E8A382;border-color:#E8A382;}
+.efx-ent-02 h3{
+  font:300 56px/1 'Cormorant Garamond',serif;color:#E8A382;
+  clip-path:inset(0 100% 0 0);
+}
+.efx-ent-02.play h3{animation:efx-e02 1.1s cubic-bezier(.7,0,.2,1);}
+@keyframes efx-e02{from{clip-path:inset(0 100% 0 0);}to{clip-path:inset(0 0 0 0);}}`
+  },
+  {
+    id: 'ent-03',
+    section: 'entrance',
+    name: 'Reveal <em>Slide In</em>',
+    desc: 'Glissement latéral depuis la gauche',
+    theme: 'dark',
+    html: `<button class="efx-ent-03-toggle">Rejouer</button>
+<div class="efx-ent-03">
+  <span class="bar"></span>
+  <h3>Direction Artistique</h3>
+</div>`,
+    css: `.efx-ent-03-toggle{
+  position:absolute;top:14px;right:14px;
+  font:600 9px/1 'Montserrat';letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(250,250,247,.5);background:transparent;
+  border:1px solid rgba(250,250,247,.18);border-radius:999px;
+  padding:7px 11px;cursor:pointer;transition:all .3s;
+}
+.efx-ent-03-toggle:hover{color:#E8A382;border-color:#E8A382;}
+.efx-ent-03{display:flex;align-items:center;gap:14px;}
+.efx-ent-03 .bar{width:34px;height:1px;background:#E8A382;}
+.efx-ent-03 h3{
+  font:600 12px/1 'Montserrat';letter-spacing:.32em;
+  text-transform:uppercase;color:#FAFAF7;
+}
+.efx-ent-03.play .bar{animation:efx-e03-bar .8s cubic-bezier(.7,0,.2,1);}
+.efx-ent-03.play h3{animation:efx-e03-text .8s cubic-bezier(.7,0,.2,1) .15s both;}
+@keyframes efx-e03-bar{from{transform:scaleX(0);transform-origin:left;}to{transform:scaleX(1);}}
+@keyframes efx-e03-text{from{opacity:0;transform:translateX(-16px);}to{opacity:1;transform:translateX(0);}}`
+  },
+  {
+    id: 'ent-04',
+    section: 'entrance',
+    name: 'Reveal <em>Scale Soft</em>',
+    desc: 'Mise à l\'échelle douce avec flou',
+    theme: 'dark',
+    html: `<button class="efx-ent-04-toggle">Rejouer</button>
+<div class="efx-ent-04"><div class="mark">EC</div></div>`,
+    css: `.efx-ent-04-toggle{
+  position:absolute;top:14px;right:14px;
+  font:600 9px/1 'Montserrat';letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(250,250,247,.5);background:transparent;
+  border:1px solid rgba(250,250,247,.18);border-radius:999px;
+  padding:7px 11px;cursor:pointer;transition:all .3s;
+}
+.efx-ent-04-toggle:hover{color:#E8A382;border-color:#E8A382;}
+.efx-ent-04 .mark{
+  width:80px;height:80px;border-radius:50%;
+  border:1px solid #E8A382;display:flex;align-items:center;
+  justify-content:center;font-family:'Cormorant Garamond',serif;
+  font-size:36px;color:#E8A382;
+}
+.efx-ent-04.play .mark{animation:efx-e04 1s cubic-bezier(.2,.7,.2,1);}
+@keyframes efx-e04{
+  from{opacity:0;transform:scale(.6);filter:blur(8px);}
+  to{opacity:1;transform:scale(1);filter:blur(0);}
+}`
+  },
+  {
+    id: 'ent-05',
+    section: 'entrance',
+    name: 'Reveal <em>Stagger Grid</em>',
+    desc: 'Grille d\'éléments en cascade',
+    theme: 'dark',
+    html: `<button class="efx-ent-05-toggle">Rejouer</button>
+<div class="efx-ent-05">
+  <span></span><span></span><span></span>
+  <span></span><span></span><span></span>
+  <span></span><span></span><span></span>
+</div>`,
+    css: `.efx-ent-05-toggle{
+  position:absolute;top:14px;right:14px;
+  font:600 9px/1 'Montserrat';letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(250,250,247,.5);background:transparent;
+  border:1px solid rgba(250,250,247,.18);border-radius:999px;
+  padding:7px 11px;cursor:pointer;transition:all .3s;
+}
+.efx-ent-05-toggle:hover{color:#E8A382;border-color:#E8A382;}
+.efx-ent-05{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:160px;}
+.efx-ent-05 span{
+  width:46px;height:46px;border:1px solid rgba(232,163,130,.3);
+  border-radius:8px;background:rgba(232,163,130,.05);
+}
+.efx-ent-05.play span{animation:efx-e05 .6s cubic-bezier(.2,.7,.2,1) both;}
+.efx-ent-05.play span:nth-child(1){animation-delay:0s;}
+.efx-ent-05.play span:nth-child(2){animation-delay:.08s;}
+.efx-ent-05.play span:nth-child(3){animation-delay:.16s;}
+.efx-ent-05.play span:nth-child(4){animation-delay:.24s;}
+.efx-ent-05.play span:nth-child(5){animation-delay:.32s;}
+.efx-ent-05.play span:nth-child(6){animation-delay:.40s;}
+.efx-ent-05.play span:nth-child(7){animation-delay:.48s;}
+.efx-ent-05.play span:nth-child(8){animation-delay:.56s;}
+.efx-ent-05.play span:nth-child(9){animation-delay:.64s;}
+@keyframes efx-e05{
+  from{opacity:0;transform:scale(.7) translateY(10px);}
+  to{opacity:1;transform:scale(1) translateY(0);}
+}`
+  }
+];
+
+// =============================================================
+// RENDER
+// =============================================================
+
+function escapeHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function highlightHtml(code){
+  return escapeHtml(code)
+    .replace(/(&lt;\/?)([\w-]+)/g, '<span class="tok-tag">$1</span><span class="tok-tag">$2</span>')
+    .replace(/([\w-]+)=/g, '<span class="tok-attr">$1</span>=')
+    .replace(/("[^"]*")/g, '<span class="tok-str">$1</span>');
+}
+
+function highlightCss(code){
+  return escapeHtml(code)
+    .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="tok-com">$1</span>')
+    .replace(/([\.#]?[\w-]+)(\s*\{)/g, '<span class="tok-sel">$1</span>$2')
+    .replace(/([\w-]+)(\s*:)/g, '<span class="tok-prop">$1</span>$2')
+    .replace(/(:\s*)([^;{}\n]+)(;)/g, function(_, c, v, s){
+      return c + '<span class="tok-val">' + v + '</span>' + s;
+    })
+    .replace(/(@[\w-]+)/g, '<span class="tok-key">$1</span>');
+}
+
+function renderCard(e){
+  const id = e.id;
+  return `
+    <article class="card" data-id="${id}" data-name="${e.id} ${e.name.replace(/<[^>]+>/g,'')} ${e.desc||''} ${e.section} ${e.section === 'buttons' ? 'boutons buttons cta' : e.section === 'cards' ? 'cartes cards tuiles tiles' : e.section === 'text' ? 'texte typography text' : e.section === 'hover' ? 'hover images overlays' : e.section === 'loaders' ? 'loaders spinners micro interactions' : e.section === 'backgrounds' ? 'fonds backgrounds decor dividers' : e.section === 'forms' ? 'champs forms inputs controls' : 'entree entrance animations reveal scroll'}">
+      <header class="card-head">
+        <div>
+          <div class="id">${id.toUpperCase()}</div>
+          <div class="name">${e.name}</div>
+        </div>
+        <div class="actions">
+          <button class="btn" data-action="code" data-id="${id}">Code</button>
+          <button class="btn" data-action="copy" data-id="${id}">Copier</button>
+        </div>
+      </header>
+      <div class="demo ${e.theme === 'light' ? 'light' : ''}" id="demo-${id}">
+        ${e.html}
+      </div>
+      <div class="code" id="code-${id}">
+        <div class="code-tabs">
+          <button class="code-tab active" data-tab="css" data-id="${id}">CSS</button>
+          <button class="code-tab" data-tab="html" data-id="${id}">HTML</button>
+        </div>
+        <pre class="active" data-lang="css">${highlightCss(e.css)}</pre>
+        <pre data-lang="html">${highlightHtml(e.html.trim())}</pre>
+      </div>
+    </article>
+  `;
+}
+
+function renderAll(){
+  const sections = {};
+  EFFECTS.forEach(e => {
+    if(!sections[e.section]) sections[e.section] = [];
+    sections[e.section].push(e);
+  });
+  const map = {
+    buttons: 'sec-buttons',
+    cards: 'sec-cards',
+    text: 'sec-text',
+    hover: 'sec-hover',
+    loaders: 'sec-loaders',
+    backgrounds: 'sec-backgrounds',
+    forms: 'sec-forms',
+    entrance: 'sec-entrance'
+  };
+  Object.entries(sections).forEach(([k, effects]) => {
+    const grid = document.querySelector('#' + map[k] + ' .grid');
+    if(grid) grid.innerHTML = effects.map(renderCard).join('');
+  });
+  // Special: letter cascade
+  setupLetterCascade();
+  // Trigger entrance animations once on display
+  setupEntranceReplays();
+}
+
+function setupLetterCascade(){
+  const el = document.querySelector('#demo-text-03 .efx-text-03');
+  if(el){
+    const text = el.textContent;
+    el.innerHTML = text.split('').map((c,i) =>
+      `<span style="animation-delay:${i*0.08}s">${c === ' ' ? '&nbsp;' : c}</span>`
+    ).join('');
+  }
+}
+
+function setupEntranceReplays(){
+  ['ent-01','ent-02','ent-03','ent-04','ent-05'].forEach(id => {
+    const demo = document.querySelector('#demo-' + id);
+    if(!demo) return;
+    const target = demo.querySelector('.efx-' + id);
+    function play(){
+      target.classList.remove('play');
+      void target.offsetWidth;
+      target.classList.add('play');
+    }
+    setTimeout(play, 300);
+    const btn = demo.querySelector('.efx-' + id + '-toggle');
+    if(btn) btn.addEventListener('click', play);
+  });
+}
+
+// =============================================================
+// INTERACTIONS
+// =============================================================
+
+document.addEventListener('click', function(ev){
+  const btn = ev.target.closest('.btn[data-action]');
+  if(!btn) return;
+  const action = btn.dataset.action;
+  const id = btn.dataset.id;
+  if(action === 'code'){
+    const code = document.getElementById('code-' + id);
+    code.classList.toggle('open');
+    btn.textContent = code.classList.contains('open') ? 'Masquer' : 'Code';
+  } else if(action === 'copy'){
+    const e = EFFECTS.find(x => x.id === id);
+    if(!e) return;
+    navigator.clipboard.writeText(e.css).then(() => {
+      btn.classList.add('copied');
+      const original = btn.textContent;
+      btn.textContent = 'Copié ✓';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.textContent = original;
+      }, 1600);
+    });
+  }
+});
+
+document.addEventListener('click', function(ev){
+  const tab = ev.target.closest('.code-tab');
+  if(!tab) return;
+  const id = tab.dataset.id;
+  const lang = tab.dataset.tab;
+  const code = document.getElementById('code-' + id);
+  code.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
+  code.querySelectorAll('pre').forEach(p => p.classList.remove('active'));
+  tab.classList.add('active');
+  code.querySelector('pre[data-lang="' + lang + '"]').classList.add('active');
+});
+
+// =============================================================
+// SIDEBAR ACTIVE STATE
+// =============================================================
+
+const navLinks = document.querySelectorAll('.sidebar a');
+const sections = document.querySelectorAll('.section');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      const id = entry.target.id;
+      navLinks.forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+
+sections.forEach(s => observer.observe(s));
+
+// =============================================================
+// SEARCH
+// =============================================================
+
+const search = document.getElementById('search');
+const noResults = document.getElementById('noResults');
+
+search.addEventListener('input', () => {
+  const q = search.value.trim().toLowerCase();
+  let visibleCount = 0;
+  document.querySelectorAll('.card').forEach(card => {
+    const haystack = (card.dataset.name || '').toLowerCase();
+    const match = !q || haystack.includes(q);
+    card.classList.toggle('hide', !match);
+    if(match) visibleCount++;
+  });
+  document.querySelectorAll('.section').forEach(sec => {
+    const visible = sec.querySelectorAll('.card:not(.hide)').length;
+    sec.classList.toggle('hide', q !== '' && visible === 0);
+  });
+  noResults.classList.toggle('show', q !== '' && visibleCount === 0);
+});
+
+// =============================================================
+// BOOT
+// =============================================================
+renderAll();
+</script>
+</body>
+</html>

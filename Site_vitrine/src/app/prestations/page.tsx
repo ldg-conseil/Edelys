@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const ServiceCategory = ({ title, children }: { title: string, children: React.ReactNode }) => (
     <div className="mb-12">
-        <Heading level={2} className="text-charcoal dark:text-creme border-b border-peche/20 pb-4 mb-8">
+        <Heading level={2} className="text-charcoal dark:text-creme border-b border-peche/10 dark:border-laiton/10 pb-4 mb-8">
             {title}
         </Heading>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
@@ -23,21 +23,20 @@ const ServiceCategory = ({ title, children }: { title: string, children: React.R
 const ServiceItem = ({ name, price, description }: { name: string, price: string, description?: string }) => (
     <div>
         <div className="flex justify-between items-baseline">
-            <Text className="font-semibold text-charcoal dark:text-creme">{name}</Text>
-            <Text className="text-peche font-semibold">{price}</Text>
+            <Text className="font-medium text-charcoal dark:text-creme/90">{name}</Text>
+            <Text className="text-peche dark:text-laiton font-semibold">{price}</Text>
         </div>
-        {description && <Text variant="caption" className="text-charcoal/60 dark:text-grege/80 mt-1">{description}</Text>}
+        {description && <Text variant="caption" className="text-charcoal/50 dark:text-grege/50 mt-1">{description}</Text>}
     </div>
 );
 
 
 const PricingPage = () => {
   return (
-    <div className="bg-creme dark:bg-dark-bg py-24 sm:py-32">
+    <div className="bg-creme dark:bg-cinema-bg py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl lg:mx-0 text-center">
-                <Text variant="overline" className="text-peche">Notre Savoir-Faire</Text>
-                <Heading level={1} className="mt-2 text-charcoal dark:text-creme">
+                <Heading level={1} number="01" className="text-charcoal dark:text-creme">
                     Prestations & Tarifs
                 </Heading>
             </div>
@@ -76,7 +75,7 @@ const PricingPage = () => {
 
                 {/* BAR A SOINS */}
                 <div>
-                    <Heading level={2} className="text-center text-charcoal dark:text-creme border-b border-peche/20 pb-4 mb-12">
+                    <Heading level={2} className="text-center text-charcoal dark:text-creme border-b border-peche/10 dark:border-laiton/10 pb-4 mb-12">
                         🧪 Bar à Soins Haute Performance
                     </Heading>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

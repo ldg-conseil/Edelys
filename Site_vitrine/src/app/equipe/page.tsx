@@ -38,15 +38,15 @@ const team = [
 
 const TeamPage = () => {
   return (
-    <div className="bg-creme dark:bg-dark-bg py-24 sm:py-32">
+    <div className="bg-creme dark:bg-cinema-bg py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
-          <Text variant="overline" className="text-peche">Nos expertes</Text>
-          <Heading level={1} className="mt-2 text-charcoal dark:text-creme">
-            Rencontrez notre équipe
+          <Heading level={1} number="01" className="text-charcoal dark:text-creme">
+            Rencontrez notre{" "}
+            <span className="italic text-peche dark:text-laiton">équipe</span>
           </Heading>
-          <Text variant="body" className="mt-6 text-lg leading-8 text-charcoal/80 dark:text-grege">
-            Derrière l'ambiance conviviale d'Edelys Coiffure se cache un quatuor de coiffeuses passionnées et complices.
+          <Text variant="body" className="mt-6 text-lg leading-8 text-charcoal/80 dark:text-grege/80">
+            Derrière l&rsquo;ambiance conviviale d&rsquo;Edelys Coiffure se cache un quatuor de coiffeuses passionnées et complices.
           </Text>
         </div>
         <ul
@@ -55,17 +55,17 @@ const TeamPage = () => {
         >
           {team.map((person) => (
             <li key={person.name}>
-              <div className="aspect-[3/4] w-full rounded-2xl overflow-hidden">
+              <div className="aspect-[3/4] w-full rounded-lg overflow-hidden border border-charcoal/[0.06] dark:border-cinema-border">
                 {/* NOTE: Add actual images to /public/images/team/ */}
-                <div className="bg-grege w-full h-full flex items-center justify-center">
-                    <Text variant="caption" className="text-charcoal/50">Image Bientôt Disponible</Text>
+                <div className="bg-grege/50 dark:bg-cinema-card w-full h-full flex items-center justify-center">
+                    <Text variant="caption" className="text-charcoal/30 dark:text-grege/30">Image Bientôt Disponible</Text>
                 </div>
               </div>
               <Heading level={3} className="mt-6 text-charcoal dark:text-creme">
                 {person.name}
               </Heading>
-              <Text variant="caption" className="text-peche">{person.role}</Text>
-              <Text variant="body" className="mt-2 text-charcoal/80 dark:text-grege text-sm">
+              <Text variant="label" className="text-peche dark:text-laiton mt-1">{person.role}</Text>
+              <Text variant="body" className="mt-2 text-charcoal/70 dark:text-grege/70 text-sm">
                 {person.description}
               </Text>
             </li>
