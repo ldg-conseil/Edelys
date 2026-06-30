@@ -2,7 +2,6 @@
 import { Heading, Text } from '@/components/ui/Typography';
 import { Metadata } from 'next';
 import React from 'react';
-import { Check } from 'lucide-react';
 
 export const metadata: Metadata = {
     title: 'Prestations & Tarifs | Edelys Coiffure',

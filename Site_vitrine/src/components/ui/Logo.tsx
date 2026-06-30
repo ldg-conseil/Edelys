@@ -55,7 +55,7 @@ export const Logo: React.FC<LogoProps> = ({
             Edelys Coiffure
           </span>
           <span className="font-sans text-[0.6rem] md:text-[0.7rem] uppercase tracking-[0.3em] text-peche font-semibold mt-1">
-            L'architecture du cheveu
+            L&rsquo;architecture du cheveu
           </span>
         </div>
       )}

@@ -1,6 +1,5 @@
 
 import { Heading, Text } from '@/components/ui/Typography';
-import { Button } from '@/components/ui/Button';
 import { Metadata } from 'next';
 import React from 'react';
 import { MapPin, Phone, Clock, Star } from 'lucide-react';
@@ -76,7 +75,7 @@ const ContactPage = () => {
                                         {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current"/>)}
                                     </div>
                                     <blockquote className="text-charcoal/70 dark:text-grege/70 flex-grow">
-                                        <p>"{testimonial.quote}"</p>
+                                        <p>&ldquo;{testimonial.quote}&rdquo;</p>
                                     </blockquote>
                                 </figure>
                             ))}

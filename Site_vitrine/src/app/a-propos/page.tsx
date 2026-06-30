@@ -23,10 +23,10 @@ const AboutPage = () => {
                 <Heading level={2} number="02" className="text-charcoal dark:text-creme">Notre Philosophie</Heading>
                 <div className="mt-6 space-y-7 text-base text-charcoal/80 dark:text-grege/80">
                     <Text>
-                        Chez Edelys Coiffure, nous pensons que la coiffure ne se limite pas à une coupe ou à une couleur : c'est un véritable moment d'échange. Que vous veniez pour une patine (un soin pigmenté léger qui ravive l'éclat et neutralise les reflets indésirables) ou pour un ombré hair subtil (un dégradé lumineux allant de racines naturelles vers des pointes éclaircies), nous mettons tout notre savoir-faire en œuvre.
+                        Chez Edelys Coiffure, nous pensons que la coiffure ne se limite pas à une coupe ou à une couleur : c&rsquo;est un véritable moment d&rsquo;échange. Que vous veniez pour une patine (un soin pigmenté léger qui ravive l&rsquo;éclat et neutralise les reflets indésirables) ou pour un ombré hair subtil (un dégradé lumineux allant de racines naturelles vers des pointes éclaircies), nous mettons tout notre savoir-faire en œuvre.
                     </Text>
                     <Text>
-                        Notre équipe est formée aux dernières tendances techniques et saura vous guider si vous hésitez sur le choix de votre style. Nous veillons à ce que votre coiffure s’accorde parfaitement à vos goûts, à votre routine quotidienne et à la nature de vos cheveux.
+                        Notre équipe est formée aux dernières tendances techniques et saura vous guider si vous hésitez sur le choix de votre style. Nous veillons à ce que votre coiffure s&rsquo;accorde parfaitement à vos goûts, à votre routine quotidienne et à la nature de vos cheveux.
                     </Text>
                 </div>
             </div>

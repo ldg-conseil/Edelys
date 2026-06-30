@@ -14,25 +14,25 @@ const team = [
     name: 'Alisson',
     role: 'Responsable du salon',
     description: 'Saluée pour son accueil au top, son écoute attentive et son management bienveillant.',
-    imageUrl: '/images/team/alisson.jpg', // Placeholder image
+    imageUrl: '/images/team/alisson.jpg',
   },
   {
     name: 'Coralie',
     role: 'Experte capillaire',
     description: 'Créative et passionnée par l\'art de la transformation et du conseil.',
-    imageUrl: '/images/team/coralie.jpg', // Placeholder image
+    imageUrl: '/images/team/coralie.jpg',
   },
   {
     name: 'Cynthia',
     role: 'Spécialiste couleur',
     description: 'Spécialiste des coupes et des techniques de coloration personnalisées.',
-    imageUrl: '/images/team/cynthia.jpg', // Placeholder image
+    imageUrl: '/images/team/cynthia.jpg',
   },
   {
     name: 'Shanice',
     role: 'Experte soin & coupe',
     description: 'Professionnelle attentionnée, experte des rituels de soin et des coupes modernes.',
-    imageUrl: '/images/team/shanice.jpg', // Placeholder image
+    imageUrl: '/images/team/shanice.jpg',
   },
 ]
 
@@ -55,11 +55,14 @@ const TeamPage = () => {
         >
           {team.map((person) => (
             <li key={person.name}>
-              <div className="aspect-[3/4] w-full rounded-lg overflow-hidden border border-charcoal/[0.06] dark:border-cinema-border">
-                {/* NOTE: Add actual images to /public/images/team/ */}
-                <div className="bg-grege/50 dark:bg-cinema-card w-full h-full flex items-center justify-center">
-                    <Text variant="caption" className="text-charcoal/30 dark:text-grege/30">Image Bientôt Disponible</Text>
-                </div>
+              <div className="aspect-[3/4] w-full rounded-lg overflow-hidden border border-charcoal/[0.06] dark:border-cinema-border relative bg-grege/30 dark:bg-cinema-card">
+                <Image
+                  src={person.imageUrl}
+                  alt={person.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
               </div>
               <Heading level={3} className="mt-6 text-charcoal dark:text-creme">
                 {person.name}
