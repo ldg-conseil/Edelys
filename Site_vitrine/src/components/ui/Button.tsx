@@ -2,10 +2,11 @@ import React from "react";
 import { LucideIcon } from "lucide-react";
 
 /* ============================================================
-   BOUTONS  —  Éditoriaux
+   BOUTONS — Charte Edelys (btn-edelys-main / btn-edelys-tag)
+   Pill · remplissage vertical au survol · micro-typographie
    ============================================================ */
 
-type ButtonVariant = "primary" | "secondary" | "outline" | "editorial" | "rose-gold";
+type ButtonVariant = "solid" | "outline" | "dark";
 type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -20,7 +21,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       children,
-      variant = "primary",
+      variant = "solid",
       size = "md",
       icon: Icon,
       iconPosition = "right",
@@ -31,36 +32,39 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const baseClasses =
-      "inline-flex items-center justify-center gap-3 font-sans font-semibold uppercase tracking-[0.2em] transition-all duration-500 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-peche dark:focus:ring-laiton disabled:opacity-50 disabled:cursor-not-allowed";
+      "btn-fill group/btn inline-flex items-center justify-center gap-3 rounded-full font-sans font-semibold uppercase tracking-[0.18em] whitespace-nowrap cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-peche dark:focus-visible:ring-laiton focus-visible:ring-offset-2 focus-visible:ring-offset-creme dark:focus-visible:ring-offset-cinema-bg disabled:opacity-50 disabled:pointer-events-none";
 
     const sizeClasses: Record<ButtonSize, string> = {
-      sm: "text-[9px] md:text-[10px] px-6 py-3",
-      md: "text-[10px] md:text-[11px] px-8 py-4",
-      lg: "text-xs md:text-sm px-10 py-5",
+      sm: "text-[9px] px-6 py-3",
+      md: "text-[10px] px-8 py-4",
+      lg: "text-[11px] px-10 py-5",
     };
 
+    /* --btn-fill-color pilote la couleur du voile de remplissage (::after) */
     const variantClasses: Record<ButtonVariant, string> = {
-      primary:
-        "bg-charcoal dark:bg-creme text-creme dark:text-charcoal hover:bg-peche dark:hover:bg-laiton dark:hover:text-charcoal shadow-lg shadow-charcoal/10 dark:shadow-none",
-      secondary:
-        "bg-peche text-charcoal hover:bg-charcoal hover:text-creme dark:hover:bg-creme dark:hover:text-charcoal shadow-lg shadow-peche/20",
+      solid:
+        "bg-peche text-charcoal hover:text-creme dark:hover:text-charcoal [--btn-fill-color:var(--color-charcoal)] dark:[--btn-fill-color:var(--color-creme)] hover:shadow-[0_10px_20px_rgba(232,163,130,0.25)]",
       outline:
-        "border border-charcoal/15 dark:border-creme/15 text-charcoal dark:text-creme hover:border-peche hover:text-peche dark:hover:border-laiton dark:hover:text-laiton",
-      editorial:
-        "text-charcoal/70 dark:text-grege/70 hover:text-charcoal dark:hover:text-creme underline-offset-4 hover:underline decoration-peche dark:decoration-laiton",
-      "rose-gold":
-        "bg-laiton text-charcoal hover:bg-peche dark:bg-laiton dark:hover:bg-peche shadow-lg shadow-laiton/20",
+        "border border-charcoal/20 dark:border-grege/25 text-charcoal/80 dark:text-grege/80 hover:text-charcoal dark:hover:text-charcoal hover:border-peche dark:hover:border-laiton [--btn-fill-color:var(--color-peche)] dark:[--btn-fill-color:var(--color-laiton)]",
+      dark:
+        "bg-charcoal text-creme dark:bg-creme dark:text-charcoal hover:text-charcoal dark:hover:text-charcoal [--btn-fill-color:var(--color-peche)] dark:[--btn-fill-color:var(--color-laiton)]",
     };
 
     const widthClass = fullWidth ? "w-full" : "";
 
-    const combinedClasses = `${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${widthClass} ${className}`;
-
     return (
-      <button ref={ref} className={combinedClasses} {...props}>
-        {Icon && iconPosition === "left" && <Icon className="w-4 h-4" />}
+      <button
+        ref={ref}
+        className={`${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${widthClass} ${className}`}
+        {...props}
+      >
+        {Icon && iconPosition === "left" && (
+          <Icon className="w-3.5 h-3.5 transition-transform duration-500 group-hover/btn:-translate-x-0.5" />
+        )}
         <span>{children}</span>
-        {Icon && iconPosition === "right" && <Icon className="w-4 h-4" />}
+        {Icon && iconPosition === "right" && (
+          <Icon className="w-3.5 h-3.5 transition-transform duration-500 group-hover/btn:translate-x-0.5" />
+        )}
       </button>
     );
   }
