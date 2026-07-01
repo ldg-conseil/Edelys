@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edelys Coiffure — Bibliothèque d'Animations CSS</title>
+    
+    <!-- Importation des typographies de la charte -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           VARIABLES DE LA CHARTE GRAPHIQUE (Adaptables au thème)
+           ========================================================================== */
+        :root {
+            /* THÈME SOMBRE (Défaut) */
+            --bg-main: #1A1A1A;          /* Anthracite profond */
+            --bg-panel: #222222;         /* Anthracite clair */
+            --bg-card: #2A211C;          /* Fond spécifique pour previews */
+            
+            --text-main: #F9F9F9;        /* Blanc cassé */
+            --text-muted: rgba(255, 255, 255, 0.6);
+            --border-color: rgba(232, 163, 130, 0.2);
+            
+            --btn-hover-bg: #F9F9F9;     /* Fond du bouton au survol */
+            --btn-hover-text: #1A1A1A;   /* Texte du bouton au survol */
+
+            /* Couleurs communes */
+            --c-peach: #E8A382;
+            --c-peach-hover: #F2B598;
+            --btn-text-on-peach: #1A1A1A;
+
+            /* Typographies */
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'Montserrat', sans-serif;
+
+            /* Courbes d'animation */
+            --ease-out: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            --transition-med: 0.4s var(--ease-out);
+            --transition-fast: 0.25s ease;
+        }
+
+        /* THÈME CLAIR (Crème / Grège) */
+        [data-theme="light"] {
+            --bg-main: #FDFBF9;          /* Crème très léger */
+            --bg-panel: #FFFFFF;         /* Blanc pur pour les cartes */
+            --bg-card: #F5F0EB;          /* Grège pour les previews */
+            
+            --text-main: #2A211C;        /* Marron/Gris très foncé */
+            --text-muted: rgba(42, 33, 28, 0.6);
+            --border-color: rgba(42, 33, 28, 0.15);
+            
+            --btn-hover-bg: #2A211C;     /* Fond du bouton au survol devient foncé */
+            --btn-hover-text: #FFFFFF;   /* Texte du bouton au survol devient blanc */
+        }
+
+        /* ==========================================================================
+           TRANSITIONS DE THÈME (Pour un switch en douceur)
+           ========================================================================== */
+        body, .sidebar, .card, .card-preview, .card-info, .section-title, .nav-link, .btn-edelys-tag, .link-edelys-underline {
+            transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+        }
+
+        /* ==========================================================================
+           RESET ET STYLES GLOBAUX
+           ========================================================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Barre latérale (Navigation) */
+        .sidebar {
+            width: 280px;
+            background: var(--bg-main);
+            border-right: 1px solid var(--border-color);
+            padding: 40px 30px;
+            position: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+        }
+
+        .brand {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            color: var(--c-peach);
+            margin-bottom: 10px;
+            line-height: 1.1;
+        }
+
+        .brand span {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        .nav-menu {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--c-peach);
+        }
+
+        /* Switcher de Thème */
+        .theme-switcher {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .theme-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-btn:hover, .theme-btn.active {
+            background: var(--text-main);
+            color: var(--bg-main);
+            border-color: var(--text-main);
+        }
+
+        /* Contenu principal */
+        .main-content {
+            margin-left: 280px;
+            padding: 60px 80px;
+            flex: 1;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 42px;
+            color: var(--text-main);
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-preview {
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-card);
+            position: relative;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .card-info {
+            padding: 20px;
+            background: var(--bg-panel);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--c-peach);
+            margin-bottom: 8px;
+        }
+
+        .card-code {
+            font-family: monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            background: rgba(0,0,0,0.1);
+            padding: 8px;
+            border-radius: 4px;
+            user-select: all;
+        }
+        [data-theme="dark"] .card-code { background: rgba(0,0,0,0.3); }
+
+        /* ==========================================================================
+           EFFETS CSS À COPIER-COLLER
+           ========================================================================== */
+
+        /* --- 1. BOUTONS --- */
+        .btn-edelys-main {
+            display: inline-block;
+            background: var(--c-peach);
+            color: var(--btn-text-on-peach);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 11px;
+            line-height: 1;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            padding: 16px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: background var(--transition-med), transform var(--transition-med), box-shadow var(--transition-med), color var(--transition-med);
+            z-index: 1;
+        }
+
+        .btn-edelys-main::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--btn-hover-bg);
+            z-index: -1;
+            transform: translateY(100%);
+            transition: transform var(--transition-med);
+        }
+
+        .btn-edelys-main:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(232, 163, 130, 0.25);
+            color: var(--btn-hover-text);
+        }
+
+        .btn-edelys-main:hover::after {
+            transform: translateY(0);
+        }
+
+        .btn-edelys-tag {
+            display: inline-block;
+            border: 1px solid var(--border-color);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 10px;
+            line-height: 1;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            padding: 9px 14px;
+            border-radius: 20px;
+            color: var(--text-muted);
+            text-decoration: none;
+            cursor: pointer;
+            background: transparent;
+        }
+
+        .btn-edelys-tag:hover {
+            background: var(--c-peach);
+            color: var(--btn-text-on-peach);
+            border-color: var(--c-peach);
+            transform: scale(1.05);
+        }
+
+        .link-edelys-underline {
+            color: var(--text-main);
+            font-family: var(--font-body);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .link-edelys-underline::after {
+            content: '';
+            position: absolute;
+            width: 100%; height: 1px;
+            bottom: 0; left: 0;
+            background-color: var(--c-peach);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform var(--transition-med);
+        }
+
+        .link-edelys-underline:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* --- 2. IMAGES --- */
+        .img-container { width: 100%; height: 100%; border-radius: 8px; overflow: hidden; position: relative; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; }
+
+        .hover-img-zoom img { transition: transform 0.8s var(--ease-out); }
+        .hover-img-zoom:hover img { transform: scale(1.08); }
+
+        .hover-img-color img { filter: grayscale(100%) contrast(1.1); transition: filter 0.8s var(--ease-out), transform 0.8s var(--ease-out); }
+        .hover-img-color:hover img { filter: grayscale(0%) contrast(1); transform: scale(1.03); }
+
+        .hover-img-shine::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-20deg); z-index: 2;
+        }
+        .hover-img-shine:hover::before { animation: shine 1.2s var(--ease-out); }
+        @keyframes shine { 100% { left: 200%; } }
+
+        /* --- 3. TYPOGRAPHIE --- */
+        .reveal-fade-up { opacity: 0; transform: translateY(30px); animation: fadeUpAnim 0.8s var(--ease-out) forwards; }
+        @keyframes fadeUpAnim { to { opacity: 1; transform: translateY(0); } }
+
+        .reveal-mask-text { display: inline-block; overflow: hidden; vertical-align: top; }
+        .reveal-mask-text span {
+            display: inline-block; transform: translateY(100%);
+            animation: maskUpAnim 0.8s var(--ease-out) forwards;
+            font-family: var(--font-heading); font-size: 32px; color: var(--c-peach);
+        }
+        @keyframes maskUpAnim { to { transform: translateY(0); } }
+
+        /* --- 4. LOADERS --- */
+        .loader-ring {
+            width: 40px; height: 40px;
+            border: 2px solid var(--border-color); border-top-color: var(--c-peach);
+            border-radius: 50%; animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .loader-pulse { display: flex; gap: 8px; }
+        .loader-pulse span { width: 8px; height: 8px; background-color: var(--c-peach); border-radius: 50%; animation: pulse 1.4s infinite ease-in-out both; }
+        .loader-pulse span:nth-child(1) { animation-delay: -0.32s; }
+        .loader-pulse span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes pulse { 0%, 80%, 100% { transform: scale(0); opacity: 0.3; } 40% { transform: scale(1); opacity: 1; } }
+
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="brand">
+            Edelys
+            <span>Animations CSS</span>
+        </div>
+        <div class="nav-menu">
+            <a href="#boutons" class="nav-link active" data-target="boutons">1. Boutons</a>
+            <a href="#images" class="nav-link" data-target="images">2. Survol Images</a>
+            <a href="#typo" class="nav-link" data-target="typo">3. Apparitions Textes</a>
+            <a href="#loaders" class="nav-link" data-target="loaders">4. Chargements</a>
+        </div>
+        
+        <!-- Contrôle des thèmes -->
+        <div class="theme-switcher">
+            <button class="theme-btn active" data-set-theme="dark">Sombre</button>
+            <button class="theme-btn" data-set-theme="light">Clair</button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- SECTION 1: BOUTONS -->
+        <section id="boutons" class="section-block">
+            <h2 class="section-title">Boutons & Liens</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-preview">
+                        <button class="btn-edelys-main">Réserver sur Planity</button>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Bouton Principal (Hero)</div>
+                        <div class="card-code">class="btn-edelys-main"</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-preview">
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn-edelys-tag">Femme</button>
+                            <button class="btn-edelys-tag">Homme</button>
+                        </div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Boutons Tags / Catégories</div>
+                        <div class="card-code">class="btn-edelys-tag"</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-preview">
+                        <a href="#" class="link-edelys-underline">Découvrir le salon</a>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Lien Souligné Animé</div>
+                        <div class="card-code">class="link-edelys-underline"</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: IMAGES -->
+        <section id="images" class="section-block" style="display: none;">
+            <h2 class="section-title">Survol d'Images</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-preview">
+                        <div class="img-container hover-img-zoom" style="width: 200px; height: 150px;">
+                            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=600&auto=format&fit=crop" alt="Coiffure">
+                        </div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Zoom Doux (Élégant)</div>
+                        <div class="card-code">class="hover-img-zoom"</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-preview">
+                        <div class="img-container hover-img-color" style="width: 200px; height: 150px;">
+                            <img src="https://images.unsplash.com/photo-1595476108010-b4d1f10d5e43?q=80&w=600&auto=format&fit=crop" alt="Produits de beauté">
+                        </div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Noir & Blanc vers Couleur</div>
+                        <div class="card-code">class="hover-img-color"</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-preview">
+                        <div class="img-container hover-img-shine" style="width: 200px; height: 150px;">
+                            <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=600&auto=format&fit=crop" alt="Salon">
+                        </div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Reflet Brillant (Shine)</div>
+                        <div class="card-code">class="hover-img-shine"</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: TYPOGRAPHIE -->
+        <section id="typo" class="section-block" style="display: none;">
+            <h2 class="section-title">Apparitions Textes</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-preview" style="flex-direction: column; gap: 10px;">
+                        <div class="reveal-fade-up demo-text" style="font-family: var(--font-heading); font-size: 24px; color: var(--c-peach);">L'Art de la Coiffure</div>
+                        <div class="reveal-fade-up demo-text" style="font-size: 12px; color: var(--text-muted); animation-delay: 0.2s;">Une expérience unique à Paris.</div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Fondu vers le haut</div>
+                        <div class="card-code">class="reveal-fade-up"</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-preview">
+                        <div class="reveal-mask-text demo-text">
+                            <span>Notre Salon</span>
+                        </div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Masque Révélateur</div>
+                        <div class="card-code">class="reveal-mask-text"</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: LOADERS -->
+        <section id="loaders" class="section-block" style="display: none;">
+            <h2 class="section-title">Chargements (Loaders)</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-preview">
+                        <div class="loader-ring"></div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Anneau Élégant</div>
+                        <div class="card-code">class="loader-ring"</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-preview">
+                        <div class="loader-pulse">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title">Points Pulsatifs</div>
+                        <div class="card-code">class="loader-pulse"</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Gestion de la navigation
+        const links = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.section-block');
+
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                links.forEach(l => l.classList.remove('active'));
+                sections.forEach(s => s.style.display = 'none');
+                
+                link.classList.add('active');
+                const targetId = link.getAttribute('data-target');
+                document.getElementById(targetId).style.display = 'block';
+
+                if(targetId === 'typo') {
+                    const animatedTexts = document.querySelectorAll('.demo-text');
+                    animatedTexts.forEach(el => {
+                        el.style.animation = 'none';
+                        el.offsetHeight; /* trigger reflow */
+                        el.style.animation = null; 
+                    });
+                }
+            });
+        });
+
+        // Gestion du Switcher de Thème
+        const themeBtns = document.querySelectorAll('.theme-btn');
+        const htmlElement = document.documentElement;
+
+        themeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Mettre à jour l'état actif des boutons
+                themeBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Appliquer le thème à l'attribut HTML
+                const selectedTheme = btn.getAttribute('data-set-theme');
+                htmlElement.setAttribute('data-theme', selectedTheme);
+            });
+        });
+    </script>
+</body>
+</html>

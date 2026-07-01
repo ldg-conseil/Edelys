@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Heading, Text } from "@/components/ui/Typography";
 import { Button } from "@/components/ui/Button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 export const HeroSection = () => {
   return (
@@ -19,13 +19,14 @@ export const HeroSection = () => {
           priority
           className="object-cover object-bottom"
         />
-        {/* Overlay Clair · Atelier Clinique : voile très léger */}
-        <div className="absolute inset-0 bg-creme/20 dark:hidden" />
-        {/* Overlay Sombre · Clair-Obscur : dégradé cinématographique chaud */}
+        {/* Overlay Clair : dégradé chaud et doux */}
+        <div className="absolute inset-0 bg-gradient-to-b from-creme/30 via-creme/15 to-creme/5 dark:hidden" />
+        <div className="absolute inset-0 bg-gradient-to-r from-peche/[0.07] via-transparent to-peche/[0.07] dark:hidden" />
+        {/* Overlay Sombre : cinématographique */}
         <div className="hidden dark:block absolute inset-0 bg-gradient-to-t from-cinema-bg/95 via-cinema-bg/50 to-cinema-bg/60" />
         <div className="hidden dark:block absolute inset-0 bg-gradient-to-r from-laiton/5 via-transparent to-laiton/5" />
         {/* Protection header */}
-        <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-charcoal/40 dark:from-cinema-bg/70 to-transparent pointer-events-none" />
+        <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-charcoal/40 dark:from-cinema-bg/70 to-transparent pointer-events-none" />
       </div>
 
       {/* ── Rideau d'entrée ── */}
@@ -35,6 +36,17 @@ export const HeroSection = () => {
         transition={{ duration: 1.2, ease: [0.7, 0, 0.3, 1], delay: 0.2 }}
         className="absolute inset-0 z-20 bg-creme dark:bg-cinema-bg"
       />
+
+      {/* ── Badge Kérastase (top right) ── */}
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 1.6 }}
+        className="absolute top-28 right-6 z-10 hidden md:flex items-center gap-2 px-4 py-2 bg-creme/80 dark:bg-cinema-card/80 backdrop-blur-md rounded-full border border-peche/20 dark:border-laiton/20 text-[10px] uppercase tracking-[0.15em] font-semibold text-charcoal/70 dark:text-grege/70"
+      >
+        <Sparkles className="w-3 h-3 text-peche dark:text-laiton" />
+        <span>Carecoach Officiel <span className="text-peche dark:text-laiton">Kérastase</span></span>
+      </motion.div>
 
       {/* ── Contenu ── */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-32 md:pt-40 text-center flex flex-col items-center">

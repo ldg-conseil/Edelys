@@ -34,92 +34,121 @@ export const ServicesPreview = () => {
   return (
     <section
       id="prestations"
-      className="py-24 md:py-32 px-6 bg-white dark:bg-[#0C0B09] transition-colors duration-500"
+      className="py-24 md:py-32 px-6 bg-creme dark:bg-cinema-bg transition-colors duration-500 relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto">
+      {/* ── Décor de fond ── */}
+      <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-peche/[0.04] dark:bg-laiton/[0.03] rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-40 -left-40 w-[400px] h-[400px] bg-charcoal/[0.02] dark:bg-creme/[0.02] rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* ── En-tête ── */}
-        <div className="text-center mb-16 md:mb-24">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 md:mb-20">
+          <div className="text-center md:text-left max-w-xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+            >
+              <Heading level={2} number="03" className="text-charcoal dark:text-creme">
+                Nos{" "}
+                <span className="italic text-peche dark:text-laiton">Prestations Phares</span>
+              </Heading>
+            </motion.div>
+          </div>
+          {/* Lien vers la carte complète */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mt-4 md:mt-0"
           >
-            <Heading level={2} number="03" className="text-charcoal dark:text-creme max-w-2xl mx-auto">
-              Nos{" "}
-              <span className="italic text-peche dark:text-laiton">Prestations Phares</span>
-            </Heading>
+            <a
+              href="https://www.planity.com/edelys-coiffure-91590-la-ferte-alais"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2 text-[10px] md:text-[11px] uppercase tracking-[0.25em] font-medium text-charcoal/50 dark:text-grege/50 hover:text-peche dark:hover:text-laiton transition-colors duration-300"
+            >
+              <span>Voir toute la carte</span>
+              <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
+            </a>
           </motion.div>
         </div>
 
-        {/* ── Grille éditoriale ── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* ── Grille ── */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
               <motion.div
                 key={service.title}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8, delay: index * 0.15 }}
-                className="group flex flex-col items-start bg-creme/60 dark:bg-cinema-card/60 p-10 rounded-lg border border-charcoal/[0.05] dark:border-cinema-border hover:border-peche/30 dark:hover:border-laiton/30 transition-all duration-500 hover:shadow-md"
+                transition={{ duration: 0.6, delay: index * 0.12 }}
+                className="group relative bg-white/80 dark:bg-cinema-card/80 backdrop-blur-sm p-8 md:p-10 rounded-lg border border-charcoal/[0.05] dark:border-cinema-border transition-all duration-500 hover:shadow-xl hover:shadow-charcoal/[0.04] dark:hover:shadow-black/[0.2] hover:-translate-y-1 hover:border-peche/30 dark:hover:border-laiton/30"
               >
+                {/* Glow décoratif au hover */}
+                <div className="absolute -inset-px rounded-lg bg-gradient-to-b from-peche/[0.07] to-transparent dark:from-laiton/[0.05] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
                 {/* Icône */}
-                <div className="p-4 bg-white dark:bg-cinema-card rounded-md mb-8 shadow-sm group-hover:scale-105 transition-transform duration-500">
+                <div className="relative z-10 p-4 bg-white dark:bg-cinema-card rounded-md mb-8 shadow-sm group-hover:shadow-md group-hover:scale-105 transition-all duration-500 w-fit">
                   <Icon className="w-6 h-6 text-peche dark:text-laiton" />
                 </div>
 
                 {/* Titre */}
-                <Heading level={4} className="mb-4 text-charcoal dark:text-creme">
+                <Heading level={4} className="relative z-10 mb-4 text-charcoal dark:text-creme">
                   {service.title}
                 </Heading>
 
                 {/* Description */}
                 <Text
                   variant="body"
-                  className="mb-8 text-charcoal/60 dark:text-grege/60 flex-grow"
+                  className="relative z-10 mb-10 text-charcoal/60 dark:text-grege/60 flex-grow"
                 >
                   {service.description}
                 </Text>
 
                 {/* Bouton */}
-                <a
-                  href={service.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full mt-auto"
-                >
-                  <Button
-                    variant="editorial"
-                    size="sm"
-                    icon={ArrowRight}
-                    fullWidth
+                <div className="relative z-10">
+                  <a
+                    href={service.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    Réserver
-                  </Button>
-                </a>
+                    <Button
+                      variant="editorial"
+                      size="sm"
+                      icon={ArrowRight}
+                      fullWidth
+                    >
+                      Réserver
+                    </Button>
+                  </a>
+                </div>
               </motion.div>
             );
           })}
         </div>
 
-        {/* ── CTA Global ── */}
+        {/* ── CTA secondaire ── */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-16 text-center"
         >
           <a
             href="https://www.planity.com/edelys-coiffure-91590-la-ferte-alais"
             target="_blank"
             rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-peche/10 dark:bg-laiton/10 rounded-full border border-peche/20 dark:border-laiton/20 text-[10px] md:text-[11px] uppercase tracking-[0.25em] font-semibold text-peche dark:text-laiton hover:bg-peche/20 dark:hover:bg-laiton/20 transition-all duration-300"
           >
-            <Button variant="rose-gold" size="md" icon={ArrowRight}>
-              Voir toute la carte sur Planity
-            </Button>
+            <Sparkles className="w-3 h-3" />
+            <span>Réserver sur Planity</span>
+            <ArrowRight className="w-3 h-3" />
           </a>
         </motion.div>
       </div>
