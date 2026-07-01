@@ -10,29 +10,34 @@ export const ServicesPreview = () => {
   const services = [
     {
       title: "Coupe & Coiffage",
-      description: "Une coupe sur-mesure adaptée à la morphologie de votre visage, accompagnée d'un coiffage sublimateur.",
+      description:
+        "Une coupe sur-mesure adaptée à la morphologie de votre visage, accompagnée d&rsquo;un coiffage sublimateur.",
       icon: Scissors,
-      link: "https://www.planity.com/edelys-coiffure-91590-la-ferte-alais"
+      link: "https://www.planity.com/edelys-coiffure-91590-la-ferte-alais",
     },
     {
       title: "Couleur & Lumière",
-      description: "Coloration Majirel, balayages subtils et jeux d'ombres pour illuminer votre chevelure avec naturel.",
+      description:
+        "Coloration Majirel, balayages subtils et jeux d&rsquo;ombres pour illuminer votre chevelure avec naturel.",
       icon: Sparkles,
-      link: "https://www.planity.com/edelys-coiffure-91590-la-ferte-alais"
+      link: "https://www.planity.com/edelys-coiffure-91590-la-ferte-alais",
     },
     {
       title: "Soin Profond Kérastase",
-      description: "Un rituel de bien-être absolu incluant l'analyse de votre cuir chevelu et un traitement haute performance.",
+      description:
+        "Un rituel de bien-être absolu incluant l&rsquo;analyse de votre cuir chevelu et un traitement haute performance.",
       icon: Droplets,
-      link: "https://www.planity.com/edelys-coiffure-91590-la-ferte-alais"
-    }
+      link: "https://www.planity.com/edelys-coiffure-91590-la-ferte-alais",
+    },
   ];
 
   return (
-    <section id="prestations" className="py-24 md:py-32 px-6 bg-white dark:bg-[#0a0a0a] transition-colors duration-500">
+    <section
+      id="prestations"
+      className="py-24 md:py-32 px-6 bg-white dark:bg-[#0C0B09] transition-colors duration-500"
+    >
       <div className="max-w-7xl mx-auto">
-        
-        {/* En-tête de section */}
+        {/* ── En-tête ── */}
         <div className="text-center mb-16 md:mb-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -40,14 +45,14 @@ export const ServicesPreview = () => {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
           >
-            <Text variant="overline" className="mb-4">La Carte</Text>
-            <Heading level={2} className="text-charcoal dark:text-creme max-w-2xl mx-auto">
-              Nos <span className="italic text-peche">Prestations Phares</span>
+            <Heading level={2} number="03" className="text-charcoal dark:text-creme max-w-2xl mx-auto">
+              Nos{" "}
+              <span className="italic text-peche dark:text-laiton">Prestations Phares</span>
             </Heading>
           </motion.div>
         </div>
 
-        {/* Grille de services */}
+        {/* ── Grille éditoriale ── */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {services.map((service, index) => {
             const Icon = service.icon;
@@ -57,23 +62,40 @@ export const ServicesPreview = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-                className="group flex flex-col items-start bg-creme/50 dark:bg-[#111] p-10 rounded-2xl border border-charcoal/5 dark:border-white/5 hover:border-peche/50 dark:hover:border-peche/50 transition-colors"
+                transition={{ duration: 0.8, delay: index * 0.15 }}
+                className="group flex flex-col items-start bg-creme/60 dark:bg-cinema-card/60 p-10 rounded-lg border border-charcoal/[0.05] dark:border-cinema-border hover:border-peche/30 dark:hover:border-laiton/30 transition-all duration-500 hover:shadow-md"
               >
-                <div className="p-4 bg-white dark:bg-black rounded-full mb-8 shadow-sm group-hover:scale-110 transition-transform duration-500">
-                  <Icon className="w-6 h-6 text-peche" />
+                {/* Icône */}
+                <div className="p-4 bg-white dark:bg-cinema-card rounded-md mb-8 shadow-sm group-hover:scale-105 transition-transform duration-500">
+                  <Icon className="w-6 h-6 text-peche dark:text-laiton" />
                 </div>
-                
+
+                {/* Titre */}
                 <Heading level={4} className="mb-4 text-charcoal dark:text-creme">
                   {service.title}
                 </Heading>
-                
-                <Text variant="body" className="mb-8 text-charcoal/70 dark:text-grege flex-grow">
+
+                {/* Description */}
+                <Text
+                  variant="body"
+                  className="mb-8 text-charcoal/60 dark:text-grege/60 flex-grow"
+                >
                   {service.description}
                 </Text>
 
-                <a href={service.link} target="_blank" rel="noopener noreferrer" className="w-full mt-auto">
-                  <Button variant="outline" size="md" icon={ArrowRight} fullWidth className="group-hover:bg-peche group-hover:text-charcoal group-hover:border-peche transition-colors">
+                {/* Bouton */}
+                <a
+                  href={service.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full mt-auto"
+                >
+                  <Button
+                    variant="editorial"
+                    size="sm"
+                    icon={ArrowRight}
+                    fullWidth
+                  >
                     Réserver
                   </Button>
                 </a>
@@ -82,7 +104,7 @@ export const ServicesPreview = () => {
           })}
         </div>
 
-        {/* Call to action global */}
+        {/* ── CTA Global ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -90,13 +112,16 @@ export const ServicesPreview = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-16 text-center"
         >
-          <a href="https://www.planity.com/edelys-coiffure-91590-la-ferte-alais" target="_blank" rel="noopener noreferrer">
-            <Button variant="primary" size="lg">
+          <a
+            href="https://www.planity.com/edelys-coiffure-91590-la-ferte-alais"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button variant="rose-gold" size="md" icon={ArrowRight}>
               Voir toute la carte sur Planity
             </Button>
           </a>
         </motion.div>
-
       </div>
     </section>
   );
