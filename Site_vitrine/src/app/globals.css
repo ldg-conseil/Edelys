@@ -4,8 +4,9 @@
 @variant dark (&:where(.dark, .dark *));
 
 /* ============================================================
-   E DELYS  C OIFFURE  —  Design Tokens
-   Direction 1b · Atelier Clinique (clair)  &  1a · Clair-Obscur Éditorial (sombre)
+   EDELYS COIFFURE — Design Tokens · « Atelier Éditorial »
+   Direction 1b · Atelier Clinique (clair)
+   Direction 1a · Clair-Obscur Éditorial (sombre)
    ============================================================ */
 
 @theme {
@@ -19,20 +20,17 @@
   --color-laiton-dim:  #B8972E;
 
   /* ── Thème Sombre · Clair-Obscur ── */
-  --color-cinema-bg:    #0E0C0A;  /* Fond cinématographique (quasi noir, légèrement chaud) */
-  --color-cinema-card:  #161310;  /* Carte sombre */
-  --color-cinema-border: rgba(212, 175, 55, 0.10); /* Bordure or laiton subtile */
-
-  /* ── Utilitaires supprimés (plus utilisés) ── */
-  /* --color-sauge, --color-terracotta retirés de la charte */
+  --color-cinema-bg:     #0E0C0A; /* Fond cinématographique (quasi noir, chaud) */
+  --color-cinema-card:   #161310; /* Carte sombre */
+  --color-cinema-border: rgba(212, 175, 55, 0.10);
 
   /* ── Polices ── */
   --font-serif: var(--font-cormorant);
   --font-sans:  var(--font-montserrat);
 
-  /* ── Grille Éditoriale ── */
-  --editorial-gap: 1.5rem;
-  --editorial-radius: 0.5rem;
+  /* ── Courbes d'animation de la charte ── */
+  --ease-edelys: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-curtain: cubic-bezier(0.7, 0, 0.3, 1);
 }
 
 @layer base {
@@ -42,16 +40,16 @@
   :root {
     --background: var(--color-creme);
     --foreground: var(--color-charcoal);
-    --muted:      var(--color-grege);
+    --muted:      rgba(26, 26, 26, 0.55);
+    --faint:      rgba(26, 26, 26, 0.38);
     --accent:     var(--color-peche);
     --accent-alt: var(--color-laiton);
-    --border:     rgba(26, 26, 26, 0.08);
-    --card:       rgba(255, 255, 255, 0.7);
-    --card-hover: rgba(255, 255, 255, 0.95);
-    --shadow-sm:  0 1px 2px rgba(26, 26, 26, 0.04);
+    --border:     rgba(26, 26, 26, 0.10);
+    --card:       rgba(255, 255, 255, 0.72);
+    --paper:      #F4EFE9;   /* panneau grège, papier de chapitre */
+    --stroke-text: rgba(26, 26, 26, 0.14);
     --shadow-md:  0 4px 16px rgba(26, 26, 26, 0.06);
     --shadow-lg:  0 12px 40px rgba(26, 26, 26, 0.08);
-    --overlay:    rgba(26, 26, 26, 0.03);
   }
 
   /* ============================================================
@@ -60,16 +58,20 @@
   .dark {
     --background: var(--color-cinema-bg);
     --foreground: var(--color-grege);
-    --muted:      rgba(234, 229, 223, 0.45);
-    --accent:     var(--color-peche);
-    --accent-alt: var(--color-laiton);
-    --border:     var(--color-cinema-border);
+    --muted:      rgba(234, 229, 223, 0.55);
+    --faint:      rgba(234, 229, 223, 0.35);
+    --accent:     var(--color-laiton);
+    --accent-alt: var(--color-peche);
+    --border:     rgba(234, 229, 223, 0.12);
     --card:       var(--color-cinema-card);
-    --card-hover: rgba(23, 20, 18, 0.95);
-    --shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.2);
+    --paper:      #14110E;
+    --stroke-text: rgba(234, 229, 223, 0.18);
     --shadow-md:  0 4px 20px rgba(0, 0, 0, 0.4);
     --shadow-lg:  0 12px 48px rgba(0, 0, 0, 0.5);
-    --overlay:    rgba(0, 0, 0, 0.2);
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
@@ -78,12 +80,10 @@
     font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
   }
 
-  /* ── Grain / Texture (thème clair : quasi invisible, éditorial) ── */
+  /* ── Grain / Texture (clair : quasi invisible · sombre : cinéma) ── */
   .bg-grain {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.025'/%3E%3C/svg%3E");
   }
-
-  /* ── Grain cinématographique (thème sombre : plus marqué) ── */
   .dark .bg-grain,
   .bg-grain-cinema {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilterDark'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilterDark)' opacity='0.07'/%3E%3C/svg%3E");
@@ -114,41 +114,162 @@
 /* ============================================================
    UTILITAIRES ÉDITORIAUX
    ============================================================ */
-@utility editorial-grid {
-  display: grid;
-  gap: var(--editorial-gap);
+
+/* ── Échelle display : titres de chapitres surdimensionnés ── */
+@utility text-display-xl {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(3rem, 9.5vw, 8.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
 }
 
-@utility editorial-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--editorial-radius);
-  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+@utility text-display-lg {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.5rem, 6.5vw, 5.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
 }
 
-@utility editorial-card-hover {
-  &:hover {
-    background: var(--card-hover);
-    border-color: var(--accent);
-    box-shadow: var(--shadow-md);
-  }
+@utility text-display-md {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.9rem, 4vw, 3.25rem);
+  line-height: 1.08;
 }
 
-/* ── Ligne décorative rose gold (dark) / peche (light) ── */
-@utility rule-accent {
-  width: 40px;
-  height: 2px;
-  background: var(--accent);
-  margin: 1.5rem 0;
-}
-
-/* ── Numéro éditorial (01, 02…) ── */
-@utility editorial-number {
+/* ── Micro-label Montserrat (méta éditoriale) ── */
+@utility text-eyebrow {
   font-family: var(--font-sans);
   font-size: 0.625rem;
   font-weight: 600;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--accent);
-  opacity: 0.7;
+}
+
+/* ── Numéro de chapitre géant, détouré ── */
+@utility text-stroke-number {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  -webkit-text-stroke: 1px var(--stroke-text);
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  user-select: none;
+}
+
+/* ── Texte vertical (rails de méta) ── */
+@utility text-vertical {
+  writing-mode: vertical-rl;
+}
+
+/* ── Ligne décorative accent ── */
+@utility rule-accent {
+  width: 40px;
+  height: 1px;
+  background: var(--accent);
+}
+
+/* ── Lien souligné animé (charte · link-edelys-underline) ── */
+@utility link-underline {
+  position: relative;
+  padding-bottom: 4px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--accent);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.4s var(--ease-edelys);
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+}
+
+/* ── Bouton principal : remplissage vertical (charte · btn-edelys-main) ── */
+@utility btn-fill {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    color 0.4s var(--ease-edelys),
+    transform 0.4s var(--ease-edelys),
+    box-shadow 0.4s var(--ease-edelys),
+    border-color 0.4s var(--ease-edelys);
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--btn-fill-color, var(--foreground));
+    z-index: -1;
+    transform: translateY(101%);
+    transition: transform 0.4s var(--ease-edelys);
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &:hover::after {
+    transform: translateY(0);
+  }
+}
+
+/* ── Images : zoom doux & N&B vers couleur (charte) ── */
+@utility img-zoom {
+  & img {
+    transition: transform 0.8s var(--ease-edelys);
+  }
+  &:hover img {
+    transform: scale(1.06);
+  }
+}
+
+@utility img-reveal-color {
+  & img {
+    filter: grayscale(100%) contrast(1.05);
+    transition: filter 0.8s var(--ease-edelys), transform 0.8s var(--ease-edelys);
+  }
+  &:hover img {
+    filter: grayscale(0%) contrast(1);
+    transform: scale(1.03);
+  }
+}
+
+/* ── Marquee éditorial ── */
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@utility animate-marquee {
+  animation: marquee-scroll 36s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
+/* ── Halo doré (curseur, desktop uniquement) ── */
+@utility cursor-halo {
+  pointer-events: none;
+  position: fixed;
+  z-index: 90;
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  border: 1px solid var(--accent);
+  opacity: 0.5;
+  mix-blend-mode: normal;
 }

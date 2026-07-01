@@ -1,5 +1,5 @@
 # PROJECT STATE: Edelys Coiffure - Digital Transformation
-> **Dernière mise à jour :** 2026-07-01 | **Version :** V0.2.1 | **Statut Global :** Design System Intégré + Portraits Équipe + ESLint Clean
+> **Dernière mise à jour :** 2026-07-02 | **Version :** V0.3 (branche `feature/refonte-studio`) | **Statut Global :** Refonte graphique complète « Atelier Éditorial »
 
 ---
 
@@ -11,7 +11,7 @@
 
 ## 2. WORKFLOW & STRATÉGIE GIT
 * **Collaboration :** Développement itératif "Homme-IA" (Vibe Coding) + Validation Client.
-* **Branche active :** `feature/site-content`
+* **Branche active :** `feature/refonte-studio`
 * **Gestion des Branches :** 
   * La branche principale (`main`) représente la version de production.
   * Tous les développements se font sur des branches `feature/<description>`.
@@ -62,6 +62,7 @@
 * **29/06/2026 :** Création des pages annexes (À Propos, Équipe, Prestations, Contact) + header dropdown. Commit `feat(site): add about/team/services pages + header improvements`.
 * **01/07/2026 :** Refonte design complète — intégration des directions 1a (Clair-Obscur) et 1b (Atelier Clinique). Nouveaux tokens CSS, composants éditoriaux, double thème fonctionnel, menu header optimisé. Release **V0.2**.
 * **01/07/2026 (soir) :** Génération des 4 portraits d'équipe depuis la photo source (`scripts/crop-team.js` → `public/images/team/`). Corrections ESLint (0 erreur, 0 warning). Mise à jour des fichiers de contexte. Release **V0.2.1**.
+* **02/07/2026 :** Refonte graphique complète « Atelier Éditorial » (branche `feature/refonte-studio`) — hero typographique avec révélations masquées, chapitres numérotés (01–05), index éditorial des prestations, chapitre Kérastase en clair-obscur, galerie N&B→couleur, marquee, menu plein écran, curseur Halo Doré, footer wordmark monumental. Carte des prestations façon menu de maison. Correction des portraits d'équipe (les crops V0.2.1 cadraient le plafond — recadrage centré sur les visages). Photos réelles intégrées avec noms sémantiques. Vérification visuelle Chrome headless (light + dark), build & lint OK.
 
 ---
 
