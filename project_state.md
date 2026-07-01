@@ -1,5 +1,5 @@
 # PROJECT STATE: Edelys Coiffure - Digital Transformation
-> **Dernière mise à jour :** 2026-07-01 | **Version :** V0.2 | **Statut Global :** Design System Intégré (Atelier Clinique + Clair-Obscur)
+> **Dernière mise à jour :** 2026-07-01 | **Version :** V0.2.1 | **Statut Global :** Design System Intégré + Portraits Équipe + ESLint Clean
 
 ---
 
@@ -61,6 +61,7 @@
 * **29/06/2026 :** Initialisation du projet Next.js avec les design tokens. UI Kit + Page d'Accueil. Release **V0.1**.
 * **29/06/2026 :** Création des pages annexes (À Propos, Équipe, Prestations, Contact) + header dropdown. Commit `feat(site): add about/team/services pages + header improvements`.
 * **01/07/2026 :** Refonte design complète — intégration des directions 1a (Clair-Obscur) et 1b (Atelier Clinique). Nouveaux tokens CSS, composants éditoriaux, double thème fonctionnel, menu header optimisé. Release **V0.2**.
+* **01/07/2026 (soir) :** Génération des 4 portraits d'équipe depuis la photo source (`scripts/crop-team.js` → `public/images/team/`). Corrections ESLint (0 erreur, 0 warning). Mise à jour des fichiers de contexte. Release **V0.2.1**.
 
 ---
 
@@ -71,7 +72,9 @@
 - [x] Construire la page d'accueil avec les animations Framer Motion
 - [x] Construire les pages annexes (À Propos, Équipe, Prestations, Contact)
 - [x] Intégrer la charte graphique (directions 1a & 1b, design tokens, thèmes clair/sombre)
-- [ ] Ajouter les images réelles de l'équipe et des photos du salon
+- [x] Générer les portraits de l'équipe (script crop-team.js → public/images/team/)
+- [x] ESLint : 0 erreur, 0 warning
+- [ ] Ajouter les images réelles du salon (photos d'ambiance)
 - [ ] Créer les pages Mentions légales et Politique de confidentialité
 - [ ] Audit et Stratégie Réseaux Sociaux (Étape 4)
 - [ ] Optimisations SEO et performances
