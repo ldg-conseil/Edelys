@@ -1,5 +1,5 @@
 # PROJECT STATE: Edelys Coiffure - Digital Transformation
-> **Dernière mise à jour :** 2026-07-02 | **Version :** V0.3 (branche `feature/refonte-studio`) | **Statut Global :** Refonte graphique complète « Atelier Éditorial »
+> **Dernière mise à jour :** 2026-07-02 | **Version :** V0.3 | **Statut Global :** Refonte graphique « Atelier Éditorial » mergée sur `main`
 
 ---
 
@@ -11,7 +11,7 @@
 
 ## 2. WORKFLOW & STRATÉGIE GIT
 * **Collaboration :** Développement itératif "Homme-IA" (Vibe Coding) + Validation Client.
-* **Branche active :** `feature/refonte-studio`
+* **Branche active :** `main`
 * **Gestion des Branches :** 
   * La branche principale (`main`) représente la version de production.
   * Tous les développements se font sur des branches `feature/<description>`.
@@ -63,6 +63,7 @@
 * **01/07/2026 :** Refonte design complète — intégration des directions 1a (Clair-Obscur) et 1b (Atelier Clinique). Nouveaux tokens CSS, composants éditoriaux, double thème fonctionnel, menu header optimisé. Release **V0.2**.
 * **01/07/2026 (soir) :** Génération des 4 portraits d'équipe depuis la photo source (`scripts/crop-team.js` → `public/images/team/`). Corrections ESLint (0 erreur, 0 warning). Mise à jour des fichiers de contexte. Release **V0.2.1**.
 * **02/07/2026 :** Refonte graphique complète « Atelier Éditorial » (branche `feature/refonte-studio`) — hero typographique avec révélations masquées, chapitres numérotés (01–05), index éditorial des prestations, chapitre Kérastase en clair-obscur, galerie N&B→couleur, marquee, menu plein écran, curseur Halo Doré, footer wordmark monumental. Carte des prestations façon menu de maison. Correction des portraits d'équipe (les crops V0.2.1 cadraient le plafond — recadrage centré sur les visages). Photos réelles intégrées avec noms sémantiques. Vérification visuelle Chrome headless (light + dark), build & lint OK.
+* **02/07/2026 :** Merge de `feature/refonte-studio` dans `main` (PR #3). Suppression définitive des fichiers `recovery-codes.txt` exposés publiquement (`Direction_Artistique/Ressources/` et `Site_vitrine/public/images/`) — **ces codes doivent être considérés comme compromis et régénérés côté fournisseur**, ils restent visibles dans l'historique git. Retouche manuelle des 4 portraits d'équipe (`public/images/team/*.jpg`). Release **V0.3**.
 
 ---
 
@@ -75,7 +76,9 @@
 - [x] Intégrer la charte graphique (directions 1a & 1b, design tokens, thèmes clair/sombre)
 - [x] Générer les portraits de l'équipe (script crop-team.js → public/images/team/)
 - [x] ESLint : 0 erreur, 0 warning
-- [ ] Ajouter les images réelles du salon (photos d'ambiance)
+- [x] Refonte graphique complète « Atelier Éditorial » (charte + portail de marque)
+- [x] Ajouter les images réelles du salon (photos d'ambiance)
+- [ ] Régénérer/révoquer les codes de récupération exposés dans l'historique git (`recovery-codes.txt`)
 - [ ] Créer les pages Mentions légales et Politique de confidentialité
 - [ ] Audit et Stratégie Réseaux Sociaux (Étape 4)
 - [ ] Optimisations SEO et performances
