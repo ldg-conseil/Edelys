@@ -6,11 +6,13 @@
 - The repository also includes design and branding resources under `Direction_Artistique/`.
 - Use `project_state.md` as the ongoing session context document.
 
-## Design System (V0.2 — 01/07/2026)
+## Design System (V0.2.1 — 01/07/2026)
 - **Two themes:** Atelier Clinique (light, editorial) & Clair-Obscur Éditorial (dark, cinematic, rose gold)
 - **Tailwind v4 dark mode:** uses class strategy via `@variant dark (&:where(.dark, .dark *));` in globals.css
 - **Palette tokens:** `peche`, `charcoal`, `creme`, `grege`, `laiton`, `cinema-bg`, `cinema-card`, `cinema-border`
 - **Editorial utilities:** `editorial-grid`, `editorial-card`, `rule-accent`, `editorial-number`
+- **Team portraits:** generated via `scripts/crop-team.js` → `public/images/team/`
+- **ESLint:** clean (0 errors, 0 warnings), `scripts/**` excluded from lint
 
 ## Primary AI responsibilities
 - Help iterate the site content, layout, and branding while preserving the current two-theme design system.
